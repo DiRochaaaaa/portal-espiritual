@@ -3,6 +3,7 @@
 import { useState, useEffect, CSSProperties } from 'react';
 import { motion } from 'framer-motion';
 import Navbar from '../../components/Navbar';
+import Footer from '../../components/Footer';
 import MeditationPlayer from '../../components/MeditationPlayer';
 import { getCurrentLocale, Locale } from '../../lib/locale';
 import { BsMusicNoteBeamed } from 'react-icons/bs';
@@ -290,6 +291,8 @@ export default function CancaoAngelicalPage() {
           </motion.div>
         </motion.div>
       </motion.div>
+
+      <Footer />
     </main>
   );
 } 

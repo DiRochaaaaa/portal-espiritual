@@ -6,6 +6,7 @@ import Navbar from '../components/Navbar';
 import BonusSection from '../components/BonusSection';
 import SpiritualQuotes from '../components/SpiritualQuotes';
 import { getCurrentLocale, Locale } from '../lib/locale';
+import Footer from '../components/Footer';
 
 const styles: Record<string, CSSProperties> = {
   container: {
@@ -141,32 +142,35 @@ export default function HomePage() {
     if (!showVideo || !videoContainerRef.current) return;
     
     // Limpar qualquer script existente
-    const existingScripts = document.querySelectorAll('script[id="scr_68193ae1d508bf236b3df1a1"]');
+    const existingScripts = document.querySelectorAll('script[id^="scr_"]');
     existingScripts.forEach(script => script.remove());
+    
+    // Definir o ID do vídeo com base no idioma
+    const videoId = locale === 'pt' ? '6734ea56e0f4c0000b8e807e' : '68193ae1d508bf236b3df1a1';
     
     // Configurar o HTML do vídeo
     videoContainerRef.current.innerHTML = `
-      <div id="vid_68193ae1d508bf236b3df1a1" style="position: relative; width: 100%; padding: 56.25% 0 0;">
-        <img id="thumb_68193ae1d508bf236b3df1a1" src="https://images.converteai.net/28d41dbd-cd23-4eac-a930-66e1aca584eb/players/68193ae1d508bf236b3df1a1/thumbnail.jpg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; display: block;" alt="thumbnail">
-        <div id="backdrop_68193ae1d508bf236b3df1a1" style="-webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); position: absolute; top: 0; height: 100%; width: 100%;"></div>
+      <div id="vid_${videoId}" style="position: relative; width: 100%; padding: 56.25% 0 0;">
+        <img id="thumb_${videoId}" src="https://images.converteai.net/28d41dbd-cd23-4eac-a930-66e1aca584eb/players/${videoId}/thumbnail.jpg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; display: block;" alt="thumbnail">
+        <div id="backdrop_${videoId}" style="-webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); position: absolute; top: 0; height: 100%; width: 100%;"></div>
       </div>
     `;
     
     // Adicionar o script
     const script = document.createElement('script');
-    script.id = 'scr_68193ae1d508bf236b3df1a1';
+    script.id = `scr_${videoId}`;
     script.type = 'text/javascript';
-    script.innerHTML = 'var s=document.createElement("script"); s.src="https://scripts.converteai.net/28d41dbd-cd23-4eac-a930-66e1aca584eb/players/68193ae1d508bf236b3df1a1/player.js", s.async=!0,document.head.appendChild(s);';
+    script.innerHTML = `var s=document.createElement("script"); s.src="https://scripts.converteai.net/28d41dbd-cd23-4eac-a930-66e1aca584eb/players/${videoId}/player.js", s.async=!0,document.head.appendChild(s);`;
     document.body.appendChild(script);
     
     return () => {
       // Remover script ao desmontar
-      const scriptToRemove = document.getElementById('scr_68193ae1d508bf236b3df1a1');
+      const scriptToRemove = document.getElementById(`scr_${videoId}`);
       if (scriptToRemove) {
         scriptToRemove.remove();
       }
     };
-  }, [showVideo]);
+  }, [showVideo, locale]);
   
   // Manipulador para iniciar a leitura
   const handleStartReading = () => {
@@ -263,19 +267,8 @@ export default function HomePage() {
         </motion.div>
       </div>
       
-      <footer style={styles.footer}>
-        <p>© 2025 Portal Espiritual</p>
-        
-        {/* Botão de debug oculto - aparece após 5 cliques no footer */}
-        {showDebugButton && (
-          <button 
-            style={styles.resetButton}
-            onClick={resetVideo}
-          >
-            {t.resetButton}
-          </button>
-        )}
-      </footer>
+      {/* Substituir o rodapé atual pelo novo componente Footer */}
+      <Footer showDebugButton={showDebugButton} onResetVideo={resetVideo} />
     </main>
   );
 } 

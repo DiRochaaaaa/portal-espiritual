@@ -202,12 +202,14 @@ export default function Navbar() {
     pt: {
       back: "Voltar",
       messages: "Mensagens",
-      music: "Canção"
+      music: "Canção",
+      portalName: "Portal Espiritual"
     },
     es: {
       back: "Volver",
       messages: "Mensajes",
-      music: "Canción"
+      music: "Canción",
+      portalName: "El Portal Espiritual"
     }
   };
 
@@ -252,12 +254,12 @@ export default function Navbar() {
               {isMobile ? (
                 <>
                   <span style={{ marginRight: '4px', fontSize: '1.1rem' }}>✧</span>
-                  <span style={{ fontSize: '0.95rem' }}>Portal Espiritual</span>
+                  <span style={{ fontSize: '0.95rem' }}>{t.portalName}</span>
                 </>
               ) : (
                 <>
                   <span style={{ marginRight: '8px', fontSize: '1.4rem' }}>✧</span>
-                  Portal Espiritual
+                  {t.portalName}
                 </>
               )}
             </motion.span>
