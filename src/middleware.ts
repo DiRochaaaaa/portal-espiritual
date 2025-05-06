@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 const locales = ['pt', 'es'];
 const defaultLocale = 'pt';
 
-async function detectLanguageFromIP(request: NextRequest): Promise<string> {
+async function detectLanguageFromIP(request: NextRequest): Promise<{ locale: string, isDetected: boolean }> {
   try {
     // Get IP address from request headers (if deployed on Vercel)
     const forwardedFor = request.headers.get('x-forwarded-for');
@@ -11,7 +11,7 @@ async function detectLanguageFromIP(request: NextRequest): Promise<string> {
     
     // Skip IP detection for local development
     if (ip === '127.0.0.1' || ip.startsWith('192.168.') || ip.startsWith('10.')) {
-      return defaultLocale;
+      return { locale: defaultLocale, isDetected: false };
     }
     
     // Fetch country information from ipapi.co
@@ -22,7 +22,7 @@ async function detectLanguageFromIP(request: NextRequest): Promise<string> {
     const { country_code } = data;
     
     if (country_code === 'BR' || country_code === 'PT') {
-      return 'pt';
+      return { locale: 'pt', isDetected: true };
     }
     
     // Spanish-speaking countries
@@ -32,13 +32,14 @@ async function detectLanguageFromIP(request: NextRequest): Promise<string> {
     ];
     
     if (spanishCountries.includes(country_code)) {
-      return 'es';
+      return { locale: 'es', isDetected: true };
     }
     
-    return defaultLocale;
+    // Se chegou aqui, significa que o país não está na lista conhecida
+    return { locale: defaultLocale, isDetected: false };
   } catch (error) {
     console.error('Error detecting language from IP:', error);
-    return defaultLocale;
+    return { locale: defaultLocale, isDetected: false };
   }
 }
 
@@ -60,15 +61,29 @@ export async function middleware(request: NextRequest) {
   
   // If locale cookie doesn't exist, detect it from IP
   let locale = localeCookie;
+  let needsSelection = false;
+  
   if (!locale) {
-    locale = await detectLanguageFromIP(request);
+    const result = await detectLanguageFromIP(request);
+    locale = result.locale;
+    needsSelection = !result.isDetected;
     
     // Create a response to set the cookie
     const response = NextResponse.next();
+    
+    // Set the locale cookie
     response.cookies.set('NEXT_LOCALE', locale, { 
       maxAge: 60 * 60 * 24 * 30, // 30 days
       path: '/' 
     });
+    
+    // Set a flag if we need language selection
+    if (needsSelection) {
+      response.cookies.set('NEEDS_LANGUAGE_SELECTION', 'true', {
+        maxAge: 60 * 60 * 24, // 1 day
+        path: '/'
+      });
+    }
     
     return response;
   }

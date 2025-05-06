@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter, Playfair_Display } from 'next/font/google';
 import './globals.css';
+import LanguageProvider from '@/components/LanguageProvider';
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -30,9 +31,24 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <link rel="icon" href="/favicon.ico" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                // Remover classes VSCode que causam problemas de hidratação
+                document.documentElement.classList.remove('vsc-initialized');
+                if (document.body) {
+                  document.body.classList.remove('vsc-initialized');
+                }
+              })();
+            `,
+          }}
+        />
       </head>
-      <body className="bg-gradient-to-b from-darkBg via-purpleDark/50 to-darkBg text-white">
-        {children}
+      <body suppressHydrationWarning className="bg-gradient-to-b from-darkBg via-purpleDark/50 to-darkBg text-white">
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );
