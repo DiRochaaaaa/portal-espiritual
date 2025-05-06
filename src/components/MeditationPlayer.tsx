@@ -47,9 +47,11 @@ const MeditationPlayer: React.FC<MeditationPlayerProps> = ({ mantras, locale }) 
   const [isLoaded, setIsLoaded] = useState(false);
   const [isError, setIsError] = useState(false);
   const [pulseSize, setPulseSize] = useState(1);
+  const [isPlayerReady, setIsPlayerReady] = useState(false);
   const playerRef = useRef<HTMLDivElement>(null);
   const ytPlayerRef = useRef<any>(null);
   const apiLoadingRef = useRef<boolean>(false);
+  const playerReadyTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   
   const currentMantra = mantras[currentIndex];
   const t = translations[locale as keyof typeof translations] || translations.pt;
@@ -89,6 +91,15 @@ const MeditationPlayer: React.FC<MeditationPlayerProps> = ({ mantras, locale }) 
       
       const firstScriptTag = document.getElementsByTagName('script')[0];
       firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
+      
+      // Adiciona um timeout de segurança para resolver após 5 segundos caso a API não carregue
+      setTimeout(() => {
+        if (apiLoadingRef.current) {
+          console.log("YouTube API load timeout - forcing resolve");
+          apiLoadingRef.current = false;
+          resolve();
+        }
+      }, 5000);
     });
   };
   
@@ -97,16 +108,28 @@ const MeditationPlayer: React.FC<MeditationPlayerProps> = ({ mantras, locale }) 
     if (!playerRef.current) return;
     
     try {
+      // Limpar o estado
+      setIsLoaded(false);
+      setIsError(false);
+      setIsPlayerReady(false);
+      
+      // Limpar qualquer timeout existente
+      if (playerReadyTimeoutRef.current) {
+        clearTimeout(playerReadyTimeoutRef.current);
+      }
+      
       // Certifique-se de que a API foi carregada
       await loadYouTubeAPI();
       
       // Limpe qualquer player anterior
       if (ytPlayerRef.current) {
-        ytPlayerRef.current.destroy();
+        try {
+          ytPlayerRef.current.destroy();
+        } catch (error) {
+          console.error("Error destroying previous player:", error);
+        }
+        ytPlayerRef.current = null;
       }
-      
-      setIsLoaded(false);
-      setIsError(false);
       
       // Verifica se o YT existe no objeto window antes de criar o player
       if (typeof window !== 'undefined' && window.YT) {
@@ -127,11 +150,16 @@ const MeditationPlayer: React.FC<MeditationPlayerProps> = ({ mantras, locale }) 
             onReady: (event: any) => {
               console.log("YouTube player ready");
               setIsLoaded(true);
+              setIsPlayerReady(true);
             },
             onStateChange: (event: any) => {
               console.log("Player state changed:", event.data);
-              // YT.PlayerState.ENDED = 0
+              // YT.PlayerState.ENDED = 0, PLAYING = 1, PAUSED = 2
               if (event.data === 0) {
+                setIsPlaying(false);
+              } else if (event.data === 1) {
+                setIsPlaying(true);
+              } else if (event.data === 2) {
                 setIsPlaying(false);
               }
             },
@@ -140,9 +168,19 @@ const MeditationPlayer: React.FC<MeditationPlayerProps> = ({ mantras, locale }) 
               setIsError(true);
               setIsLoaded(true); // Consideramos carregado mesmo com erro
               setIsPlaying(false);
+              setIsPlayerReady(false);
             }
           }
         });
+        
+        // Adiciona um timeout para verificar se o player está realmente pronto
+        playerReadyTimeoutRef.current = setTimeout(() => {
+          if (!isPlayerReady && ytPlayerRef.current) {
+            console.log("Setting player ready after timeout");
+            setIsLoaded(true);
+            setIsPlayerReady(true);
+          }
+        }, 3000);
       } else {
         throw new Error("YouTube API não carregada corretamente");
       }
@@ -150,6 +188,7 @@ const MeditationPlayer: React.FC<MeditationPlayerProps> = ({ mantras, locale }) 
       console.error("Error initializing YouTube player:", error);
       setIsError(true);
       setIsLoaded(true);
+      setIsPlayerReady(false);
     }
   };
   
@@ -168,17 +207,76 @@ const MeditationPlayer: React.FC<MeditationPlayerProps> = ({ mantras, locale }) 
     };
   }, [currentIndex]);
   
+  // Destruir player e limpar timeouts quando o componente for desmontado
+  useEffect(() => {
+    return () => {
+      if (playerReadyTimeoutRef.current) {
+        clearTimeout(playerReadyTimeoutRef.current);
+      }
+      
+      if (ytPlayerRef.current) {
+        try {
+          ytPlayerRef.current.destroy();
+        } catch (error) {
+          console.error("Error destroying YouTube player:", error);
+        }
+      }
+    };
+  }, []);
+  
   const togglePlay = () => {
-    if (!ytPlayerRef.current || !isLoaded || isError) return;
+    if (!ytPlayerRef.current) {
+      console.log("Player ref não disponível, tentando inicializar novamente");
+      initializePlayer();
+      return;
+    }
+    
+    if (!isLoaded || isError) {
+      console.log("Player não carregado ou com erro");
+      return;
+    }
     
     try {
       if (isPlaying) {
+        console.log("Pausando vídeo");
         ytPlayerRef.current.pauseVideo();
+        setIsPlaying(false);
       } else {
-        ytPlayerRef.current.playVideo();
+        console.log("Tocando vídeo");
+        
+        // Tentativa com retry automático
+        const attemptPlay = (retries = 0) => {
+          try {
+            ytPlayerRef.current.playVideo();
+            
+            // Verifica após 500ms se o player realmente começou a tocar
+            setTimeout(() => {
+              if (ytPlayerRef.current && ytPlayerRef.current.getPlayerState() !== 1) {
+                console.log(`Vídeo não começou a tocar após tentativa ${retries + 1}`);
+                
+                if (retries < 2) {
+                  console.log(`Tentando novamente (${retries + 1}/3)`);
+                  attemptPlay(retries + 1);
+                } else {
+                  console.log("Falha após 3 tentativas, reinicializando player");
+                  initializePlayer();
+                }
+              }
+            }, 500);
+          } catch (error) {
+            console.error("Erro ao tentar tocar:", error);
+            if (retries < 2) {
+              console.log(`Tentando novamente após erro (${retries + 1}/3)`);
+              setTimeout(() => attemptPlay(retries + 1), 300);
+            } else {
+              setIsError(true);
+            }
+          }
+        };
+        
+        attemptPlay();
+        setIsPlaying(true);
       }
-      
-      setIsPlaying(!isPlaying);
     } catch (error) {
       console.error("Error toggling play state:", error);
       setIsError(true);

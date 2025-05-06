@@ -27,6 +27,7 @@ const styles: Record<string, CSSProperties> = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+    flexWrap: 'nowrap',
   },
   logo: {
     display: 'flex',
@@ -41,8 +42,12 @@ const styles: Record<string, CSSProperties> = {
     textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)',
   },
   logoTextMobile: {
-    fontSize: '1rem',
-    letterSpacing: '0.03em',
+    fontSize: '0.95rem',
+    letterSpacing: '0.02em',
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
+    maxWidth: '100%',
+    display: 'inline-block',
   },
   langButton: {
     display: 'flex',
@@ -98,7 +103,9 @@ const styles: Record<string, CSSProperties> = {
   leftSection: {
     display: 'flex',
     alignItems: 'center',
-    gap: '1rem',
+    gap: '0.75rem',
+    minWidth: 0,
+    flexGrow: 1,
   },
   buttonText: {
     display: 'block',
@@ -121,6 +128,10 @@ const styles: Record<string, CSSProperties> = {
     transition: 'all 0.2s ease',
     boxShadow: '0 2px 8px rgba(0, 0, 0, 0.2)',
   },
+  messageButtonMobile: {
+    padding: '0.25rem 0.5rem',
+    fontSize: '0.8rem',
+  },
   messageIcon: {
     fontSize: '1rem',
   },
@@ -139,6 +150,11 @@ const styles: Record<string, CSSProperties> = {
     fontWeight: 'bold',
     transition: 'all 0.2s ease',
     boxShadow: '0 2px 8px rgba(0, 0, 0, 0.2)',
+  },
+  langButtonCircularMobile: {
+    width: '28px',
+    height: '28px',
+    fontSize: '0.75rem',
   },
 };
 
@@ -234,7 +250,10 @@ export default function Navbar() {
               }}
             >
               {isMobile ? (
-                <span style={{ fontSize: '1.1rem' }}>Portal</span>
+                <>
+                  <span style={{ marginRight: '4px', fontSize: '1.1rem' }}>✧</span>
+                  <span style={{ fontSize: '0.95rem' }}>Portal Espiritual</span>
+                </>
               ) : (
                 <>
                   <span style={{ marginRight: '8px', fontSize: '1.4rem' }}>✧</span>
@@ -245,12 +264,15 @@ export default function Navbar() {
           </Link>
         </div>
         
-        <div style={styles.navActions}>
+        <div style={{
+          ...styles.navActions,
+          gap: isMobile ? '0.5rem' : '0.75rem'
+        }}>
           <Link href="/mensagens" style={{ textDecoration: 'none' }}>
             <motion.button
               style={{
                 ...styles.messageButton,
-                padding: isMobile ? '0.35rem 0.65rem' : '0.35rem 0.7rem',
+                ...(isMobile ? styles.messageButtonMobile : {})
               }}
               whileHover={{ 
                 scale: 1.05, 
@@ -258,10 +280,9 @@ export default function Navbar() {
                 boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)' 
               }}
               whileTap={{ scale: 0.95 }}
-              aria-label={t.messages}
             >
-              <span style={styles.messageIcon}><BsChatSquareFill /></span>
-              {!isMobile && <span>{t.messages}</span>}
+              <BsChatSquareFill style={styles.messageIcon} />
+              <span style={isMobile ? styles.buttonTextHidden : styles.buttonText}>{t.messages}</span>
             </motion.button>
           </Link>
           
@@ -269,7 +290,7 @@ export default function Navbar() {
             <motion.button
               style={{
                 ...styles.messageButton,
-                padding: isMobile ? '0.35rem 0.65rem' : '0.35rem 0.7rem',
+                ...(isMobile ? styles.messageButtonMobile : {})
               }}
               whileHover={{ 
                 scale: 1.05, 
@@ -277,15 +298,17 @@ export default function Navbar() {
                 boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)' 
               }}
               whileTap={{ scale: 0.95 }}
-              aria-label={t.music}
             >
-              <span style={styles.messageIcon}><BsMusicNoteBeamed /></span>
-              {!isMobile && <span>{t.music}</span>}
+              <BsMusicNoteBeamed style={styles.messageIcon} />
+              <span style={isMobile ? styles.buttonTextHidden : styles.buttonText}>{t.music}</span>
             </motion.button>
           </Link>
           
           <motion.button
-            style={styles.langButtonCircular}
+            style={{
+              ...styles.langButtonCircular,
+              ...(isMobile ? styles.langButtonCircularMobile : {})
+            }}
             whileHover={{ 
               scale: 1.1, 
               backgroundColor: 'rgba(87, 26, 111, 0.9)',

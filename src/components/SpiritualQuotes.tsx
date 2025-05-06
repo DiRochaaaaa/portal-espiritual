@@ -181,12 +181,16 @@ const SpiritualQuotes = () => {
 
   const containerStyle: CSSProperties = {
     position: 'relative',
-    padding: '30px 15px',
+    padding: isMobile ? '25px 10px' : '30px 15px',
     background: 'linear-gradient(to right, rgba(21, 0, 34, 0.9), rgba(123, 31, 162, 0.5))',
     borderRadius: '10px',
     margin: '20px 0',
     boxShadow: '0 4px 15px rgba(0, 0, 0, 0.2)',
     textAlign: 'center',
+    width: '100%',
+    maxWidth: isMobile ? '95%' : '100%',
+    marginLeft: 'auto',
+    marginRight: 'auto',
   };
 
   const titleStyle: CSSProperties = {
@@ -202,28 +206,33 @@ const SpiritualQuotes = () => {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    padding: isMobile ? '0 55px' : '0',
-    margin: '30px 0',
+    padding: isMobile ? '0 30px' : '0',
+    margin: isMobile ? '15px 0' : '30px 0',
+    width: '100%',
   };
 
   const cardStyle: CSSProperties = {
-    padding: isMobile ? '25px 15px' : '30px',
+    padding: isMobile ? '30px 15px' : '30px',
     margin: '0 auto',
     width: '100%',
-    maxWidth: '90%',
+    maxWidth: isMobile ? '100%' : '90%',
     borderRadius: '15px',
     background: 'rgba(255, 255, 255, 0.05)',
     backdropFilter: 'blur(10px)',
     border: '1px solid rgba(255, 255, 255, 0.1)',
     boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
-    marginBottom: '15px',
+    marginBottom: isMobile ? '10px' : '15px',
+    minHeight: isMobile ? '160px' : 'auto',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
   };
 
   const quoteStyle: CSSProperties = {
-    fontSize: isMobile ? '1rem' : '1.2rem',
+    fontSize: isMobile ? '1.1rem' : '1.2rem',
     color: 'white',
     lineHeight: '1.6',
-    marginBottom: '20px',
+    marginBottom: '15px',
     fontStyle: 'italic',
     textAlign: 'center',
   };
@@ -231,8 +240,9 @@ const SpiritualQuotes = () => {
   const sourceStyle: CSSProperties = {
     textAlign: 'right',
     color: '#D4AF37',
-    fontSize: isMobile ? '0.9rem' : '1rem',
+    fontSize: isMobile ? '1rem' : '1rem',
     fontWeight: 500,
+    marginTop: 'auto',
   };
 
   const buttonsContainerStyle: CSSProperties = {
@@ -262,8 +272,8 @@ const SpiritualQuotes = () => {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    width: '42px',
-    height: '42px',
+    width: '40px',
+    height: '40px',
     borderRadius: '50%',
     background: 'rgba(123, 31, 162, 0.7)',
     color: 'white',
@@ -272,7 +282,7 @@ const SpiritualQuotes = () => {
     cursor: 'pointer',
     boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
     position: 'absolute',
-    top: '50%',
+    top: '45%',
     transform: 'translateY(-50%)',
     zIndex: 10,
     transition: 'all 0.2s ease-in-out',
@@ -281,8 +291,11 @@ const SpiritualQuotes = () => {
   const dotsContainerStyle: CSSProperties = {
     display: 'flex',
     justifyContent: 'center',
-    gap: '8px',
-    margin: '20px 0 10px',
+    gap: isMobile ? '6px' : '8px',
+    margin: isMobile ? '15px 0 10px' : '20px 0 10px',
+    flexWrap: 'wrap',
+    maxWidth: '100%',
+    padding: '0 10px',
   };
 
   const dotStyle: CSSProperties = {
@@ -292,6 +305,7 @@ const SpiritualQuotes = () => {
     background: 'rgba(255, 255, 255, 0.3)',
     cursor: 'pointer',
     transition: 'all 0.2s ease',
+    margin: isMobile ? '3px' : '0',
   };
 
   const activeDotStyle: CSSProperties = {
