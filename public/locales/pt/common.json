@@ -1,0 +1,15 @@
+{
+  "title": "Bem-vindo ao Tarô dos Anjos",
+  "startReading": "Iniciar minha Leitura",
+  "bonuses": "BÔNUS",
+  "access": "Acessar",
+  "language": "Idioma",
+  "changeLanguage": "Mudar para Espanhol",
+  "bonusList": [
+    { "title": "Grupo do WhatsApp Exclusivo", "description": "Junte-se ao nosso grupo para receber mensagens diárias" },
+    { "title": "Orações de Cura", "description": "Orações poderosas para cura espiritual" },
+    { "title": "Presente Surpresa", "description": "Um presente especial para você" },
+    { "title": "Contato com Celestino", "description": "Contato direto com nosso mentor espiritual" },
+    { "title": "Canção Angelical", "description": "Músicas para elevar sua vibração" }
+  ]
+} 

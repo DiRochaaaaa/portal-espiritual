@@ -1,0 +1,353 @@
+import { CSSProperties, useState } from 'react';
+import { motion } from 'framer-motion';
+import Link from 'next/link';
+import { BsChatFill, BsBookFill, BsGiftFill, BsMusicNoteBeamed, BsPersonFill, BsStarFill } from 'react-icons/bs';
+import { GiMeditation } from 'react-icons/gi';
+
+interface BonusCardProps {
+  title: string;
+  description?: string;
+  icon: string;
+  link: string;
+  index: number;
+  buttonText?: string;
+}
+
+const styles: Record<string, CSSProperties> = {
+  card: {
+    position: 'relative',
+    background: 'linear-gradient(145deg, rgba(31, 41, 55, 0.8), rgba(17, 24, 39, 0.9))',
+    backdropFilter: 'blur(16px)',
+    borderRadius: '16px',
+    overflow: 'hidden',
+    padding: '32px 24px',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    textAlign: 'center',
+    height: '100%',
+    border: '1px solid rgba(255, 255, 255, 0.08)',
+    boxShadow: '0 10px 25px rgba(0, 0, 0, 0.2)',
+    transition: 'all 0.3s ease',
+    zIndex: 1,
+    touchAction: 'manipulation',
+  },
+  cardInner: {
+    position: 'relative',
+    zIndex: 2,
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    height: '100%',
+    touchAction: 'manipulation',
+  },
+  cardBorder: {
+    position: 'absolute',
+    top: -1,
+    left: -1,
+    right: -1,
+    bottom: -1,
+    zIndex: 0,
+    borderRadius: '17px',
+    background: 'linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0))',
+    opacity: 0,
+    transition: 'opacity 0.5s ease',
+  },
+  iconContainer: {
+    width: '84px',
+    height: '84px',
+    borderRadius: '16px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: '24px',
+    position: 'relative',
+    zIndex: 2,
+  },
+  iconGlow: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    borderRadius: '16px',
+    background: 'rgba(37, 99, 235, 0.3)',
+    filter: 'blur(10px)',
+    opacity: 0.5,
+    zIndex: 1,
+  },
+  iconBg: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    borderRadius: '16px',
+    background: 'linear-gradient(135deg, #2563EB, #1E40AF)',
+    boxShadow: '0 5px 15px rgba(0, 0, 0, 0.2)',
+    zIndex: 2,
+  },
+  icon: {
+    fontSize: '38px',
+    color: '#fff',
+    position: 'relative',
+    zIndex: 3,
+    textShadow: '0 1px 3px rgba(0, 0, 0, 0.2)',
+  },
+  title: {
+    color: '#F9FAFB',
+    fontSize: '1.5rem',
+    fontWeight: 700,
+    margin: '0 0 10px',
+    textShadow: '0 1px 2px rgba(0, 0, 0, 0.15)',
+  },
+  description: {
+    color: '#D1D5DB',
+    fontSize: '0.95rem',
+    marginBottom: '24px',
+    flexGrow: 1,
+    lineHeight: '1.6',
+  },
+  button: {
+    marginTop: 'auto',
+    padding: '12px 28px',
+    borderRadius: '12px',
+    background: 'linear-gradient(to right, #2563EB, #1D4ED8)',
+    color: '#fff',
+    border: 'none',
+    cursor: 'pointer',
+    fontSize: '0.95rem',
+    fontWeight: 600,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '8px',
+    textDecoration: 'none',
+    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+    transition: 'all 0.3s ease',
+    position: 'relative',
+    overflow: 'hidden',
+    touchAction: 'manipulation',
+  },
+  buttonText: {
+    position: 'relative',
+    zIndex: 2,
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+  },
+  buttonIcon: {
+    fontSize: '1.1rem',
+    transition: 'transform 0.3s ease',
+  },
+  buttonShine: {
+    position: 'absolute',
+    top: 0,
+    left: '-100%',
+    width: '100%',
+    height: '100%',
+    background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent)',
+    transition: 'left 0.5s ease',
+    zIndex: 1,
+  },
+  highlight: {
+    position: 'absolute',
+    width: '120px',
+    height: '120px',
+    borderRadius: '30%',
+    background: 'radial-gradient(circle, var(--color-from) 0%, transparent 70%)',
+    filter: 'blur(25px)',
+    opacity: 0.08,
+    zIndex: 0,
+    transition: 'all 0.5s ease',
+  },
+  highlightTop: {
+    top: '-20px',
+    right: '-20px',
+    '--color-from': '#F97316',
+  } as CSSProperties,
+  highlightBottom: {
+    bottom: '-20px',
+    left: '-20px',
+    '--color-from': '#2563EB',
+  } as CSSProperties,
+};
+
+const getIcon = (iconType: string) => {
+  switch (iconType) {
+    case 'whatsapp':
+      return <BsChatFill />;
+    case 'prayer':
+      return <BsBookFill />;
+    case 'gift':
+      return <BsGiftFill />;
+    case 'celestino':
+      return <BsPersonFill />;
+    case 'music':
+      return <BsMusicNoteBeamed />;
+    case 'mantra':
+      return <GiMeditation />;
+    default:
+      return <BsStarFill />;
+  }
+};
+
+const getIconColor = (iconType: string) => {
+  switch (iconType) {
+    case 'whatsapp':
+      return 'linear-gradient(135deg, #25D366, #128C7E)';
+    case 'prayer':
+      return 'linear-gradient(135deg, #F59E0B, #D97706)';
+    case 'gift':
+      return 'linear-gradient(135deg, #EC4899, #DB2777)';
+    case 'celestino':
+      return 'linear-gradient(135deg, #8B5CF6, #7C3AED)';
+    case 'music':
+      return 'linear-gradient(135deg, #3B82F6, #2563EB)';
+    default:
+      return 'linear-gradient(135deg, #2563EB, #1E40AF)';
+  }
+};
+
+export default function BonusCard({ title, description, icon, link, index, buttonText = 'ACESSAR' }: BonusCardProps) {
+  const [isHovered, setIsHovered] = useState(false);
+  const iconComponent = getIcon(icon);
+  const iconColor = getIconColor(icon);
+
+  // Verificar se é um link interno ou externo
+  const isInternalLink = link.startsWith('/');
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ 
+        duration: 0.5, 
+        delay: index * 0.1,
+        ease: "easeOut" 
+      }}
+      whileHover={{ y: -8, scale: 1.02 }}
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+      style={{ touchAction: 'manipulation' }}
+    >
+      <div style={styles.card}>
+        <div 
+          style={{
+            ...styles.cardBorder,
+            opacity: isHovered ? 0.4 : 0
+          }}
+        />
+        
+        <div style={styles.cardInner}>
+          <div 
+            style={{
+              ...styles.highlightTop,
+              opacity: isHovered ? 0.15 : 0.08,
+              transform: isHovered ? 'scale(1.2)' : 'scale(1)'
+            }}
+          />
+          
+          <div 
+            style={{
+              ...styles.highlightBottom,
+              opacity: isHovered ? 0.15 : 0.08,
+              transform: isHovered ? 'scale(1.2)' : 'scale(1)'
+            }}
+          />
+          
+          <motion.div
+            style={{
+              ...styles.iconContainer
+            }}
+            animate={isHovered ? {
+              y: [0, -4, 0],
+              scale: [1, 1.05, 1]
+            } : {}}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              repeatType: "loop"
+            }}
+          >
+            <div style={styles.iconGlow} />
+            <div 
+              style={{
+                ...styles.iconBg,
+                background: iconColor
+              }}
+            />
+            <span style={{...styles.icon, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>{iconComponent}</span>
+          </motion.div>
+          
+          <h3 style={styles.title}>
+            {title}
+          </h3>
+          
+          {description && (
+            <p style={styles.description}>{description}</p>
+          )}
+          
+          {isInternalLink ? (
+            // Link interno - usa o Next Link para evitar recarregar toda a página
+            <Link href={link} passHref>
+              <motion.div
+                style={styles.button}
+                whileHover={{
+                  boxShadow: '0 6px 16px rgba(0, 0, 0, 0.2)',
+                  background: 'linear-gradient(to right, #F97316, #EA580C)'
+                }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <div 
+                  style={{
+                    ...styles.buttonShine,
+                    left: isHovered ? '100%' : '-100%'
+                  }}
+                />
+                <div style={styles.buttonText}>
+                  <span>{buttonText}</span>
+                  <motion.span 
+                    style={styles.buttonIcon}
+                    animate={isHovered ? { x: [0, 5, 0] } : {}}
+                    transition={{ duration: 0.5, repeat: Infinity }}
+                  >
+                    &rarr;
+                  </motion.span>
+                </div>
+              </motion.div>
+            </Link>
+          ) : (
+            // Link externo - abre em nova aba
+            <motion.a
+              href={link}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={styles.button}
+              whileHover={{
+                boxShadow: '0 6px 16px rgba(0, 0, 0, 0.2)',
+                background: 'linear-gradient(to right, #F97316, #EA580C)'
+              }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <div 
+                style={{
+                  ...styles.buttonShine,
+                  left: isHovered ? '100%' : '-100%'
+                }}
+              />
+              <div style={styles.buttonText}>
+                <span>{buttonText}</span>
+                <motion.span 
+                  style={styles.buttonIcon}
+                  animate={isHovered ? { x: [0, 5, 0] } : {}}
+                  transition={{ duration: 0.5, repeat: Infinity }}
+                >
+                  &rarr;
+                </motion.span>
+              </div>
+            </motion.a>
+          )}
+        </div>
+      </div>
+    </motion.div>
+  );
+} 

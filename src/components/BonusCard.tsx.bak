@@ -1,0 +1,356 @@
+import { CSSProperties, useState } from 'react';
+import { motion } from 'framer-motion';
+import Link from 'next/link';
+
+interface BonusCardProps {
+  title: string;
+  description?: string;
+  icon: string;
+  link: string;
+  index: number;
+  buttonText?: string;
+}
+
+const styles: Record<string, CSSProperties> = {
+  card: {
+    position: 'relative',
+    background: 'rgba(75, 0, 130, 0.2)',
+    backdropFilter: 'blur(12px)',
+    borderRadius: '20px',
+    overflow: 'hidden',
+    padding: '32px 24px',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    textAlign: 'center',
+    height: '100%',
+    border: '1px solid rgba(123, 31, 162, 0.3)',
+    boxShadow: '0 10px 25px rgba(0, 0, 0, 0.2)',
+    transition: 'all 0.3s ease',
+    zIndex: 1,
+    touchAction: 'manipulation',
+  },
+  cardInner: {
+    position: 'relative',
+    zIndex: 2,
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    height: '100%',
+    touchAction: 'manipulation',
+  },
+  gradientBorder: {
+    position: 'absolute',
+    top: -2,
+    left: -2,
+    right: -2,
+    bottom: -2,
+    zIndex: 0,
+    border: '2px solid transparent',
+    borderRadius: '22px',
+    background: 'linear-gradient(135deg, #D4AF37, #3E8EDE, #FF6B95, #D4AF37) border-box',
+    WebkitMask: 'linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)',
+    WebkitMaskComposite: 'xor',
+    maskComposite: 'exclude',
+    opacity: 0,
+    transition: 'opacity 0.5s ease',
+  },
+  iconContainer: {
+    width: '90px',
+    height: '90px',
+    borderRadius: '50%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: '25px',
+    position: 'relative',
+    zIndex: 2,
+  },
+  iconGlow: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    borderRadius: '50%',
+    background: 'rgba(123, 31, 162, 0.6)',
+    filter: 'blur(10px)',
+    opacity: 0.5,
+    zIndex: 1,
+  },
+  iconBg: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    borderRadius: '50%',
+    background: 'linear-gradient(135deg, #7B1FA2, #4A0072)',
+    boxShadow: '0 5px 15px rgba(123, 31, 162, 0.4)',
+    zIndex: 2,
+  },
+  icon: {
+    fontSize: '40px',
+    color: '#fff',
+    position: 'relative',
+    zIndex: 3,
+    textShadow: '0 2px 5px rgba(0, 0, 0, 0.3)',
+  },
+  title: {
+    fontFamily: "'Playfair Display', serif",
+    color: '#fff',
+    fontSize: '1.6rem',
+    fontWeight: 600,
+    margin: '0 0 12px',
+    textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)',
+  },
+  description: {
+    color: 'rgba(255, 255, 255, 0.85)',
+    fontSize: '0.95rem',
+    marginBottom: '24px',
+    flexGrow: 1,
+    lineHeight: '1.6',
+  },
+  button: {
+    marginTop: 'auto',
+    padding: '12px 28px',
+    borderRadius: '30px',
+    background: 'linear-gradient(45deg, #7B1FA2, #9C27B0)',
+    color: '#fff',
+    border: 'none',
+    cursor: 'pointer',
+    fontSize: '0.9rem',
+    fontWeight: 600,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '8px',
+    textDecoration: 'none',
+    boxShadow: '0 5px 15px rgba(123, 31, 162, 0.4)',
+    transition: 'all 0.3s ease',
+    position: 'relative',
+    overflow: 'hidden',
+    touchAction: 'manipulation',
+  },
+  buttonText: {
+    position: 'relative',
+    zIndex: 2,
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+  },
+  buttonIcon: {
+    fontSize: '1.1rem',
+    transition: 'transform 0.3s ease',
+  },
+  buttonShine: {
+    position: 'absolute',
+    top: 0,
+    left: '-100%',
+    width: '100%',
+    height: '100%',
+    background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent)',
+    transition: 'left 0.5s ease',
+    zIndex: 1,
+  },
+  orb: {
+    position: 'absolute',
+    width: '150px',
+    height: '150px',
+    borderRadius: '50%',
+    background: 'radial-gradient(circle, var(--color-from) 0%, transparent 70%)',
+    filter: 'blur(20px)',
+    opacity: 0.15,
+    zIndex: 0,
+    transition: 'all 0.5s ease',
+  },
+  orbTop: {
+    top: '-50px',
+    right: '-30px',
+    '--color-from': '#D4AF37',
+  } as CSSProperties,
+  orbBottom: {
+    bottom: '-50px',
+    left: '-30px',
+    '--color-from': '#3E8EDE',
+  } as CSSProperties,
+};
+
+const getIconEmoji = (iconType: string) => {
+  switch (iconType) {
+    case 'whatsapp':
+      return "💬";
+    case 'prayer':
+      return "📖";
+    case 'gift':
+      return "🎁";
+    case 'celestino':
+      return "👨‍🦳";
+    case 'music':
+      return "🎵";
+    case 'mantra':
+      return "🧘";
+    default:
+      return "✨";
+  }
+};
+
+const getIconColor = (iconType: string) => {
+  switch (iconType) {
+    case 'whatsapp':
+      return 'linear-gradient(135deg, #25D366, #128C7E)';
+    case 'prayer':
+      return 'linear-gradient(135deg, #D4AF37, #B8860B)';
+    case 'gift':
+      return 'linear-gradient(135deg, #FF6B95, #FF0066)';
+    case 'celestino':
+      return 'linear-gradient(135deg, #7B1FA2, #4A0072)';
+    case 'music':
+      return 'linear-gradient(135deg, #3E8EDE, #2A6BBF)';
+    case 'mantra':
+      return 'linear-gradient(135deg, #2A9D8F, #40E0D0)';
+    default:
+      return 'linear-gradient(135deg, #7B1FA2, #4A0072)';
+  }
+};
+
+export default function BonusCard({ title, description, icon, link, index, buttonText = 'ACESSAR' }: BonusCardProps) {
+  const [isHovered, setIsHovered] = useState(false);
+  const iconEmoji = getIconEmoji(icon);
+  const iconColor = getIconColor(icon);
+
+  // Verificar se é um link interno ou externo
+  const isInternalLink = link.startsWith('/');
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ 
+        duration: 0.6, 
+        delay: index * 0.15,
+        ease: "easeOut" 
+      }}
+      whileHover={{ y: -15, scale: 1.03 }}
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+      style={{ touchAction: 'manipulation' }}
+    >
+      <div style={styles.card}>
+        <div 
+          style={{
+            ...styles.gradientBorder,
+            opacity: isHovered ? 1 : 0
+          }}
+        />
+        
+        <div style={styles.cardInner}>
+          <div 
+            style={{
+              ...styles.orbTop,
+              opacity: isHovered ? 0.3 : 0.15,
+              transform: isHovered ? 'scale(1.2)' : 'scale(1)'
+            }}
+          />
+          
+          <div 
+            style={{
+              ...styles.orbBottom,
+              opacity: isHovered ? 0.3 : 0.15,
+              transform: isHovered ? 'scale(1.2)' : 'scale(1)'
+            }}
+          />
+          
+          <motion.div
+            style={styles.iconContainer}
+            animate={isHovered ? {
+              y: [0, -5, 0],
+              rotate: [0, 5, 0, -5, 0]
+            } : {}}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              repeatType: "loop"
+            }}
+          >
+            <div style={styles.iconGlow} />
+            <div 
+              style={{
+                ...styles.iconBg,
+                background: iconColor
+              }}
+            />
+            <span style={styles.icon}>{iconEmoji}</span>
+          </motion.div>
+          
+          <h3 style={styles.title}>
+            {title}
+          </h3>
+          
+          {description && (
+            <p style={styles.description}>{description}</p>
+          )}
+          
+          {isInternalLink ? (
+            // Link interno - usa o Next Link para evitar recarregar toda a página
+            <Link href={link} passHref>
+              <motion.div
+                style={styles.button}
+                whileHover={{
+                  boxShadow: '0 8px 20px rgba(123, 31, 162, 0.6)',
+                  background: 'linear-gradient(45deg, #9C27B0, #D4AF37)'
+                }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <div 
+                  style={{
+                    ...styles.buttonShine,
+                    left: isHovered ? '100%' : '-100%'
+                  }}
+                />
+                <div style={styles.buttonText}>
+                  <span>{buttonText}</span>
+                  <motion.span 
+                    style={styles.buttonIcon}
+                    animate={isHovered ? { x: [0, 5, 0] } : {}}
+                    transition={{ duration: 0.5, repeat: Infinity }}
+                  >
+                    ➔
+                  </motion.span>
+                </div>
+              </motion.div>
+            </Link>
+          ) : (
+            // Link externo - abre em nova aba
+            <motion.a
+              href={link}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={styles.button}
+              whileHover={{
+                boxShadow: '0 8px 20px rgba(123, 31, 162, 0.6)',
+                background: 'linear-gradient(45deg, #9C27B0, #D4AF37)'
+              }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <div 
+                style={{
+                  ...styles.buttonShine,
+                  left: isHovered ? '100%' : '-100%'
+                }}
+              />
+              <div style={styles.buttonText}>
+                <span>{buttonText}</span>
+                <motion.span 
+                  style={styles.buttonIcon}
+                  animate={isHovered ? { x: [0, 5, 0] } : {}}
+                  transition={{ duration: 0.5, repeat: Infinity }}
+                >
+                  ➔
+                </motion.span>
+              </div>
+            </motion.a>
+          )}
+        </div>
+      </div>
+    </motion.div>
+  );
+} 

@@ -1,0 +1,15 @@
+{
+  "title": "Bienvenido al Tarot de los Ángeles",
+  "startReading": "Iniciar mi Lectura",
+  "bonuses": "BONOS",
+  "access": "Acceder",
+  "language": "Idioma",
+  "changeLanguage": "Cambiar a Portugués",
+  "bonusList": [
+    { "title": "Grupo de WhatsApp Exclusivo", "description": "Únete a nuestro grupo para recibir mensajes diarios" },
+    { "title": "Oraciones de Sanación", "description": "Poderosas oraciones para sanación espiritual" },
+    { "title": "Regalo Sorpresa", "description": "Un regalo especial para ti" },
+    { "title": "Contacto con Celestino", "description": "Contacto directo con nuestro mentor espiritual" },
+    { "title": "Canción Angelical", "description": "Música para elevar tu vibración" }
+  ]
+} 
