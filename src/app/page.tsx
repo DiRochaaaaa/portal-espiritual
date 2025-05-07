@@ -1,10 +1,9 @@
 'use client';
 
-import { useState, useEffect, useRef, CSSProperties } from 'react';
+import { useState, useEffect, useRef, CSSProperties, memo } from 'react';
 import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
-import BonusSection from '../components/BonusSection';
-import SpiritualQuotes from '../components/SpiritualQuotes';
+import { SpiritualQuotesWithSuspense, BonusSectionWithSuspense } from '../lib/LazyComponents';
 import { getCurrentLocale, Locale } from '../lib/locale';
 import Footer from '../components/Footer';
 
@@ -365,9 +364,9 @@ export default function HomePage() {
                 animate={{ opacity: 1, width: '100%' }}
                 transition={{ duration: 0.8, delay: 0.5 }}
               />
-              <BonusSection locale={locale} />
+              <BonusSectionWithSuspense locale={locale} />
               <div style={styles.divider} />
-              <SpiritualQuotes />
+              <SpiritualQuotesWithSuspense />
             </>
           )}
         </motion.div>

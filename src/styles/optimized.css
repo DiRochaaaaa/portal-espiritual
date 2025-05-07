@@ -1,0 +1,65 @@
+/* Otimização para diferentes condições de conexão */
+
+/* Reduzir animações em conexões lentas */
+.reduce-motion * {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+}
+
+/* Otimizar conteúdo para dispositivos móveis e tablets */
+@media (max-width: 768px) {
+  /* Simplificar gradientes e efeitos visuais em dispositivos móveis */
+  .simplify-mobile {
+    background: linear-gradient(to bottom, #150022, #4A0072) !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  
+  /* Reduzir tamanho das imagens em dispositivos móveis */
+  .mobile-optimized-image {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* Classes utilitárias para carregamento preguiçoso */
+.lazy-visible {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.lazy-visible.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Placeholders para conteúdo que está carregando */
+.placeholder {
+  background: linear-gradient(90deg, rgba(123, 31, 162, 0.2), rgba(123, 31, 162, 0.3), rgba(123, 31, 162, 0.2));
+  background-size: 200% 100%;
+  animation: placeholder-pulse 1.5s ease-in-out infinite;
+  border-radius: 6px;
+}
+
+@keyframes placeholder-pulse {
+  0% {
+    background-position: 0% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Otimizações para renderização */
+.content-visibility-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 1000px; /* Valor aproximado para altura esperada */
+}
+
+/* Prevenir piscar de texto durante o carregamento da fonte */
+.reduce-layout-shift {
+  font-display: optional;
+} 
