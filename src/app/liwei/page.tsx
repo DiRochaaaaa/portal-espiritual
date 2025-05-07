@@ -2,9 +2,7 @@
 
 import { useState, useEffect, CSSProperties, memo, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import Navbar from '../../components/Navbar';
-import Footer from '../../components/Footer';
-import { MeditationPlayerWithSuspense, MantraEffectsManualWithSuspense, EnergyProtectionManualWithSuspense } from '../../lib/LazyComponents';
+import { NavbarWithSuspense, FooterWithSuspense, MeditationPlayerWithSuspense, MantraEffectsManualWithSuspense, EnergyProtectionManualWithSuspense } from '../../lib/LazyComponents';
 import { getCurrentLocale, Locale } from '../../lib/locale';
 import { BsFillVolumeUpFill, BsBookFill, BsShieldFill, BsChevronDown, BsChevronUp, BsPlayCircleFill } from 'react-icons/bs';
 import { FaLeaf, FaMountain, FaWater, FaFire } from 'react-icons/fa';
@@ -710,7 +708,7 @@ export default function LiWeiPage() {
 
   return (
     <main style={styles.container}>
-      <Navbar />
+      <NavbarWithSuspense />
 
       <motion.div 
         style={styles.content}
@@ -1025,7 +1023,7 @@ export default function LiWeiPage() {
         </motion.section>
       </motion.div>
 
-      <Footer />
+      <FooterWithSuspense />
     </main>
   );
 } 

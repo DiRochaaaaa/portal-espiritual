@@ -1,6 +1,6 @@
 import { CSSProperties } from 'react';
 import { motion } from 'framer-motion';
-import BonusCard from './BonusCard';
+import { BonusCardWithSuspense } from '../lib/LazyComponents';
 
 interface BonusSectionProps {
   locale: 'pt' | 'es';
@@ -202,7 +202,7 @@ export default function BonusSection({ locale }: BonusSectionProps) {
 
       <div style={styles.grid}>
         {t.features.map((feature, index) => (
-          <BonusCard
+          <BonusCardWithSuspense
             key={`feature-${index}`}
             title={feature.title}
             description={feature.description}
@@ -232,7 +232,7 @@ export default function BonusSection({ locale }: BonusSectionProps) {
 
       <div style={styles.grid}>
         {t.contacts.map((contact, index) => (
-          <BonusCard
+          <BonusCardWithSuspense
             key={`contact-${index}`}
             title={contact.title}
             description={contact.description}

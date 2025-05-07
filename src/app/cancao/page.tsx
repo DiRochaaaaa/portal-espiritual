@@ -2,9 +2,7 @@
 
 import { useState, useEffect, CSSProperties } from 'react';
 import { motion } from 'framer-motion';
-import Navbar from '../../components/Navbar';
-import Footer from '../../components/Footer';
-import MeditationPlayer from '../../components/MeditationPlayer';
+import { NavbarWithSuspense, FooterWithSuspense, MeditationPlayerWithSuspense } from '../../lib/LazyComponents';
 import { getCurrentLocale, Locale } from '../../lib/locale';
 import { BsMusicNoteBeamed, BsFillLightbulbFill } from 'react-icons/bs';
 import { colors, gradients, commonStyles, motionVariants } from '../../styles/shared';
@@ -141,7 +139,7 @@ export default function CancaoAngelicalPage() {
 
   return (
     <main style={styles.container}>
-      <Navbar />
+      <NavbarWithSuspense />
 
       <motion.div 
         style={styles.content}
@@ -221,7 +219,7 @@ export default function CancaoAngelicalPage() {
           {...motionVariants.fadeInUp}
           transition={{ duration: 0.6, delay: 0.6 }}
         >
-          <MeditationPlayer mantras={currentMantras.map(adaptMantraFormat)} locale={locale} />
+          <MeditationPlayerWithSuspense mantras={currentMantras.map(adaptMantraFormat)} locale={locale} />
           
           <motion.div 
             style={{
@@ -248,7 +246,7 @@ export default function CancaoAngelicalPage() {
         </motion.div>
       </motion.div>
 
-      <Footer />
+      <FooterWithSuspense />
     </main>
   );
 } 

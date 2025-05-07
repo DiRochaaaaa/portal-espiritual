@@ -1,7 +1,7 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter, Playfair_Display } from 'next/font/google';
 import './globals.css';
-import LanguageProvider from '@/components/LanguageProvider';
+import ClientLayout from '../components/ClientLayout';
 
 // Configuração otimizada de fontes
 const inter = Inter({ 
@@ -20,17 +20,23 @@ const playfair = Playfair_Display({
   fallback: ['Georgia', 'serif']
 });
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  themeColor: [
+    { media: '(prefers-color-scheme: dark)', color: '#150022' },
+    { media: '(prefers-color-scheme: light)', color: '#150022' }
+  ],
+};
+
 export const metadata: Metadata = {
   title: 'Portal Espiritual | Tarô dos Anjos',
   description: 'Descubra o Tarô dos Anjos e acesse conteúdos exclusivos no Portal Espiritual.',
   icons: {
     icon: '/favicon.ico',
   },
-  viewport: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no',
-  themeColor: [
-    { media: '(prefers-color-scheme: dark)', color: '#150022' },
-    { media: '(prefers-color-scheme: light)', color: '#150022' }
-  ],
 };
 
 export default function RootLayout({
@@ -56,9 +62,9 @@ export default function RootLayout({
         />
       </head>
       <body suppressHydrationWarning className="bg-gradient-to-b from-darkBg via-purpleDark/50 to-darkBg text-white">
-        <LanguageProvider>
+        <ClientLayout>
           {children}
-        </LanguageProvider>
+        </ClientLayout>
       </body>
     </html>
   );

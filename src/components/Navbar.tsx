@@ -158,7 +158,7 @@ const styles: Record<string, CSSProperties> = {
   },
 };
 
-export default function Navbar() {
+const NavbarComponent = () => {
   const [locale, setLocale] = useState<Locale>('pt');
   const [mounted, setMounted] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -326,4 +326,6 @@ export default function Navbar() {
       </div>
     </nav>
   );
-} 
+};
+
+export default NavbarComponent; 

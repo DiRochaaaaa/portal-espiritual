@@ -1,11 +1,10 @@
 'use client';
 
 import { useState, useEffect, useRef, CSSProperties, memo } from 'react';
-import { motion } from 'framer-motion';
-import Navbar from '../components/Navbar';
-import { SpiritualQuotesWithSuspense, BonusSectionWithSuspense } from '../lib/LazyComponents';
-import { getCurrentLocale, Locale } from '../lib/locale';
-import Footer from '../components/Footer';
+import { motion, AnimatePresence } from 'framer-motion';
+import { NavbarWithSuspense, SpiritualQuotesWithSuspense, BonusSectionWithSuspense, FooterWithSuspense } from '../lib/LazyComponents';
+import { getCurrentLocale, toggleLocale, Locale } from '../lib/locale';
+import YouTubeLoader from '../components/YouTubeLoader';
 
 const styles: Record<string, CSSProperties> = {
   container: {
@@ -225,7 +224,7 @@ export default function HomePage() {
   
   return (
     <main style={styles.container}>
-      <Navbar />
+      <NavbarWithSuspense />
       
       <div style={styles.contentContainer}>
         <motion.h1 
@@ -373,7 +372,7 @@ export default function HomePage() {
       </div>
       
       {/* Substituir o rodapé atual pelo novo componente Footer */}
-      <Footer showDebugButton={showDebugButton} onResetVideo={resetVideo} />
+      <FooterWithSuspense showDebugButton={showDebugButton} onResetVideo={resetVideo} />
     </main>
   );
 } 

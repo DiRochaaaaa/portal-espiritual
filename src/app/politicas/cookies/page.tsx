@@ -2,8 +2,7 @@
 
 import { useState, useEffect, CSSProperties } from 'react';
 import { motion } from 'framer-motion';
-import Navbar from '../../../components/Navbar';
-import Footer from '../../../components/Footer';
+import { NavbarWithSuspense, FooterWithSuspense } from '../../../lib/LazyComponents';
 import { getCurrentLocale, Locale } from '../../../lib/locale';
 
 const styles: Record<string, CSSProperties> = {
@@ -232,7 +231,7 @@ export default function CookiesPolicyPage() {
   
   return (
     <main style={styles.container}>
-      <Navbar />
+      <NavbarWithSuspense />
       
       <div style={styles.contentContainer}>
         <motion.div
@@ -321,7 +320,7 @@ export default function CookiesPolicyPage() {
         </motion.div>
       </div>
       
-      <Footer />
+      <FooterWithSuspense />
     </main>
   );
 } 

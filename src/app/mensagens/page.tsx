@@ -2,8 +2,7 @@
 
 import { useState, useEffect, CSSProperties } from 'react';
 import { motion } from 'framer-motion';
-import Navbar from '../../components/Navbar';
-import SpiritualQuotes from '../../components/SpiritualQuotes';
+import { NavbarWithSuspense, SpiritualQuotesWithSuspense } from '../../lib/LazyComponents';
 import { getCurrentLocale, Locale } from '../../lib/locale';
 
 const styles: Record<string, CSSProperties> = {
@@ -75,7 +74,7 @@ export default function MensagensPage() {
   
   return (
     <main style={styles.container}>
-      <Navbar />
+      <NavbarWithSuspense />
       
       <div style={styles.contentContainer}>
         <motion.h1
@@ -102,7 +101,7 @@ export default function MensagensPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
         >
-          <SpiritualQuotes />
+          <SpiritualQuotesWithSuspense />
         </motion.div>
       </div>
       

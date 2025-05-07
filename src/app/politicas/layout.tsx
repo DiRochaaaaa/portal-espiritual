@@ -12,14 +12,14 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: 'Mantras Sagrados do Monge Li Wei | Portal Espiritual',
-  description: 'Práticas milenares para elevação espiritual e harmonia interior. Descubra os mantras sagrados do Monge Li Wei.',
+  title: 'Políticas | Portal Espiritual',
+  description: 'Políticas de privacidade, termos de uso e cookies do Portal Espiritual.',
 };
 
-export default function LiWeiLayout({
+export default function PoliticasLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return children;
-}
+} 

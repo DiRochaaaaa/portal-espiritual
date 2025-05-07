@@ -2,8 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import Navbar from '../../components/Navbar';
-import BonusCard from '../../components/BonusCard';
+import { NavbarWithSuspense, BonusCardWithSuspense } from '../../lib/LazyComponents';
 import { getCurrentLocale, Locale } from '../../lib/locale';
 
 export default function BonusPage() {
@@ -98,7 +97,7 @@ export default function BonusPage() {
   
   return (
     <main className="flex min-h-screen flex-col bg-gradient-to-b from-darkBg via-purpleDark/50 to-darkBg text-white">
-      <Navbar />
+      <NavbarWithSuspense />
       
       <div className="container mx-auto px-4 pt-24 pb-12">
         <motion.div
@@ -113,7 +112,7 @@ export default function BonusPage() {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {t.bonusList.map((bonus, index) => (
-            <BonusCard
+            <BonusCardWithSuspense
               key={index}
               title={bonus.title}
               description={bonus.description}
