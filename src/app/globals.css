@@ -222,4 +222,74 @@ body::before {
   background: var(--gradient-hover);
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Solução para gradientes não animáveis */
+.gradient-bg-1 {
+  background: linear-gradient(135deg, #0A2B82, #937D60);
+}
+
+.gradient-bg-2 {
+  background: linear-gradient(135deg, #150022, #4A0072, #150022);
+}
+
+.gradient-bg-3 {
+  background: linear-gradient(to right, #D4AF37, #FFD700, #D4AF37);
+}
+
+/* Gradiente específico que causa erro */
+.gradient-blue-gold {
+  background-color: #0A2B82; /* Fallback para navegadores que não suportam gradientes */
+  color: white;
+  position: relative;
+}
+
+.gradient-blue-gold::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #0A2B82, #937D60);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Use cores sólidas para animações */
+.color-blue {
+  background-color: #0A2B82;
+}
+
+.color-gold {
+  background-color: #937D60;
+}
+
+/* Alternativa segura para quando precisar animar cores */
+@keyframes safeColorTransition {
+  0% { background-color: rgba(10, 43, 130, 1); }
+  50% { background-color: rgba(73, 89, 136, 1); }
+  100% { background-color: rgba(147, 125, 96, 1); }
+}
+
+.animate-safe-colors {
+  animation: safeColorTransition 2s infinite alternate;
+}
+
+/* Classe para reduzir animações */
+.reduce-motion {
+  --motion-reduce: reduce !important;
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+}
+
+/* Implementação de media query para preferência de usuário */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 } 

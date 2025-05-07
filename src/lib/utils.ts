@@ -57,28 +57,6 @@ export function debounce<T extends (...args: any[]) => any>(
   };
 }
 
-// Função para carregar scripts de forma otimizada
-export function loadScript(src: string, id: string, async = true, defer = false): Promise<boolean> {
-  return new Promise((resolve) => {
-    // Verifica se o script já existe
-    if (document.getElementById(id)) {
-      resolve(true);
-      return;
-    }
-
-    const script = document.createElement('script');
-    script.id = id;
-    script.src = src;
-    script.async = async;
-    script.defer = defer;
-
-    script.onload = () => resolve(true);
-    script.onerror = () => resolve(false);
-
-    document.head.appendChild(script);
-  });
-}
-
 // Cache para evitar recálculos
 const memoizedResults: Record<string, any> = {};
 

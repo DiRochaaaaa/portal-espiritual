@@ -11,6 +11,11 @@ import { adaptMantraFormat, getTranslatedContent } from '../../lib/utils';
 import SectionTitle from '../../components/SectionTitle';
 import Card from '../../components/Card';
 
+// Importar ícones temáticos dos mantras
+import { FaHeart, FaInfinity, FaSeedling, FaOm, FaYinYang } from 'react-icons/fa';
+import { GiMountainRoad, GiLotusFlower, GiMeditation, GiPeaceDove } from 'react-icons/gi';
+import { RiMentalHealthFill } from 'react-icons/ri';
+
 // Definição das cores estendidas
 const colors = {
   purple: { 
@@ -108,7 +113,7 @@ const bonusAudio = {
   pt: {
     id: "liwei-bonus",
     title: "Meditação Guiada do Monge Li Wei",
-    youtubeId: "lUKJrkKnQOQ",
+    youtubeId: "bIr6dABjMWk",
     description: "Uma meditação exclusiva guiada com base nos ensinamentos do Monge Li Wei para relaxamento profundo e expansão da consciência.",
     objective: "Relaxamento Profundo",
     color: colors.purple.light
@@ -116,7 +121,7 @@ const bonusAudio = {
   es: {
     id: "liwei-bonus",
     title: "Meditación Guiada del Monje Li Wei",
-    youtubeId: "lUKJrkKnQOQ",
+    youtubeId: "bIr6dABjMWk",
     description: "Una meditación exclusiva guiada basada en las enseñanzas del Monje Li Wei para relajación profunda y expansión de la conciencia.",
     objective: "Relajación Profunda",
     color: colors.purple.light
@@ -131,7 +136,7 @@ const mantras = {
       title: "Om Mani Padme Hum",
       description: "O mantra da compaixão. Invoca purificação e transformação. Ajuda a abrir o coração e a conexão com todos os seres.",
       objective: "Compaixão e Purificação",
-      youtubeId: "iG_lNuNUVd4",
+      youtubeId: "rvcaxqTf7MQ",
       color: colors.purple.light,
       text: "Om Mani Padme Hum"
     },
@@ -169,7 +174,7 @@ const mantras = {
       title: "Om Mani Padme Hum",
       description: "El mantra de la compasión. Invoca purificación y transformación. Ayuda a abrir el corazón y la conexión con todos los seres.",
       objective: "Compasión y Purificación",
-      youtubeId: "iG_lNuNUVd4",
+      youtubeId: "rvcaxqTf7MQ",
       color: colors.purple.light,
       text: "Om Mani Padme Hum"
     },
@@ -642,6 +647,45 @@ const translations = {
   }
 };
 
+// Definição de cores para cada mantra
+const mantraColors: Record<string, {
+  primary: string;
+  secondary: string;
+  gradient: string;
+  icon: JSX.Element;
+}> = {
+  'om-mani-padme-hum': {
+    primary: '#8A2BE2', // Roxo (cor da espiritualidade e transformação)
+    secondary: '#D8BFD8', // Lilás claro
+    gradient: 'linear-gradient(135deg, #8A2BE2, #9370DB)',
+    icon: <GiLotusFlower size={28} color="#D8BFD8" />
+  },
+  'om-gam-ganapataye-namaha': {
+    primary: '#FF8C00', // Laranja (cor da superação de obstáculos)
+    secondary: '#FFD700', // Dourado
+    gradient: 'linear-gradient(135deg, #FF8C00, #FFD700)',
+    icon: <GiMountainRoad size={28} color="#FFD700" />
+  },
+  'om-namah-shivaya': {
+    primary: '#1E90FF', // Azul (cor da transformação espiritual)
+    secondary: '#87CEFA', // Azul claro
+    gradient: 'linear-gradient(135deg, #1E90FF, #87CEFA)',
+    icon: <FaInfinity size={28} color="#87CEFA" />
+  },
+  'om-shanti-shanti-shanti': {
+    primary: '#32CD32', // Verde (cor da paz e tranquilidade)
+    secondary: '#98FB98', // Verde claro
+    gradient: 'linear-gradient(135deg, #32CD32, #98FB98)',
+    icon: <GiPeaceDove size={28} color="#98FB98" />
+  }
+};
+
+// Função para obter a configuração de cores de um mantra pelo ID
+const getMantraTheme = (id: string) => {
+  const formattedId = id.toLowerCase().replace(/\s+/g, '-');
+  return mantraColors[formattedId as keyof typeof mantraColors] || mantraColors['om-mani-padme-hum']; // Default
+};
+
 export default function LiWeiPage() {
   const [locale, setLocale] = useState<Locale>('pt');
   const [mounted, setMounted] = useState(false);
@@ -706,6 +750,162 @@ export default function LiWeiPage() {
     </motion.div>
   );
 
+  // No componente LiWeiPage, substitua a seção de renderização de mantras
+  const renderMantraCard = (mantra: {
+    id: string;
+    title: string;
+    description: string;
+    text: string;
+    youtubeId: string;
+    objective: string;
+    color: string;
+  }, index: number) => {
+    const mantraTheme = getMantraTheme(mantra.id);
+    
+    return (
+      <Card
+        key={mantra.id}
+        title={mantra.title}
+        description={
+          <div style={{ position: 'relative' }}>
+            {/* Ícone do mantra */}
+            <div style={{
+              position: 'absolute',
+              top: '-20px',
+              right: '0px',
+              opacity: 0.9,
+              transform: 'translateY(-50%)',
+            }}>
+              {mantraTheme.icon}
+            </div>
+            
+            {/* Descrição do mantra com destaque */}
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '12px',
+              marginTop: '5px',
+              marginRight: '30px', // Espaço para o ícone
+            }}>
+              {/* Título do benefício principal */}
+              <div style={{
+                fontWeight: 'bold',
+                fontSize: '0.95rem',
+                color: mantraTheme.secondary,
+                marginBottom: '-5px',
+              }}>
+                {locale === 'pt' ? 'Benefícios:' : 'Beneficios:'}
+              </div>
+              
+              {/* Descrição com estilo aprimorado */}
+              <p style={{
+                margin: 0,
+                paddingLeft: '10px',
+                borderLeft: `3px solid ${mantraTheme.primary}`,
+                fontSize: '0.9rem',
+                lineHeight: '1.5',
+                color: 'rgba(255, 255, 255, 0.85)',
+              }}>
+                {mantra.description}
+              </p>
+            </div>
+          </div>
+        }
+        active={activeMantra === index}
+        onClick={() => handleMantraSelect(index)}
+        delay={0.5 + (index * 0.1)}
+        extraStyles={{
+          cursor: 'pointer', 
+          position: 'relative',
+          transition: 'all 0.3s ease',
+          transform: activeMantra === index ? 'scale(1.02)' : 'scale(1)',
+          border: activeMantra === index 
+            ? `1px solid ${mantraTheme.primary}` 
+            : `1px solid ${colors.borders.light}`,
+          boxShadow: activeMantra === index 
+            ? `0 5px 15px ${mantraTheme.primary}33` 
+            : 'none',
+          background: activeMantra === index 
+            ? `linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.5)), ${mantraTheme.gradient}11` 
+            : colors.backgrounds.card,
+        }}
+      >
+        {/* Texto do mantra com estilo melhorado */}
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '10px',
+          marginTop: '15px',
+          padding: '10px',
+          background: `linear-gradient(to right, ${mantraTheme.primary}22, ${mantraTheme.primary}44, ${mantraTheme.primary}22)`,
+          borderRadius: '8px',
+          border: `1px solid ${mantraTheme.primary}33`
+        }}>
+          <FaOm size={20} color={mantraTheme.secondary} />
+          <p style={{
+            margin: 0,
+            fontWeight: '600',
+            fontSize: '1.05rem',
+            background: 'linear-gradient(to right, #D4AF37, #FFD700, #D4AF37)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            textAlign: 'center',
+          }}>
+            {mantra.text}
+          </p>
+        </div>
+        
+        {/* Botão de reprodução estilizado */}
+        <div style={{
+          display: 'flex',
+          justifyContent: 'center',
+          marginTop: '20px'
+        }}>
+          <motion.button
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '10px 20px',
+              background: activeMantra === index 
+                ? mantraTheme.gradient
+                : 'rgba(255, 255, 255, 0.1)',
+              border: 'none',
+              borderRadius: '50px',
+              color: activeMantra === index ? '#333' : 'white',
+              fontSize: '0.95rem',
+              fontWeight: 500,
+              cursor: 'pointer',
+              boxShadow: activeMantra === index 
+                ? `0 4px 12px ${mantraTheme.primary}66`
+                : '0 2px 6px rgba(0,0,0,0.2)',
+            }}
+            whileHover={{ 
+              scale: 1.05,
+              background: mantraTheme.gradient,
+              color: '#333',
+              boxShadow: `0 4px 12px ${mantraTheme.primary}66`
+            }}
+            whileTap={{ scale: 0.95 }}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleMantraSelect(index);
+            }}
+          >
+            <BsPlayCircleFill size={18} />
+            {activeMantra === index 
+              ? (locale === 'pt' ? 'Pausar' : 'Pausar') 
+              : (locale === 'pt' ? 'Reproduzir' : 'Reproducir')}
+          </motion.button>
+        </div>
+        
+        {activeMantra === index && renderMantraPlayer(index)}
+      </Card>
+    );
+  };
+
   return (
     <main style={styles.container}>
       <NavbarWithSuspense />
@@ -767,70 +967,7 @@ export default function LiWeiPage() {
             </p>
           </div>
           
-          {currentMantras.map((mantra, index) => (
-            <Card
-              key={mantra.id}
-              title={mantra.title}
-              description={mantra.description}
-              active={activeMantra === index}
-              onClick={() => handleMantraSelect(index)}
-              delay={0.5 + (index * 0.1)}
-              extraStyles={{
-                cursor: 'pointer', 
-                position: 'relative',
-                transition: 'all 0.3s ease',
-                transform: activeMantra === index ? 'scale(1.02)' : 'scale(1)',
-                border: activeMantra === index 
-                  ? `1px solid ${colors.gold.main}` 
-                  : `1px solid ${colors.borders.light}`,
-                boxShadow: activeMantra === index 
-                  ? `0 5px 15px rgba(212, 175, 55, 0.2)` 
-                  : 'none'
-              }}
-            >
-              {renderMantraText(mantra.text)}
-              
-              {/* Botão de reprodução */}
-              <div style={{
-                display: 'flex',
-                justifyContent: 'center',
-                marginTop: '16px'
-              }}>
-                <motion.button
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '8px',
-                    padding: '8px 16px',
-                    background: activeMantra === index ? colors.gold.main : 'rgba(255, 255, 255, 0.1)',
-                    border: 'none',
-                    borderRadius: '50px',
-                    color: activeMantra === index ? '#333' : 'white',
-                    fontSize: '0.9rem',
-                    fontWeight: 500,
-                    cursor: 'pointer'
-                  }}
-                  whileHover={{ 
-                    scale: 1.05,
-                    background: colors.gold.main,
-                    color: '#333'
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleMantraSelect(index);
-                  }}
-                >
-                  <BsPlayCircleFill size={16} />
-                  {activeMantra === index 
-                    ? (locale === 'pt' ? 'Pausar' : 'Pausar') 
-                    : (locale === 'pt' ? 'Reproduzir' : 'Reproducir')}
-                </motion.button>
-              </div>
-              
-              {activeMantra === index && renderMantraPlayer(index)}
-            </Card>
-          ))}
+          {currentMantras.map((mantra, index) => renderMantraCard(mantra, index))}
         </motion.section>
 
         <div style={styles.divider} />

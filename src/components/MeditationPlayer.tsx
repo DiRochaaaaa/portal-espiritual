@@ -3,10 +3,37 @@
 import { useState, useEffect, useRef, CSSProperties } from 'react';
 import { motion, Variants } from 'framer-motion';
 
+// Função para codificar corretamente URLs de áudio
+const encodeAudioUrl = (url: string): string => {
+  // Divide a URL em partes (caminho e nome do arquivo)
+  const parts = url.split('/');
+  const fileName = parts.pop();
+  const path = parts.join('/');
+  
+  // Codifica o nome do arquivo para lidar com espaços e caracteres especiais
+  return `${path}/${encodeURIComponent(fileName || '')}`;
+};
+
+// Mapear IDs do YouTube para arquivos MP3 locais
+const AUDIO_FILES: Record<string, string> = {
+  // Mantras Li Wei
+  'iG_lNuNUVd4': '/audio/om mani padme hum.mp3',
+  'HxXgTU9c8n0': '/audio/Om Gam Ganapataye Namaha.mp3',
+  'EWZdQcNAkQ8': '/audio/Om Namah Shivaya.mp3',
+  'KtvyJBtQUag': '/audio/OM SHANTI SHANTI SHANTI.mp3',
+  'lUKJrkKnQOQ': '/audio/limpeza-de-energia.mp3',
+  'bIr6dABjMWk': '/audio/meditação.mp3',
+  
+  // Canção Angelical
+  'DXNA9A68GTY': '/audio/atrair-anjos.mp3',
+  '1AyuYJG_7WE': '/audio/meditação.mp3',
+  'nnjICT7yu1U': '/audio/frequencia-abundancia.mp3',
+};
+
 interface Mantra {
   id: string;
   title: string;
-  youtubeId: string;
+  youtubeId: string;  // Mantemos para compatibilidade, mas usaremos para mapear arquivos MP3
   description: string;
   objective: string;
   color: string;
@@ -39,20 +66,15 @@ const translations = {
   }
 };
 
-// Utiliza a declaração existente em youtube.d.ts
-// import '../lib/youtube.d.ts';
-
 const MeditationPlayer: React.FC<MeditationPlayerProps> = ({ mantras, locale }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isError, setIsError] = useState(false);
   const [pulseSize, setPulseSize] = useState(1);
-  const [isPlayerReady, setIsPlayerReady] = useState(false);
-  const playerRef = useRef<HTMLDivElement>(null);
-  const ytPlayerRef = useRef<any>(null);
-  const apiLoadingRef = useRef<boolean>(false);
-  const playerReadyTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string>('');
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const nativeAudioRef = useRef<HTMLAudioElement | null>(null);
   
   const currentMantra = mantras[currentIndex];
   const t = translations[locale as keyof typeof translations] || translations.pt;
@@ -73,230 +95,126 @@ const MeditationPlayer: React.FC<MeditationPlayerProps> = ({ mantras, locale }) 
     };
   }, [isPlaying]);
   
-  // Função para carregar a API do YouTube
-  const loadYouTubeAPI = () => {
-    if (typeof window !== 'undefined' && window.YT) return Promise.resolve();
-    if (apiLoadingRef.current) return Promise.resolve();
-    
-    apiLoadingRef.current = true;
-    return new Promise<void>((resolve) => {
-      // Define a função de callback que será chamada quando a API estiver pronta
-      window.onYouTubeIframeAPIReady = () => {
-        apiLoadingRef.current = false;
-        resolve();
-      };
-      
-      // Cria o script e o adiciona ao documento
-      const tag = document.createElement('script');
-      tag.src = 'https://www.youtube.com/iframe_api';
-      
-      const firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
-      
-      // Adiciona um timeout de segurança para resolver após 5 segundos caso a API não carregue
-      setTimeout(() => {
-        if (apiLoadingRef.current) {
-          console.log("YouTube API load timeout - forcing resolve");
-          apiLoadingRef.current = false;
-          resolve();
-        }
-      }, 5000);
-    });
-  };
-  
-  // Função para inicializar o player
-  const initializePlayer = async () => {
-    if (!playerRef.current) return;
-    
-    try {
-      // Limpar o estado
+  // Inicializar o player de áudio
+  useEffect(() => {
+    const initAudio = () => {
+      // Limpar estado anterior
       setIsLoaded(false);
       setIsError(false);
-      setIsPlayerReady(false);
+      setIsPlaying(false);
+      setErrorMessage('');
       
-      // Limpar qualquer timeout existente
-      if (playerReadyTimeoutRef.current) {
-        clearTimeout(playerReadyTimeoutRef.current);
-      }
+      // Obter o caminho do arquivo de áudio
+      const audioFilePath = AUDIO_FILES[currentMantra.youtubeId];
       
-      // Certifique-se de que a API foi carregada
-      await loadYouTubeAPI();
-      
-      // Limpe qualquer player anterior
-      if (ytPlayerRef.current) {
+      if (audioFilePath) {
         try {
-          ytPlayerRef.current.destroy();
-        } catch (error) {
-          console.error("Error destroying previous player:", error);
-        }
-        ytPlayerRef.current = null;
-      }
-      
-      // Verifica se o YT existe no objeto window antes de criar o player
-      if (typeof window !== 'undefined' && window.YT) {
-        // Cria um novo player
-        ytPlayerRef.current = new window.YT.Player(playerRef.current, {
-          height: '0',
-          width: '0',
-          videoId: currentMantra.youtubeId,
-          playerVars: {
-            autoplay: 0,
-            controls: 0,
-            showinfo: 0,
-            rel: 0,
-            fs: 0,
-            modestbranding: 1
-          },
-          events: {
-            onReady: (event: any) => {
-              console.log("YouTube player ready");
+          // Codificar o URL para lidar com espaços e caracteres especiais
+          const encodedUrl = encodeAudioUrl(audioFilePath);
+          
+          // Usar o elemento HTML de áudio nativo
+          if (nativeAudioRef.current) {
+            nativeAudioRef.current.src = encodedUrl;
+            
+            // Configurar event listeners no áudio nativo
+            nativeAudioRef.current.onloadeddata = () => {
+              console.log(`Áudio carregado: ${encodedUrl}`);
               setIsLoaded(true);
-              setIsPlayerReady(true);
-            },
-            onStateChange: (event: any) => {
-              console.log("Player state changed:", event.data);
-              // YT.PlayerState.ENDED = 0, PLAYING = 1, PAUSED = 2
-              if (event.data === 0) {
-                setIsPlaying(false);
-              } else if (event.data === 1) {
-                setIsPlaying(true);
-              } else if (event.data === 2) {
-                setIsPlaying(false);
-              }
-            },
-            onError: (event: any) => {
-              console.error("YouTube player error:", event.data);
-              setIsError(true);
-              setIsLoaded(true); // Consideramos carregado mesmo com erro
+              setIsError(false);
+            };
+            
+            nativeAudioRef.current.oncanplaythrough = () => {
+              console.log(`Áudio pronto para reprodução: ${encodedUrl}`);
+              setIsLoaded(true);
+            };
+            
+            nativeAudioRef.current.onended = () => {
+              console.log('Áudio terminou');
               setIsPlaying(false);
-              setIsPlayerReady(false);
-            }
+            };
+            
+            nativeAudioRef.current.onerror = (e) => {
+              console.error(`Erro ao carregar o áudio: ${audioFilePath}`, e);
+              setIsError(true);
+              setErrorMessage('Não foi possível carregar o áudio');
+            };
+            
+            // Configurar a referência do áudio programático para usar o elemento nativo
+            audioRef.current = nativeAudioRef.current;
+            
+            // Carregar o áudio
+            nativeAudioRef.current.load();
+            console.log(`Carregando áudio: ${encodedUrl}`);
+          } else {
+            console.error("Elemento de áudio nativo não encontrado");
+            setIsError(true);
+            setErrorMessage('Problema ao inicializar o player de áudio');
           }
-        });
-        
-        // Adiciona um timeout para verificar se o player está realmente pronto
-        playerReadyTimeoutRef.current = setTimeout(() => {
-          if (!isPlayerReady && ytPlayerRef.current) {
-            console.log("Setting player ready after timeout");
-            setIsLoaded(true);
-            setIsPlayerReady(true);
-          }
-        }, 3000);
+        } catch (error) {
+          console.error('Erro ao configurar o áudio:', error);
+          setIsError(true);
+          setErrorMessage('Erro inesperado ao carregar o áudio');
+        }
       } else {
-        throw new Error("YouTube API não carregada corretamente");
+        console.error(`Arquivo de áudio não encontrado para o mantra: ${currentMantra.title}`);
+        setIsError(true);
+        setErrorMessage('Arquivo de áudio não encontrado');
       }
-    } catch (error) {
-      console.error("Error initializing YouTube player:", error);
-      setIsError(true);
-      setIsLoaded(true);
-      setIsPlayerReady(false);
-    }
-  };
-  
-  // Carregar a API do YouTube e configurar o player quando o componente montar ou o mantra mudar
-  useEffect(() => {
-    initializePlayer();
+    };
     
-    return () => {
-      if (ytPlayerRef.current) {
-        try {
-          ytPlayerRef.current.destroy();
-        } catch (error) {
-          console.error("Error destroying YouTube player:", error);
-        }
-      }
-    };
-  }, [currentIndex]);
-  
-  // Destruir player e limpar timeouts quando o componente for desmontado
-  useEffect(() => {
-    return () => {
-      if (playerReadyTimeoutRef.current) {
-        clearTimeout(playerReadyTimeoutRef.current);
-      }
-      
-      if (ytPlayerRef.current) {
-        try {
-          ytPlayerRef.current.destroy();
-        } catch (error) {
-          console.error("Error destroying YouTube player:", error);
-        }
-      }
-    };
-  }, []);
+    initAudio();
+    
+  }, [currentIndex, currentMantra.youtubeId, currentMantra.title]);
   
   const togglePlay = () => {
-    if (!ytPlayerRef.current) {
-      console.log("Player ref não disponível, tentando inicializar novamente");
-      initializePlayer();
-      return;
-    }
-    
-    if (!isLoaded || isError) {
-      console.log("Player não carregado ou com erro");
+    if (!audioRef.current || !isLoaded) {
+      console.log("Player não disponível ou áudio não carregado");
       return;
     }
     
     try {
       if (isPlaying) {
-        console.log("Pausando vídeo");
-        ytPlayerRef.current.pauseVideo();
+        audioRef.current.pause();
         setIsPlaying(false);
       } else {
-        console.log("Tocando vídeo");
+        // Em dispositivos móveis, precisamos de uma interação do usuário para tocar áudio
+        const playPromise = audioRef.current.play();
         
-        // Tentativa com retry automático
-        const attemptPlay = (retries = 0) => {
-          try {
-            ytPlayerRef.current.playVideo();
-            
-            // Verifica após 500ms se o player realmente começou a tocar
-            setTimeout(() => {
-              if (ytPlayerRef.current && ytPlayerRef.current.getPlayerState() !== 1) {
-                console.log(`Vídeo não começou a tocar após tentativa ${retries + 1}`);
-                
-                if (retries < 2) {
-                  console.log(`Tentando novamente (${retries + 1}/3)`);
-                  attemptPlay(retries + 1);
-                } else {
-                  console.log("Falha após 3 tentativas, reinicializando player");
-                  initializePlayer();
-                }
-              }
-            }, 500);
-          } catch (error) {
-            console.error("Erro ao tentar tocar:", error);
-            if (retries < 2) {
-              console.log(`Tentando novamente após erro (${retries + 1}/3)`);
-              setTimeout(() => attemptPlay(retries + 1), 300);
-            } else {
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              console.log('Áudio reproduzindo com sucesso');
+              setIsPlaying(true);
+              setIsError(false);
+            })
+            .catch((error) => {
+              console.error("Erro ao reproduzir áudio:", error);
               setIsError(true);
-            }
-          }
-        };
-        
-        attemptPlay();
-        setIsPlaying(true);
+              setErrorMessage('Não foi possível reproduzir o áudio. Tente novamente.');
+              
+              // Em dispositivos iOS/Safari, pode ser necessário recarregar o áudio
+              if (audioRef.current) {
+                audioRef.current.load();
+              }
+            });
+        }
       }
     } catch (error) {
-      console.error("Error toggling play state:", error);
+      console.error("Erro ao controlar reprodução:", error);
       setIsError(true);
+      setErrorMessage('Erro ao controlar a reprodução');
     }
   };
   
   const handlePrevious = () => {
     if (currentIndex > 0) {
       setCurrentIndex(currentIndex - 1);
-      setIsPlaying(false);
-      setIsLoaded(false);
     }
   };
   
   const handleNext = () => {
     if (currentIndex < mantras.length - 1) {
       setCurrentIndex(currentIndex + 1);
-      setIsPlaying(false);
-      setIsLoaded(false);
     }
   };
 
@@ -409,40 +327,41 @@ const MeditationPlayer: React.FC<MeditationPlayerProps> = ({ mantras, locale }) 
     },
     controls: {
       display: 'flex',
-      justifyContent: 'center',
       alignItems: 'center',
-      gap: '20px',
-      marginTop: '20px',
+      justifyContent: 'center',
+      marginBottom: '20px',
+      gap: '15px',
     },
     button: {
+      padding: '10px 20px',
+      borderRadius: '50px',
       backgroundColor: 'rgba(123, 31, 162, 0.3)',
       color: 'white',
-      border: '1px solid rgba(123, 31, 162, 0.5)',
-      borderRadius: '25px',
-      padding: '8px 15px',
-      fontSize: '0.9rem',
+      border: '1px solid rgba(123, 31, 162, 0.6)',
       cursor: 'pointer',
+      fontSize: '0.9rem',
+      transition: 'all 0.2s ease',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      transition: 'all 0.3s ease',
     },
     navButton: {
-      backgroundColor: 'rgba(21, 0, 34, 0.5)',
-      width: '35px',
-      height: '35px',
+      width: '40px',
+      height: '40px',
       borderRadius: '50%',
+      backgroundColor: 'rgba(123, 31, 162, 0.2)',
+      color: 'white',
+      border: '1px solid rgba(123, 31, 162, 0.4)',
+      cursor: 'pointer',
+      fontSize: '1.2rem',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      color: 'white',
-      cursor: 'pointer',
-      fontSize: '1.2rem',
-      border: '1px solid rgba(123, 31, 162, 0.3)',
+      transition: 'all 0.2s ease',
     },
     description: {
       fontSize: '0.9rem',
-      color: 'rgba(255, 255, 255, 0.8)',
+      color: 'rgba(255, 255, 255, 0.7)',
       textAlign: 'center',
       marginTop: '15px',
       lineHeight: '1.4',
@@ -451,9 +370,6 @@ const MeditationPlayer: React.FC<MeditationPlayerProps> = ({ mantras, locale }) 
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-    },
-    playerContainer: {
-      display: 'none',
     },
     statusMessage: {
       fontSize: '0.85rem',
@@ -520,6 +436,22 @@ const MeditationPlayer: React.FC<MeditationPlayerProps> = ({ mantras, locale }) 
         <div style={playerStyles.objectiveLabel}>{t.objective}:</div>
         <div style={playerStyles.objective}>{currentMantra.objective}</div>
       </div>
+      
+      {/* Elemento de áudio nativo visível para compatibilidade mobile */}
+      <audio 
+        ref={nativeAudioRef} 
+        controls 
+        style={{ display: 'none' }}
+        preload="auto"
+        onPlay={() => setIsPlaying(true)}
+        onPause={() => setIsPlaying(false)}
+      >
+        <source 
+          src={AUDIO_FILES[currentMantra.youtubeId] ? encodeAudioUrl(AUDIO_FILES[currentMantra.youtubeId]) : ''} 
+          type="audio/mpeg" 
+        />
+        Seu navegador não suporta o elemento de áudio.
+      </audio>
       
       <motion.div 
         style={{
@@ -633,12 +565,60 @@ const MeditationPlayer: React.FC<MeditationPlayerProps> = ({ mantras, locale }) 
         </motion.button>
       </div>
       
-      {isError && <div style={playerStyles.statusMessage}>{t.error}</div>}
+      {isError && (
+        <div style={playerStyles.statusMessage}>
+          {errorMessage || t.error}
+          <button 
+            onClick={(e) => {
+              e.stopPropagation();
+              
+              // Tentar reproduzir usando o elemento de áudio nativo
+              if (nativeAudioRef.current) {
+                const audioFilePath = AUDIO_FILES[currentMantra.youtubeId];
+                if (audioFilePath) {
+                  const encodedUrl = encodeAudioUrl(audioFilePath);
+                  nativeAudioRef.current.src = encodedUrl;
+                  nativeAudioRef.current.load();
+                  
+                  // Mostrar controles nativos de áudio temporariamente
+                  nativeAudioRef.current.style.display = 'block';
+                  
+                  // Tentar reproduzir automaticamente
+                  nativeAudioRef.current.play()
+                    .then(() => {
+                      setIsPlaying(true);
+                      setIsError(false);
+                      
+                      // Após 1 segundo, esconder os controles nativos
+                      setTimeout(() => {
+                        if (nativeAudioRef.current) {
+                          nativeAudioRef.current.style.display = 'none';
+                        }
+                      }, 1000);
+                    })
+                    .catch(err => {
+                      console.error("Ainda não foi possível reproduzir automaticamente:", err);
+                      // Manter os controles visíveis para que o usuário possa clicar
+                    });
+                }
+              }
+            }}
+            style={{
+              marginLeft: '10px',
+              padding: '5px 10px',
+              background: 'rgba(255, 255, 255, 0.2)',
+              border: 'none',
+              borderRadius: '4px',
+              color: 'white',
+              cursor: 'pointer',
+            }}
+          >
+            Tentar Novamente
+          </button>
+        </div>
+      )}
       
       <p style={playerStyles.description}>{currentMantra.description}</p>
-      
-      {/* Container para o player do YouTube */}
-      <div ref={playerRef} style={playerStyles.playerContainer}></div>
     </div>
   );
 };

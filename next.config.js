@@ -15,11 +15,8 @@ const nextConfig = {
       exclude: ['error', 'warn'],
     } : false,
   },
-  experimental: {
-    optimizeCss: true,
-  },
   output: 'standalone',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '' : undefined,
+  basePath: '',
 };
 
 module.exports = nextConfig; 
