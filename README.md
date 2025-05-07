@@ -91,4 +91,47 @@ Ou configure a implantação automática a partir do repositório Git.
 
 ## Licença
 
-Este projeto é para uso exclusivo do Portal Espiritual. 
+Este projeto é para uso exclusivo do Portal Espiritual.
+
+## Desenvolvimento
+
+```bash
+# Instalar dependências
+npm install
+
+# Iniciar servidor de desenvolvimento
+npm run dev
+
+# Gerar build de produção
+npm run build
+
+# Iniciar servidor de produção
+node .next/standalone/server.js
+```
+
+## Arquivos de Áudio
+
+Este projeto usa arquivos MP3 locais para reprodução de áudios. 
+
+**Nota importante:** Os arquivos de áudio não são incluídos no controle de versão do Git devido ao seu tamanho. 
+
+### Localização dos arquivos de áudio
+
+Os arquivos de áudio devem ser colocados na pasta `public/audio/` para funcionar corretamente.
+
+Lista de arquivos necessários:
+- atrair-anjos.mp3
+- frequencia-abundancia.mp3
+- limpeza-de-energia.mp3
+- meditação.mp3
+- Om Gam Ganapataye Namaha.mp3
+- om mani padme hum.mp3
+- Om Namah Shivaya.mp3
+- OM SHANTI SHANTI SHANTI.mp3
+
+### Alternativas
+
+Para equipes que precisam compartilhar esses arquivos:
+1. Use uma solução de compartilhamento de arquivos separada (Google Drive, Dropbox, etc.)
+2. Configure Git LFS se necessário (https://git-lfs.github.com/)
+3. Considere hospedar os arquivos em um CDN e referenciar as URLs 
