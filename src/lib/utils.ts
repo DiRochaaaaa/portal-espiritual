@@ -1,14 +1,12 @@
 import { Locale } from './locale';
 
 // Helper function to adapt mantras for the MeditationPlayer component
-export const adaptMantraFormat = (mantra: any) => ({
-  id: mantra.id,
-  title: mantra.title,
-  youtubeId: mantra.youtubeId,
-  description: mantra.description,
-  objective: mantra.objective,
-  color: mantra.color
-});
+export function adaptMantraFormat(mantra: any) {
+  return {
+    ...mantra,
+    // Qualquer adaptação necessária
+  };
+}
 
 // Format text with line breaks for display
 export const formatContentWithLineBreaks = (content: string) => {
@@ -20,7 +18,7 @@ export const formatContentWithLineBreaks = (content: string) => {
 
 // Create a reusable translations getter
 export function getTranslatedContent<T>(translations: Record<Locale, T>, locale: Locale): T {
-  return translations[locale];
+  return translations[locale] || translations.pt;
 }
 
 // Utility for safely joining class names
@@ -48,17 +46,78 @@ export function debounce<T extends (...args: any[]) => any>(
   func: T,
   wait: number
 ): (...args: Parameters<T>) => void {
-  let timeout: ReturnType<typeof setTimeout> | null = null;
+  let timeout: NodeJS.Timeout | null = null;
   
-  return function(...args: Parameters<T>) {
-    const later = () => {
-      timeout = null;
-      func(...args);
-    };
+  return function(...args: Parameters<T>): void {
+    if (timeout) clearTimeout(timeout);
     
-    if (timeout !== null) {
-      clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      func(...args);
+    }, wait);
+  };
+}
+
+// Função para carregar scripts de forma otimizada
+export function loadScript(src: string, id: string, async = true, defer = false): Promise<boolean> {
+  return new Promise((resolve) => {
+    // Verifica se o script já existe
+    if (document.getElementById(id)) {
+      resolve(true);
+      return;
     }
-    timeout = setTimeout(later, wait);
+
+    const script = document.createElement('script');
+    script.id = id;
+    script.src = src;
+    script.async = async;
+    script.defer = defer;
+
+    script.onload = () => resolve(true);
+    script.onerror = () => resolve(false);
+
+    document.head.appendChild(script);
+  });
+}
+
+// Cache para evitar recálculos
+const memoizedResults: Record<string, any> = {};
+
+// Função para cálculos caros com memoização
+export function memoize<T>(fn: (...args: any[]) => T, getKey: (...args: any[]) => string): (...args: any[]) => T {
+  return (...args: any[]): T => {
+    const key = getKey(...args);
+    
+    if (memoizedResults[key] === undefined) {
+      memoizedResults[key] = fn(...args);
+    }
+    
+    return memoizedResults[key];
+  };
+}
+
+// Função para limitar a frequência de execução de funções (throttle)
+export function throttle<T extends (...args: any[]) => any>(
+  func: T,
+  limit: number
+): (...args: Parameters<T>) => void {
+  let lastFunc: NodeJS.Timeout;
+  let lastRan: number = 0;
+  
+  return function(this: any, ...args: Parameters<T>): void {
+    const context = this;
+    
+    if (!lastRan) {
+      func.apply(context, args);
+      lastRan = Date.now();
+    } else {
+      clearTimeout(lastFunc);
+      
+      lastFunc = setTimeout(function() {
+        if ((Date.now() - lastRan) >= limit) {
+          func.apply(context, args);
+          lastRan = Date.now();
+        }
+      }, limit - (Date.now() - lastRan));
+    }
   };
 } 

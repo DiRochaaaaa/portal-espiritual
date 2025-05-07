@@ -3,21 +3,34 @@ import { Inter, Playfair_Display } from 'next/font/google';
 import './globals.css';
 import LanguageProvider from '@/components/LanguageProvider';
 
+// Configuração otimizada de fontes
 const inter = Inter({ 
   subsets: ['latin'],
   variable: '--font-inter',
-  display: 'swap' 
+  display: 'swap',
+  preload: true,
+  fallback: ['system-ui', 'sans-serif']
 });
 
 const playfair = Playfair_Display({ 
   subsets: ['latin'],
   variable: '--font-playfair',
-  display: 'swap'
+  display: 'swap',
+  preload: true,
+  fallback: ['Georgia', 'serif']
 });
 
 export const metadata: Metadata = {
   title: 'Portal Espiritual | Tarô dos Anjos',
   description: 'Descubra o Tarô dos Anjos e acesse conteúdos exclusivos no Portal Espiritual.',
+  icons: {
+    icon: '/favicon.ico',
+  },
+  viewport: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no',
+  themeColor: [
+    { media: '(prefers-color-scheme: dark)', color: '#150022' },
+    { media: '(prefers-color-scheme: light)', color: '#150022' }
+  ],
 };
 
 export default function RootLayout({
@@ -28,9 +41,6 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={`${inter.variable} ${playfair.variable}`}>
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-        <link rel="icon" href="/favicon.ico" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet" />
         <script
           dangerouslySetInnerHTML={{
             __html: `
