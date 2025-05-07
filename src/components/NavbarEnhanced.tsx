@@ -272,7 +272,7 @@ export default function NavbarEnhanced() {
   if (!mounted) return null;
   
   // Generate breadcrumb items
-  const pathSegments = pathname.split('/').filter(Boolean);
+  const pathSegments = pathname ? pathname.split('/').filter(Boolean) : [];
   const breadcrumbs = [
     { path: '/', label: t.home },
     ...pathSegments.map((segment, index) => {

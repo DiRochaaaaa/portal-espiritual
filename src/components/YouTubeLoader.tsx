@@ -68,8 +68,8 @@ const YouTubeLoader: React.FC<YouTubeLoaderProps> = ({
       
       // Criar o player quando a API estiver pronta
       const createPlayer = () => {
-        // Verificar se o YT existe no objeto global
-        if (typeof window !== 'undefined' && window.YT && window.YT.Player) {
+        // Verificar se o YT existe no objeto global e se o elemento DOM existe
+        if (typeof window !== 'undefined' && window.YT && window.YT.Player && playerRef.current) {
           // Criar novo player
           ytPlayerRef.current = new window.YT.Player(playerRef.current, {
             height: '0',
@@ -98,7 +98,12 @@ const YouTubeLoader: React.FC<YouTubeLoaderProps> = ({
         createPlayer();
       } else {
         // Caso contrário, defina a função de callback para quando a API estiver pronta
-        window.onYouTubeIframeAPIReady = createPlayer;
+        window.onYouTubeIframeAPIReady = () => {
+          // Verificar novamente se o elemento DOM existe
+          if (playerRef.current) {
+            createPlayer();
+          }
+        };
       }
     } catch (error) {
       console.error("Erro ao inicializar o player do YouTube:", error);

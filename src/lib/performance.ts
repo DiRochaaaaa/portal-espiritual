@@ -70,7 +70,9 @@ export function monitorWebVitals(): void {
     // First Input Delay (FID)
     const fidObserver = new PerformanceObserver((entryList) => {
       for (const entry of entryList.getEntries()) {
-        const delay = entry.processingStart - entry.startTime;
+        // Type assertion for PerformanceEventTiming which has processingStart
+        const eventTiming = entry as PerformanceEventTiming;
+        const delay = eventTiming.processingStart - entry.startTime;
         console.log('[Performance] FID:', delay);
       }
     });
