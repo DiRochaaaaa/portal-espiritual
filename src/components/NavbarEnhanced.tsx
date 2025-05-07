@@ -222,6 +222,8 @@ export default function NavbarEnhanced() {
         return translations[locale].song;
       case '/bonus':
         return translations[locale].bonus;
+      case '/liwei':
+        return translations[locale].liwei;
       default:
         return path.split('/').pop();
     }
@@ -238,7 +240,8 @@ export default function NavbarEnhanced() {
       messages: "Mensagens",
       menu: "Menu",
       language: "Idioma",
-      scrollToTop: "Voltar ao topo"
+      scrollToTop: "Voltar ao topo",
+      liwei: "Mantras Li Wei"
     },
     es: {
       back: "Volver",
@@ -250,7 +253,8 @@ export default function NavbarEnhanced() {
       messages: "Mensajes",
       menu: "Menú",
       language: "Idioma",
-      scrollToTop: "Volver arriba"
+      scrollToTop: "Volver arriba",
+      liwei: "Mantras Li Wei"
     }
   };
 

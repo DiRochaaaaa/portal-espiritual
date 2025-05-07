@@ -38,7 +38,7 @@ const styles: Record<string, CSSProperties> = {
     fontFamily: "'Playfair Display', serif",
     textAlign: 'center',
     marginBottom: '2rem',
-    background: 'linear-gradient(to right, white, #D4AF37, white)',
+    background: 'linear-gradient(to right, #D4AF37, #FFD700, #D4AF37)',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
     backgroundClip: 'text',
@@ -309,7 +309,7 @@ export default function TermsOfUsePage() {
             <h2 style={styles.sectionTitle}>{t.contact.title}</h2>
             <p style={styles.paragraph}>{t.contact.p1}</p>
             <p style={styles.paragraph}>
-              Email: <a href={`mailto:${t.contact.email}`} style={{color: '#D4AF37'}}>{t.contact.email}</a>
+              Email: <a href={`mailto:${t.contact.email}`} style={{background: 'linear-gradient(to right, #D4AF37, #FFD700, #D4AF37)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'}}>{t.contact.email}</a>
             </p>
           </div>
           

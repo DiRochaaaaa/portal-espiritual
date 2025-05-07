@@ -6,48 +6,17 @@ import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import MeditationPlayer from '../../components/MeditationPlayer';
 import { getCurrentLocale, Locale } from '../../lib/locale';
-import { BsMusicNoteBeamed } from 'react-icons/bs';
-import { BsFillLightbulbFill } from 'react-icons/bs';
+import { BsMusicNoteBeamed, BsFillLightbulbFill } from 'react-icons/bs';
+import { colors, gradients, commonStyles, motionVariants } from '../../styles/shared';
+import { adaptMantraFormat, getTranslatedContent } from '../../lib/utils';
 
+// Page-specific styles extending common styles
 const styles: Record<string, CSSProperties> = {
-  container: {
-    minHeight: '100vh',
-    display: 'flex',
-    flexDirection: 'column',
-    background: 'linear-gradient(to bottom, #150022, #4A0072, #150022)',
-    color: 'white',
-  },
-  content: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: '120px 24px 60px',
-    width: '100%',
-    maxWidth: '800px',
-    margin: '0 auto',
-  },
-  title: {
-    fontFamily: "'Playfair Display', serif",
-    fontSize: 'clamp(2rem, 5vw, 3rem)',
-    fontWeight: 700,
-    textAlign: 'center',
-    marginBottom: '24px',
-    background: 'linear-gradient(to right, white, #D4AF37, white)',
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
-    backgroundClip: 'text',
-  },
-  subtitle: {
-    fontSize: '1.1rem',
-    textAlign: 'center',
-    marginBottom: '48px',
-    color: 'rgba(255, 255, 255, 0.8)',
-  },
+  ...commonStyles,
   icon: {
     fontSize: '3.5rem',
     marginBottom: '24px',
-    color: '#D4AF37',
+    ...gradients.goldText,
     filter: 'drop-shadow(0 0 8px rgba(212, 175, 55, 0.4))',
   },
   harp: {
@@ -64,31 +33,24 @@ const styles: Record<string, CSSProperties> = {
     marginTop: '32px',
     marginBottom: '48px',
   },
-  divider: {
-    width: '100%',
-    maxWidth: '600px',
-    height: '1px',
-    margin: '3rem auto',
-    background: 'linear-gradient(to right, transparent, rgba(212, 175, 55, 0.5), transparent)',
-  },
   explanation: {
     fontSize: '0.95rem',
     textAlign: 'center',
-    color: 'rgba(255, 255, 255, 0.8)',
+    color: colors.text.muted,
     maxWidth: '600px',
     margin: '0 auto 32px',
     lineHeight: '1.6',
     padding: '16px',
-    background: 'rgba(123, 31, 162, 0.1)',
+    background: colors.backgrounds.highlight,
     backdropFilter: 'blur(10px)',
     borderRadius: '12px',
-    border: '1px solid rgba(123, 31, 162, 0.3)',
+    border: `1px solid ${colors.borders.medium}`,
   },
   musicNotes: {
     position: 'absolute',
     fontSize: '24px',
     opacity: 0,
-    color: '#D4AF37',
+    ...gradients.goldText,
   }
 };
 
@@ -117,7 +79,7 @@ const mantras = {
       youtubeId: "nnjICT7yu1U",
       description: "Este poderoso mantra ajuda a atrair abundância e prosperidade para sua vida, removendo bloqueios e abrindo canais para receber bênçãos.",
       objective: "Abundância",
-      color: "#D4AF37"
+      color: colors.gold.main
     }
   ],
   es: [
@@ -143,7 +105,7 @@ const mantras = {
       youtubeId: "nnjICT7yu1U",
       description: "Este poderoso mantra ayuda a atraer abundancia y prosperidad a tu vida, eliminando bloqueos y abriendo canales para recibir bendiciones.",
       objective: "Abundancia",
-      color: "#D4AF37"
+      color: colors.gold.main
     }
   ]
 };
@@ -174,7 +136,7 @@ export default function CancaoAngelicalPage() {
     }
   };
 
-  const t = translations[locale];
+  const t = getTranslatedContent(translations, locale);
   const currentMantras = mantras[locale];
 
   return (
@@ -183,14 +145,12 @@ export default function CancaoAngelicalPage() {
 
       <motion.div 
         style={styles.content}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
+        {...motionVariants.fadeInUp}
         transition={{ duration: 0.5 }}
       >
         <motion.div
           style={styles.harp}
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
+          {...motionVariants.scaleIn}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
           <div style={styles.icon}>
@@ -242,8 +202,7 @@ export default function CancaoAngelicalPage() {
         
         <motion.p 
           style={styles.subtitle}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          {...motionVariants.fadeIn}
           transition={{ duration: 0.5, delay: 0.4 }}
         >
           {t.subtitle}
@@ -251,8 +210,7 @@ export default function CancaoAngelicalPage() {
         
         <motion.div 
           style={styles.explanation}
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
+          {...motionVariants.scaleIn}
           transition={{ duration: 0.5, delay: 0.5 }}
         >
           {t.explanation}
@@ -260,15 +218,14 @@ export default function CancaoAngelicalPage() {
         
         <motion.div
           style={styles.playerContainer}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          {...motionVariants.fadeInUp}
           transition={{ duration: 0.6, delay: 0.6 }}
         >
-          <MeditationPlayer mantras={currentMantras} locale={locale} />
+          <MeditationPlayer mantras={currentMantras.map(adaptMantraFormat)} locale={locale} />
           
           <motion.div 
             style={{
-              backgroundColor: 'rgba(123, 31, 162, 0.2)',
+              backgroundColor: colors.backgrounds.highlight,
               padding: '12px 16px',
               borderRadius: '8px',
               marginTop: '20px',
@@ -276,16 +233,15 @@ export default function CancaoAngelicalPage() {
               alignItems: 'center',
               justifyContent: 'center',
               gap: '10px',
-              border: '1px dashed rgba(212, 175, 55, 0.4)'
+              border: `1px dashed ${colors.borders.gold}`
             }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            {...motionVariants.fadeIn}
             transition={{ delay: 1 }}
           >
-            <span style={{ color: '#D4AF37', fontSize: '1.2rem' }}>
+            <span style={{ ...gradients.goldText, fontSize: '1.2rem' }}>
               <BsFillLightbulbFill />
             </span>
-            <p style={{ margin: 0, fontSize: '0.9rem', color: 'rgba(255, 255, 255, 0.9)' }}>
+            <p style={{ margin: 0, fontSize: '0.9rem', color: colors.text.light }}>
               {t.tip}
             </p>
           </motion.div>

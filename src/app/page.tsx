@@ -31,7 +31,7 @@ const styles: Record<string, CSSProperties> = {
     fontFamily: "'Playfair Display', serif",
     textAlign: 'center',
     marginBottom: '2rem',
-    background: 'linear-gradient(to right, white, #D4AF37, white)',
+    background: 'linear-gradient(to right, #D4AF37, #FFD700, #D4AF37)',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
     backgroundClip: 'text',
@@ -237,7 +237,7 @@ export default function HomePage() {
               style={styles.button}
               whileHover={{ 
                 scale: 1.05, 
-                background: 'linear-gradient(to right, #D4AF37, #7B1FA2)'
+                background: 'linear-gradient(to right, #D4AF37, #FFD700)'
               }}
               whileTap={{ scale: 0.95 }}
               onClick={handleStartReading}

@@ -27,7 +27,7 @@ const styles: Record<string, CSSProperties> = {
     fontFamily: "'Playfair Display', serif",
     textAlign: 'center',
     marginBottom: '2rem',
-    background: 'linear-gradient(to right, white, #D4AF37, white)',
+    background: 'linear-gradient(to right, #D4AF37, #FFD700, #D4AF37)',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
     backgroundClip: 'text',

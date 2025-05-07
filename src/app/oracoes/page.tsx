@@ -29,7 +29,7 @@ const styles: Record<string, CSSProperties> = {
     fontWeight: 700,
     textAlign: 'center',
     marginBottom: '24px',
-    background: 'linear-gradient(to right, white, #D4AF37, white)',
+    background: 'linear-gradient(to right, #D4AF37, #FFD700, #D4AF37)',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
     backgroundClip: 'text',
@@ -102,6 +102,7 @@ const styles: Record<string, CSSProperties> = {
     top: '-30px',
     right: '-30px',
     '--color-from': '#D4AF37',
+    '--color-to': '#FFD700',
   } as CSSProperties,
   orbBottom: {
     bottom: '-30px',

@@ -73,7 +73,7 @@ const styles: Record<string, CSSProperties> = {
     fontWeight: 700,
     textAlign: 'center',
     marginBottom: '16px',
-    background: 'linear-gradient(to right, #D4AF37, white, #D4AF37)',
+    background: 'linear-gradient(to right, #D4AF37, #FFD700, #D4AF37)',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
     backgroundClip: 'text',
@@ -309,7 +309,7 @@ const styles: Record<string, CSSProperties> = {
     display: 'block',
     fontSize: '1.1rem',
     fontWeight: 600,
-    background: 'linear-gradient(135deg, #D4AF37, #B8860B)',
+    background: 'linear-gradient(135deg, #D4AF37, #FFD700)',
     color: 'white',
     border: 'none',
     borderRadius: '30px',
@@ -574,7 +574,7 @@ export default function PresenteSurpresaPage() {
 
   const translations: Translations = {
     pt: {
-      title: "HOʻOPONOPONO — O PODER DO HOʻOPONOPONO",
+      title: "O PODER DO HOʻOPONOPONO",
       subtitle: "A Arte de Curar e Transformar • Celestino – A Voz da Verdade",
       tocTitle: "SUMÁRIO",
       backToTop: "↑",
@@ -695,7 +695,7 @@ export default function PresenteSurpresaPage() {
       ]
     },
     es: {
-      title: "HOʻOPONOPONO — EL PODER DEL HOʻOPONOPONO",
+      title: "EL PODER DEL HOʻOPONOPONO",
       subtitle: "El Arte de Sanar y Transformar • Celestino – La Voz de la Verdad",
       tocTitle: "ÍNDICE",
       backToTop: "↑",

@@ -10,6 +10,7 @@ interface Mantra {
   description: string;
   objective: string;
   color: string;
+  text?: string;
 }
 
 interface MeditationPlayerProps {
@@ -574,7 +575,11 @@ const MeditationPlayer: React.FC<MeditationPlayerProps> = ({ mantras, locale }) 
             repeatType: "reverse",
             ease: "easeInOut"
           }}
-          onClick={isLoaded && !isError ? togglePlay : undefined}
+          onClick={(e) => {
+            // Impedir que o clique se propague para o container pai
+            e.stopPropagation();
+            if (isLoaded && !isError) togglePlay();
+          }}
         >
           {renderInnerCircleContent()}
         </motion.div>
@@ -585,7 +590,10 @@ const MeditationPlayer: React.FC<MeditationPlayerProps> = ({ mantras, locale }) 
           style={playerStyles.navButton}
           whileHover={{ scale: 1.1, backgroundColor: 'rgba(123, 31, 162, 0.5)' }}
           whileTap={{ scale: 0.95 }}
-          onClick={handlePrevious}
+          onClick={(e) => {
+            e.stopPropagation();
+            handlePrevious();
+          }}
           disabled={currentIndex === 0}
         >
           ←
@@ -602,7 +610,10 @@ const MeditationPlayer: React.FC<MeditationPlayerProps> = ({ mantras, locale }) 
             backgroundColor: isPlaying ? 'rgba(255, 100, 100, 0.5)' : 'rgba(100, 255, 100, 0.5)' 
           } : {}}
           whileTap={isLoaded && !isError ? { scale: 0.95 } : {}}
-          onClick={togglePlay}
+          onClick={(e) => {
+            e.stopPropagation();
+            togglePlay();
+          }}
           disabled={!isLoaded || isError}
         >
           {isPlaying ? t.pause : t.play}
@@ -612,7 +623,10 @@ const MeditationPlayer: React.FC<MeditationPlayerProps> = ({ mantras, locale }) 
           style={playerStyles.navButton}
           whileHover={{ scale: 1.1, backgroundColor: 'rgba(123, 31, 162, 0.5)' }}
           whileTap={{ scale: 0.95 }}
-          onClick={handleNext}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleNext();
+          }}
           disabled={currentIndex === mantras.length - 1}
         >
           →
