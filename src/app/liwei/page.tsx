@@ -127,7 +127,7 @@ const bonusAudio = {
   pt: {
     id: "liwei-bonus",
     title: "Meditação Guiada do Monge Li Wei",
-    youtubeId: "lUKJrkKnQOQ",
+    youtubeId: "tEmt1Znux58",
     description: "Uma meditação exclusiva guiada com base nos ensinamentos do Monge Li Wei para relaxamento profundo e expansão da consciência.",
     objective: "Relaxamento Profundo",
     color: colors.purple.light
@@ -135,12 +135,15 @@ const bonusAudio = {
   es: {
     id: "liwei-bonus",
     title: "Meditación Guiada del Monje Li Wei",
-    youtubeId: "lUKJrkKnQOQ",
+    youtubeId: "tEmt1Znux58",
     description: "Una meditación exclusiva guiada basada en las enseñanzas del Monje Li Wei para relajación profunda y expansión de la conciencia.",
     objective: "Relajación Profunda",
     color: colors.purple.light
   }
 };
+
+// Chave para armazenar acesso aos mantras do Li Wei no localStorage
+const LIWEI_VISITED_KEY = 'portalEspiritual_liweiVisited';
 
 export default function LiWeiPage() {
   const [locale, setLocale] = useState<Locale>('pt');
@@ -151,6 +154,13 @@ export default function LiWeiPage() {
   useEffect(() => {
     setMounted(true);
     setLocale(getCurrentLocale());
+    
+    // Registrar que o usuário visitou a página do Li Wei
+    try {
+      localStorage.setItem(LIWEI_VISITED_KEY, 'true');
+    } catch (error) {
+      console.error('Erro ao salvar no localStorage:', error);
+    }
   }, []);
 
   if (!mounted) return null;

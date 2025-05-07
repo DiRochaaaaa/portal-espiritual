@@ -90,11 +90,15 @@ const styles: Record<string, CSSProperties> = {
 // Chave para armazenar o estado do vídeo no localStorage
 const VIDEO_STATE_KEY = 'portalEspiritual_videoShown';
 
+// Chave para verificar se o usuário já visitou os mantras do Li Wei
+const LIWEI_VISITED_KEY = 'portalEspiritual_liweiVisited';
+
 export default function HomePage() {
   const [showVideo, setShowVideo] = useState<boolean>(false);
   const [locale, setLocale] = useState<Locale>('pt');
   const [mounted, setMounted] = useState<boolean>(false);
   const [showDebugButton, setShowDebugButton] = useState<boolean>(false);
+  const [hasVisitedLiWei, setHasVisitedLiWei] = useState<boolean>(false);
   
   // Referência para a div do vídeo
   const videoContainerRef = useRef<HTMLDivElement>(null);
@@ -124,6 +128,12 @@ export default function HomePage() {
       const savedVideoState = localStorage.getItem(VIDEO_STATE_KEY);
       if (savedVideoState === 'true') {
         setShowVideo(true);
+      }
+      
+      // Verificar se o usuário já visitou os mantras do Li Wei
+      const liweiVisited = localStorage.getItem(LIWEI_VISITED_KEY);
+      if (liweiVisited === 'true') {
+        setHasVisitedLiWei(true);
       }
     } catch (error) {
       console.error('Erro ao acessar localStorage:', error);
@@ -201,12 +211,14 @@ export default function HomePage() {
     pt: {
       title: "Bem-vindo ao Tarô dos Anjos",
       startReading: "Iniciar minha Leitura",
-      resetButton: "Resetar Vídeo"
+      resetButton: "Resetar Vídeo",
+      liweiButton: "Acessar Mantras do Monge Li Wei"
     },
     es: {
       title: "Bienvenido al Tarot de los Ángeles",
       startReading: "Iniciar mi Lectura",
-      resetButton: "Resetear Video"
+      resetButton: "Resetear Video",
+      liweiButton: "Acceder a los Mantras del Monje Li Wei"
     }
   };
   
@@ -249,6 +261,100 @@ export default function HomePage() {
           {/* Vídeo renderizado diretamente na página principal */}
           {showVideo && (
             <div style={styles.videoContainer} ref={videoContainerRef} />
+          )}
+          
+          {/* Botão de acesso aos mantras do Li Wei para usuários recorrentes */}
+          {showVideo && hasVisitedLiWei && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+              style={{ 
+                display: 'flex', 
+                justifyContent: 'center', 
+                marginTop: '2rem',
+                marginBottom: '1rem'
+              }}
+            >
+              <motion.a
+                href="/liwei"
+                style={{
+                  padding: '0.85rem 1.8rem',
+                  background: 'linear-gradient(135deg, rgba(123, 31, 162, 0.8), rgba(103, 21, 142, 0.9))',
+                  color: '#FFD700',
+                  borderRadius: '0.5rem',
+                  textDecoration: 'none',
+                  border: '1px solid rgba(212, 175, 55, 0.5)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.7rem',
+                  fontWeight: 600,
+                  boxShadow: '0 4px 15px rgba(0, 0, 0, 0.3), 0 0 10px rgba(212, 175, 55, 0.2)',
+                  position: 'relative',
+                  overflow: 'hidden',
+                }}
+                whileHover={{
+                  scale: 1.05,
+                  boxShadow: '0 6px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(212, 175, 55, 0.4)',
+                  border: '1px solid rgba(212, 175, 55, 0.8)',
+                  color: '#FFDF00',
+                }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <motion.span
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    height: '2px',
+                    background: 'linear-gradient(to right, transparent, rgba(212, 175, 55, 0.7), transparent)'
+                  }}
+                  animate={{
+                    opacity: [0.5, 1, 0.5],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  width="18" 
+                  height="18" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="#FFD700" 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
+                {t.liweiButton}
+                <motion.span
+                  style={{
+                    position: 'absolute',
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    height: '2px',
+                    background: 'linear-gradient(to right, transparent, rgba(212, 175, 55, 0.7), transparent)'
+                  }}
+                  animate={{
+                    opacity: [0.5, 1, 0.5],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 1
+                  }}
+                />
+              </motion.a>
+            </motion.div>
           )}
           
           {showVideo && (
