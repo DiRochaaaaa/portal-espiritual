@@ -66,16 +66,29 @@ const Card: React.FC<CardProps> = ({
       )}
       
       {description && (
-        <p
-          style={{
-            fontSize: '0.9rem',
-            color: colors.text.muted,
-            lineHeight: '1.5',
-            margin: 0,
-          }}
-        >
-          {description}
-        </p>
+        typeof description === 'string' ? (
+          <p
+            style={{
+              fontSize: '0.9rem',
+              color: colors.text.muted,
+              lineHeight: '1.5',
+              margin: 0,
+            }}
+          >
+            {description}
+          </p>
+        ) : (
+          <div
+            style={{
+              fontSize: '0.9rem',
+              color: colors.text.muted,
+              lineHeight: '1.5',
+              margin: 0,
+            }}
+          >
+            {description}
+          </div>
+        )
       )}
       
       {children}

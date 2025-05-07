@@ -17,17 +17,17 @@ const encodeAudioUrl = (url: string): string => {
 // Mapear IDs do YouTube para arquivos MP3 locais
 const AUDIO_FILES: Record<string, string> = {
   // Mantras Li Wei
-  'iG_lNuNUVd4': '/audio/om mani padme hum.mp3',
-  'HxXgTU9c8n0': '/audio/Om Gam Ganapataye Namaha.mp3',
-  'EWZdQcNAkQ8': '/audio/Om Namah Shivaya.mp3',
-  'KtvyJBtQUag': '/audio/OM SHANTI SHANTI SHANTI.mp3',
-  'lUKJrkKnQOQ': '/audio/limpeza-de-energia.mp3',
-  'bIr6dABjMWk': '/audio/meditação.mp3',
+  'iGslNuNUVd4': 'https://leitura.tarodosanjos.online/wp-content/uploads/2025/05/om-mani-padme-hum.mp3',
+  'HxXgTU9c8n0': 'https://leitura.tarodosanjos.online/wp-content/uploads/2025/05/Om-Gam-Ganapataye-Namaha.mp3',
+  'EWZdQcNAkQ8': 'https://leitura.tarodosanjos.online/wp-content/uploads/2025/05/Om-Namah-Shivaya.mp3',
+  'KtvyJBtQUag': 'https://leitura.tarodosanjos.online/wp-content/uploads/2025/05/OM-SHANTI-SHANTI-SHANTI.mp3',
+  'lUKJrkKnQOQ': 'https://leitura.tarodosanjos.online/wp-content/uploads/2025/05/limpeza-de-energia.mp3',
+  'bIr6dABjMWk': 'https://leitura.tarodosanjos.online/wp-content/uploads/2025/05/meditacao.mp3',
   
   // Canção Angelical
-  'DXNA9A68GTY': '/audio/atrair-anjos.mp3',
-  '1AyuYJG_7WE': '/audio/meditação.mp3',
-  'nnjICT7yu1U': '/audio/frequencia-abundancia.mp3',
+  'DXNA9A68GTY': 'https://leitura.tarodosanjos.online/wp-content/uploads/2025/05/atrair-anjos.mp3',
+  '1AyuYJG_7WE': 'https://leitura.tarodosanjos.online/wp-content/uploads/2025/05/meditacao.mp3',
+  'nnjICT7yu1U': 'https://leitura.tarodosanjos.online/wp-content/uploads/2025/05/frequencia-abundancia.mp3',
 };
 
 interface Mantra {
@@ -109,22 +109,22 @@ const MeditationPlayer: React.FC<MeditationPlayerProps> = ({ mantras, locale }) 
       
       if (audioFilePath) {
         try {
-          // Codificar o URL para lidar com espaços e caracteres especiais
-          const encodedUrl = encodeAudioUrl(audioFilePath);
+          // As URLs já estão completas, não precisamos mais codificar
+          const audioUrl = audioFilePath;
           
           // Usar o elemento HTML de áudio nativo
           if (nativeAudioRef.current) {
-            nativeAudioRef.current.src = encodedUrl;
+            nativeAudioRef.current.src = audioUrl;
             
             // Configurar event listeners no áudio nativo
             nativeAudioRef.current.onloadeddata = () => {
-              console.log(`Áudio carregado: ${encodedUrl}`);
+              console.log(`Áudio carregado: ${audioUrl}`);
               setIsLoaded(true);
               setIsError(false);
             };
             
             nativeAudioRef.current.oncanplaythrough = () => {
-              console.log(`Áudio pronto para reprodução: ${encodedUrl}`);
+              console.log(`Áudio pronto para reprodução: ${audioUrl}`);
               setIsLoaded(true);
             };
             
@@ -144,7 +144,7 @@ const MeditationPlayer: React.FC<MeditationPlayerProps> = ({ mantras, locale }) 
             
             // Carregar o áudio
             nativeAudioRef.current.load();
-            console.log(`Carregando áudio: ${encodedUrl}`);
+            console.log(`Carregando áudio: ${audioUrl}`);
           } else {
             console.error("Elemento de áudio nativo não encontrado");
             setIsError(true);
@@ -396,6 +396,26 @@ const MeditationPlayer: React.FC<MeditationPlayerProps> = ({ mantras, locale }) 
     }
   };
 
+  // Função para garantir que a cor é válida para animação
+  const ensureValidColor = (color: string): string => {
+    // Se já for um formato rgba ou rgb, retornar diretamente
+    if (color.startsWith('rgba(') || color.startsWith('rgb(')) {
+      return color;
+    }
+    
+    // Se for hexadecimal, garantir que tenha 6 dígitos
+    if (color.startsWith('#')) {
+      // Se tiver menos de 6 dígitos (excluindo o #), converter para rgb
+      if (color.length < 7) {
+        // Converter para um formato seguro (branco com transparência)
+        return 'rgba(255, 255, 255, 0.9)';
+      }
+    }
+    
+    // Adicionar transparência CC (80%) ao final da cor
+    return `${color}CC`;
+  };
+
   // Renderização do conteúdo do círculo interno baseado no estado do player
   const renderInnerCircleContent = () => {
     if (!isLoaded) {
@@ -407,6 +427,9 @@ const MeditationPlayer: React.FC<MeditationPlayerProps> = ({ mantras, locale }) 
     }
     
     if (isPlaying) {
+      // Obter uma cor segura para animação
+      const safeColor = ensureValidColor(currentMantra.color || '#7B1FA2');
+      
       return (
         <div style={playerStyles.soundWave}>
           {[0, 1, 2, 3, 4].map((i) => (
@@ -417,7 +440,7 @@ const MeditationPlayer: React.FC<MeditationPlayerProps> = ({ mantras, locale }) 
               animate="playing"
               style={{
                 ...playerStyles.soundBar,
-                backgroundColor: `${currentMantra.color}CC`,
+                backgroundColor: safeColor,
               }}
             />
           ))}
@@ -447,7 +470,7 @@ const MeditationPlayer: React.FC<MeditationPlayerProps> = ({ mantras, locale }) 
         onPause={() => setIsPlaying(false)}
       >
         <source 
-          src={AUDIO_FILES[currentMantra.youtubeId] ? encodeAudioUrl(AUDIO_FILES[currentMantra.youtubeId]) : ''} 
+          src={AUDIO_FILES[currentMantra.youtubeId] ? AUDIO_FILES[currentMantra.youtubeId] : ''} 
           type="audio/mpeg" 
         />
         Seu navegador não suporta o elemento de áudio.
@@ -456,7 +479,7 @@ const MeditationPlayer: React.FC<MeditationPlayerProps> = ({ mantras, locale }) 
       <motion.div 
         style={{
           ...playerStyles.visualizer,
-          boxShadow: `0 0 30px ${currentMantra.color}33`
+          boxShadow: `0 0 30px ${ensureValidColor(currentMantra.color || '#7B1FA2').replace('CC', '33')}`
         }}
         animate={{ 
           scale: pulseSize 
@@ -469,16 +492,16 @@ const MeditationPlayer: React.FC<MeditationPlayerProps> = ({ mantras, locale }) 
         <motion.div 
           style={{
             ...playerStyles.outerCircle,
-            borderColor: currentMantra.color
+            borderColor: ensureValidColor(currentMantra.color || '#7B1FA2').replace('CC', '')
           }}
           animate={{ 
             boxShadow: isPlaying 
               ? [
-                  `0 0 10px ${currentMantra.color}33`,
-                  `0 0 20px ${currentMantra.color}66`,
-                  `0 0 10px ${currentMantra.color}33`
+                  `0 0 10px ${ensureValidColor(currentMantra.color || '#7B1FA2').replace('CC', '33')}`,
+                  `0 0 20px ${ensureValidColor(currentMantra.color || '#7B1FA2').replace('CC', '66')}`,
+                  `0 0 10px ${ensureValidColor(currentMantra.color || '#7B1FA2').replace('CC', '33')}`
                 ]
-              : `0 0 10px ${currentMantra.color}33`
+              : `0 0 10px ${ensureValidColor(currentMantra.color || '#7B1FA2').replace('CC', '33')}`
           }}
           transition={{ 
             duration: 3,
@@ -495,11 +518,11 @@ const MeditationPlayer: React.FC<MeditationPlayerProps> = ({ mantras, locale }) 
           animate={{ 
             boxShadow: isPlaying 
               ? [
-                  `0 0 10px ${currentMantra.color}33 inset`,
-                  `0 0 25px ${currentMantra.color}66 inset`,
-                  `0 0 10px ${currentMantra.color}33 inset`
+                  `0 0 10px ${ensureValidColor(currentMantra.color || '#7B1FA2').replace('CC', '33')} inset`,
+                  `0 0 25px ${ensureValidColor(currentMantra.color || '#7B1FA2').replace('CC', '66')} inset`,
+                  `0 0 10px ${ensureValidColor(currentMantra.color || '#7B1FA2').replace('CC', '33')} inset`
                 ]
-              : `0 0 10px ${currentMantra.color}33 inset`
+              : `0 0 10px ${ensureValidColor(currentMantra.color || '#7B1FA2').replace('CC', '33')} inset`
           }}
           transition={{ 
             duration: 2,
@@ -576,8 +599,8 @@ const MeditationPlayer: React.FC<MeditationPlayerProps> = ({ mantras, locale }) 
               if (nativeAudioRef.current) {
                 const audioFilePath = AUDIO_FILES[currentMantra.youtubeId];
                 if (audioFilePath) {
-                  const encodedUrl = encodeAudioUrl(audioFilePath);
-                  nativeAudioRef.current.src = encodedUrl;
+                  const audioUrl = audioFilePath;
+                  nativeAudioRef.current.src = audioUrl;
                   nativeAudioRef.current.load();
                   
                   // Mostrar controles nativos de áudio temporariamente

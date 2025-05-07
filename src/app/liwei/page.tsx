@@ -79,33 +79,55 @@ const styles: Record<string, CSSProperties> = {
   },
   elementGrid: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
-    gap: '20px',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+    gap: '24px',
     width: '100%',
-    marginTop: '20px',
+    marginTop: '30px',
   },
   elementCard: {
     textAlign: 'center',
-    padding: '16px',
-    background: colors.backgrounds.glassLight,
-    borderRadius: '12px',
-    border: `1px solid ${colors.borders.light}`,
+    padding: '30px 20px',
+    background: 'rgba(21, 0, 34, 0.5)',
+    borderRadius: '16px',
+    border: `1px solid rgba(255, 255, 255, 0.1)`,
+    boxShadow: '0 10px 30px rgba(0, 0, 0, 0.2)',
+    backdropFilter: 'blur(10px)',
+    transition: 'all 0.4s ease',
+    overflow: 'hidden',
+    position: 'relative',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   elementIcon: {
-    fontSize: '2rem',
-    marginBottom: '12px',
+    fontSize: '3rem',
+    marginBottom: '20px',
     ...gradients.goldText,
+    filter: 'drop-shadow(0 0 12px rgba(212, 175, 55, 0.6))',
+    position: 'relative',
+    zIndex: 2,
   },
   elementTitle: {
-    fontSize: '1rem',
-    fontWeight: 600,
-    marginBottom: '8px',
+    fontSize: '1.2rem',
+    fontWeight: 700,
+    marginBottom: '12px',
     color: 'white',
+    background: 'linear-gradient(to right, #D4AF37, #FFD700, #D4AF37)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundClip: 'text',
+    textShadow: '0 2px 10px rgba(212, 175, 55, 0.3)',
+    position: 'relative',
+    zIndex: 2,
   },
   elementDescription: {
-    fontSize: '0.85rem',
-    color: colors.text.muted,
-  }
+    fontSize: '0.95rem',
+    color: 'rgba(255, 255, 255, 0.9)',
+    lineHeight: '1.6',
+    position: 'relative',
+    zIndex: 2,
+  },
 };
 
 // Áudio bônus para meditação
@@ -136,7 +158,7 @@ const mantras = {
       title: "Om Mani Padme Hum",
       description: "O mantra da compaixão. Invoca purificação e transformação. Ajuda a abrir o coração e a conexão com todos os seres.",
       objective: "Compaixão e Purificação",
-      youtubeId: "rvcaxqTf7MQ",
+      youtubeId: "iGslNuNUVd4",
       color: colors.purple.light,
       text: "Om Mani Padme Hum"
     },
@@ -174,7 +196,7 @@ const mantras = {
       title: "Om Mani Padme Hum",
       description: "El mantra de la compasión. Invoca purificación y transformación. Ayuda a abrir el corazón y la conexión con todos los seres.",
       objective: "Compasión y Purificación",
-      youtubeId: "rvcaxqTf7MQ",
+      youtubeId: "iGslNuNUVd4",
       color: colors.purple.light,
       text: "Om Mani Padme Hum"
     },
@@ -1096,7 +1118,11 @@ export default function LiWeiPage() {
 
         {/* Seção Proteção Energética com Elementos Naturais */}
         <motion.section
-          style={styles.section}
+          style={{
+            ...styles.section,
+            position: 'relative',
+            paddingTop: '20px',
+          }}
           {...motionVariants.fadeInUp}
           transition={{ duration: 0.5, delay: 1.1 }}
         >
@@ -1106,14 +1132,75 @@ export default function LiWeiPage() {
             delay={1.1}
           />
           
-          <p style={{...styles.cardDescription, marginBottom: '20px'}}>{t.elementsDescription}</p>
+          <p style={{
+            ...styles.cardDescription, 
+            marginBottom: '30px',
+            fontSize: '1.05rem',
+            maxWidth: '800px',
+            margin: '0 auto 40px',
+            textAlign: 'center',
+            lineHeight: 1.6,
+            color: 'rgba(255, 255, 255, 0.9)'
+          }}>{t.elementsDescription}</p>
+          
+          <div style={{
+            maxWidth: '800px',
+            margin: '0 auto 20px',
+            padding: '15px 20px',
+            background: 'rgba(123, 31, 162, 0.15)',
+            borderRadius: '10px',
+            border: '1px solid rgba(212, 175, 55, 0.2)',
+            textAlign: 'center',
+            fontSize: '0.95rem',
+            color: 'rgba(255, 255, 255, 0.85)',
+            lineHeight: 1.6,
+          }}>
+            <span style={{color: '#FFD700', fontWeight: 'bold'}}>Dica:</span> Ao usar os quatro elementos em conjunto, você cria uma barreira energética completa que harmoniza seu ambiente e potencializa suas práticas espirituais.
+          </div>
           
           <div style={styles.elementGrid}>
             <motion.div 
-              style={styles.elementCard}
+              style={{
+                ...styles.elementCard,
+                background: 'linear-gradient(145deg, rgba(21, 0, 34, 0.7), rgba(40, 20, 0, 0.7))'
+              }}
+              whileHover={{ 
+                y: -10, 
+                boxShadow: '0 15px 30px rgba(0, 0, 0, 0.3)', 
+                border: '1px solid rgba(212, 175, 55, 0.3)' 
+              }}
               {...motionVariants.scaleIn}
               transition={{ duration: 0.4, delay: 1.2 }}
             >
+              <div style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                background: 'radial-gradient(circle at bottom right, rgba(139, 69, 19, 0.1), transparent 70%)',
+                zIndex: 1
+              }} />
+              <motion.div 
+                style={{
+                  position: 'absolute',
+                  top: '15px',
+                  right: '15px',
+                  width: '15px',
+                  height: '15px',
+                  borderRadius: '50%',
+                  background: 'rgba(139, 69, 19, 0.3)',
+                  zIndex: 1
+                }}
+                animate={{
+                  opacity: [0.3, 0.6, 0.3],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
               <div style={styles.elementIcon}>
                 <FaMountain />
               </div>
@@ -1122,10 +1209,47 @@ export default function LiWeiPage() {
             </motion.div>
             
             <motion.div 
-              style={styles.elementCard}
+              style={{
+                ...styles.elementCard,
+                background: 'linear-gradient(145deg, rgba(21, 0, 34, 0.7), rgba(0, 30, 60, 0.7))'
+              }}
+              whileHover={{ 
+                y: -10, 
+                boxShadow: '0 15px 30px rgba(0, 0, 0, 0.3)', 
+                border: '1px solid rgba(212, 175, 55, 0.3)' 
+              }}
               {...motionVariants.scaleIn}
               transition={{ duration: 0.4, delay: 1.3 }}
             >
+              <div style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                background: 'radial-gradient(circle at bottom left, rgba(0, 119, 190, 0.1), transparent 70%)',
+                zIndex: 1
+              }} />
+              <motion.div 
+                style={{
+                  position: 'absolute',
+                  top: '15px',
+                  left: '15px',
+                  width: '15px',
+                  height: '15px',
+                  borderRadius: '50%',
+                  background: 'rgba(0, 119, 190, 0.3)',
+                  zIndex: 1
+                }}
+                animate={{
+                  opacity: [0.3, 0.6, 0.3],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
               <div style={styles.elementIcon}>
                 <FaWater />
               </div>
@@ -1134,10 +1258,47 @@ export default function LiWeiPage() {
             </motion.div>
             
             <motion.div 
-              style={styles.elementCard}
+              style={{
+                ...styles.elementCard,
+                background: 'linear-gradient(145deg, rgba(21, 0, 34, 0.7), rgba(60, 0, 0, 0.7))'
+              }}
+              whileHover={{ 
+                y: -10, 
+                boxShadow: '0 15px 30px rgba(0, 0, 0, 0.3)', 
+                border: '1px solid rgba(212, 175, 55, 0.3)' 
+              }}
               {...motionVariants.scaleIn}
               transition={{ duration: 0.4, delay: 1.4 }}
             >
+              <div style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                background: 'radial-gradient(circle at top right, rgba(255, 69, 0, 0.1), transparent 70%)',
+                zIndex: 1
+              }} />
+              <motion.div 
+                style={{
+                  position: 'absolute',
+                  bottom: '15px',
+                  right: '15px',
+                  width: '15px',
+                  height: '15px',
+                  borderRadius: '50%',
+                  background: 'rgba(255, 69, 0, 0.3)',
+                  zIndex: 1
+                }}
+                animate={{
+                  opacity: [0.3, 0.7, 0.3],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
               <div style={styles.elementIcon}>
                 <FaFire />
               </div>
@@ -1146,10 +1307,47 @@ export default function LiWeiPage() {
             </motion.div>
             
             <motion.div 
-              style={styles.elementCard}
+              style={{
+                ...styles.elementCard,
+                background: 'linear-gradient(145deg, rgba(21, 0, 34, 0.7), rgba(0, 40, 0, 0.7))'
+              }}
+              whileHover={{ 
+                y: -10, 
+                boxShadow: '0 15px 30px rgba(0, 0, 0, 0.3)', 
+                border: '1px solid rgba(212, 175, 55, 0.3)' 
+              }}
               {...motionVariants.scaleIn}
               transition={{ duration: 0.4, delay: 1.5 }}
             >
+              <div style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                background: 'radial-gradient(circle at top left, rgba(76, 187, 23, 0.1), transparent 70%)',
+                zIndex: 1
+              }} />
+              <motion.div 
+                style={{
+                  position: 'absolute',
+                  bottom: '15px',
+                  left: '15px',
+                  width: '15px',
+                  height: '15px',
+                  borderRadius: '50%',
+                  background: 'rgba(76, 187, 23, 0.3)',
+                  zIndex: 1
+                }}
+                animate={{
+                  opacity: [0.3, 0.6, 0.3],
+                }}
+                transition={{
+                  duration: 3.5,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
               <div style={styles.elementIcon}>
                 <FaLeaf />
               </div>

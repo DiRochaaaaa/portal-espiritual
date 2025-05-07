@@ -16,13 +16,18 @@ const encodeAudioUrl = (url: string): string => {
 // Mapear IDs do YouTube para arquivos MP3 locais
 const AUDIO_FILES: Record<string, string> = {
   // Vídeos da página principal e outros
-  'bIr6dABjMWk': '/audio/meditação.mp3',
-  'aWgD6QWkLNI': '/audio/limpeza-de-energia.mp3',
-  'rvcaxqTf7MQ': '/audio/om mani padme hum.mp3',
-  'DXNA9A68GTY': '/audio/atrair-anjos.mp3',
-  '1AyuYJG_7WE': '/audio/meditação.mp3',
-  'nnjICT7yu1U': '/audio/frequencia-abundancia.mp3',
-  // Adicione outros mapeamentos conforme necessário
+  // Mantras Li Wei
+  'iGslNuNUVd4': 'https://leitura.tarodosanjos.online/wp-content/uploads/2025/05/om-mani-padme-hum.mp3',
+  'HxXgTU9c8n0': 'https://leitura.tarodosanjos.online/wp-content/uploads/2025/05/Om-Gam-Ganapataye-Namaha.mp3',
+  'EWZdQcNAkQ8': 'https://leitura.tarodosanjos.online/wp-content/uploads/2025/05/Om-Namah-Shivaya.mp3',
+  'KtvyJBtQUag': 'https://leitura.tarodosanjos.online/wp-content/uploads/2025/05/OM-SHANTI-SHANTI-SHANTI.mp3',
+  'lUKJrkKnQOQ': 'https://leitura.tarodosanjos.online/wp-content/uploads/2025/05/limpeza-de-energia.mp3',
+  'bIr6dABjMWk': 'https://leitura.tarodosanjos.online/wp-content/uploads/2025/05/meditacao.mp3',
+  
+  // Canção Angelical
+  'DXNA9A68GTY': 'https://leitura.tarodosanjos.online/wp-content/uploads/2025/05/atrair-anjos.mp3',
+  '1AyuYJG_7WE': 'https://leitura.tarodosanjos.online/wp-content/uploads/2025/05/meditacao.mp3',
+  'nnjICT7yu1U': 'https://leitura.tarodosanjos.online/wp-content/uploads/2025/05/frequencia-abundancia.mp3',
 };
 
 interface YouTubeLoaderProps {
@@ -75,8 +80,8 @@ const YouTubeLoader: React.FC<YouTubeLoaderProps> = ({
         return;
       }
       
-      // Codificar o URL para lidar com espaços e caracteres especiais
-      const encodedUrl = encodeAudioUrl(audioFilePath);
+      // As URLs já estão completas, não precisamos mais codificar
+      const audioUrl = audioFilePath;
       
       // Limpar listeners antigos se o audioRef já existir
       if (audioRef.current) {
@@ -86,10 +91,10 @@ const YouTubeLoader: React.FC<YouTubeLoaderProps> = ({
         audioRef.current.removeEventListener('error', () => {});
         
         // Atualizar o src do áudio existente
-        audioRef.current.src = encodedUrl;
+        audioRef.current.src = audioUrl;
       } else {
         // Criar novo elemento de áudio
-        audioRef.current = new Audio(encodedUrl);
+        audioRef.current = new Audio(audioUrl);
       }
       
       // Configurar eventos de áudio
@@ -97,7 +102,7 @@ const YouTubeLoader: React.FC<YouTubeLoaderProps> = ({
         if (!audioRef.current) return;
         
         audioRef.current.addEventListener('loadeddata', () => {
-          console.log(`Áudio carregado: ${encodedUrl}`);
+          console.log(`Áudio carregado: ${audioUrl}`);
           setIsLoaded(true);
           
           // Criar uma interface que imita o player do YouTube
@@ -151,7 +156,7 @@ const YouTubeLoader: React.FC<YouTubeLoaderProps> = ({
         });
         
         audioRef.current.addEventListener('canplaythrough', () => {
-          console.log(`Áudio pronto para reprodução: ${encodedUrl}`);
+          console.log(`Áudio pronto para reprodução: ${audioUrl}`);
           setIsLoaded(true);
         });
         
@@ -173,7 +178,7 @@ const YouTubeLoader: React.FC<YouTubeLoaderProps> = ({
       
       // Carregar o áudio (mas não começar a tocar)
       audioRef.current.load();
-      console.log(`Iniciando carregamento do áudio: ${encodedUrl}`);
+      console.log(`Iniciando carregamento do áudio: ${audioUrl}`);
       
     } catch (error) {
       console.error("Erro ao inicializar o player de áudio:", error);

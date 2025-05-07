@@ -66,7 +66,7 @@ const mantras = {
     {
       id: "mantra-2",
       title: "Frequência 432Hz para Limpeza Energética",
-      youtubeId: "1AyuYJG_7WE",
+      youtubeId: "lUKJrkKnQOQ",
       description: "A frequência 432Hz está alinhada com a vibração natural do universo. Esta meditação ajuda a limpar bloqueios energéticos e promover harmonia interior.",
       objective: "Limpeza Energética",
       color: "#4CAF50"
@@ -92,7 +92,7 @@ const mantras = {
     {
       id: "mantra-2",
       title: "Frecuencia 432Hz para Limpieza Energética",
-      youtubeId: "1AyuYJG_7WE",
+      youtubeId: "lUKJrkKnQOQ",
       description: "La frecuencia 432Hz está alineada con la vibración natural del universo. Esta meditación ayuda a limpiar bloqueos energéticos y promover armonía interior.",
       objective: "Limpieza Energética",
       color: "#4CAF50"
