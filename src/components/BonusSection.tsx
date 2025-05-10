@@ -69,7 +69,7 @@ const styles: Record<string, CSSProperties> = {
 // Links para os recursos e contatos
 const links = {
   whatsapp: 'https://chat.whatsapp.com/LGi8EoO6OB804uGRossRNO',
-  celestino: 'https://wa.me/5511966536715',
+  celestino: 'https://wa.me/5511967973944',
   prayers: '/oracoes',
   gift: '/presente',
   song: '/cancao'
