@@ -126,9 +126,6 @@ const styles: Record<string, CSSProperties> = {
     borderBottom: `1px solid rgba(255, 255, 255, 0.1)`,
     zIndex: 2,
     flexWrap: 'wrap',
-    '@media (max-width: 480px)': {
-      padding: '12px 16px',
-    },
   },
   stepNumber: {
     width: '36px',
@@ -150,9 +147,6 @@ const styles: Record<string, CSSProperties> = {
     color: 'white',
     margin: 0,
     ...gradients.goldText,
-    '@media (max-width: 480px)': {
-      fontSize: '1.1rem',
-    },
   },
   stepTimeLabel: {
     marginLeft: 'auto',
@@ -165,32 +159,17 @@ const styles: Record<string, CSSProperties> = {
     borderRadius: '20px',
     border: '1px solid rgba(255, 255, 255, 0.1)',
     color: colors.text.light,
-    '@media (max-width: 480px)': {
-      marginLeft: 0,
-      fontSize: '0.8rem',
-      padding: '4px 10px',
-      marginTop: '8px',
-      width: '100%',
-      justifyContent: 'center',
-    },
   },
   stepContent: {
     position: 'relative',
     padding: '20px',
     zIndex: 2,
-    '@media (max-width: 480px)': {
-      padding: '16px',
-    },
   },
   stepListItem: {
     marginBottom: '16px',
     display: 'flex',
     alignItems: 'flex-start',
     gap: '12px',
-    '@media (max-width: 480px)': {
-      gap: '8px',
-      marginBottom: '12px',
-    },
   },
   stepListIcon: {
     fontSize: '1.2rem',
@@ -204,9 +183,6 @@ const styles: Record<string, CSSProperties> = {
     color: colors.text.muted,
     flex: 1,
     lineHeight: '1.6',
-    '@media (max-width: 480px)': {
-      fontSize: '0.95rem',
-    },
   },
   scheduleTable: {
     width: '100%',
@@ -219,10 +195,6 @@ const styles: Record<string, CSSProperties> = {
     borderRadius: '12px',
     overflow: 'hidden',
     border: '1px solid rgba(123, 31, 162, 0.3)',
-    '@media (max-width: 600px)': {
-      display: 'block',
-      overflowX: 'auto',
-    },
   },
   tableHeader: {
     padding: '16px 20px',
@@ -232,10 +204,6 @@ const styles: Record<string, CSSProperties> = {
     fontWeight: 'bold',
     background: 'rgba(74, 0, 114, 0.4)',
     borderBottom: `1px solid rgba(255, 255, 255, 0.1)`,
-    '@media (max-width: 480px)': {
-      padding: '12px 16px',
-      fontSize: '0.9rem',
-    },
   },
   tableCell: {
     padding: '16px 20px',
@@ -243,10 +211,6 @@ const styles: Record<string, CSSProperties> = {
     color: colors.text.muted,
     borderBottom: `1px solid rgba(255, 255, 255, 0.08)`,
     lineHeight: '1.5',
-    '@media (max-width: 480px)': {
-      padding: '12px 16px',
-      fontSize: '0.9rem',
-    },
   },
   tableCellHighlight: {
     color: colors.text.light,
@@ -262,20 +226,12 @@ const styles: Record<string, CSSProperties> = {
     color: '#d4b3ff',
     border: '1px solid rgba(123, 31, 162, 0.6)',
     boxShadow: '0 3px 6px rgba(0, 0, 0, 0.2)',
-    '@media (max-width: 480px)': {
-      padding: '4px 10px',
-      fontSize: '0.8rem',
-    },
   },
   tipsGrid: {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
     gap: '20px',
     marginTop: '24px',
-    '@media (max-width: 600px)': {
-      gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-      gap: '16px',
-    },
   },
   tipCard: {
     position: 'relative',
@@ -291,10 +247,6 @@ const styles: Record<string, CSSProperties> = {
     boxShadow: '0 10px 30px rgba(0, 0, 0, 0.2)',
     overflow: 'hidden',
     transition: 'all 0.3s ease',
-    '@media (max-width: 480px)': {
-      padding: '20px 16px',
-      gap: '12px',
-    },
   },
   tipGlow: {
     position: 'absolute',
@@ -322,11 +274,6 @@ const styles: Record<string, CSSProperties> = {
     position: 'relative',
     zIndex: 2,
     boxShadow: '0 5px 15px rgba(0, 0, 0, 0.3)',
-    '@media (max-width: 480px)': {
-      width: '50px',
-      height: '50px',
-      fontSize: '1.6rem',
-    },
   },
   tipText: {
     fontSize: '0.95rem',
@@ -334,9 +281,6 @@ const styles: Record<string, CSSProperties> = {
     lineHeight: '1.6',
     position: 'relative',
     zIndex: 2,
-    '@media (max-width: 480px)': {
-      fontSize: '0.9rem',
-    },
   },
   note: {
     position: 'relative',
@@ -350,10 +294,6 @@ const styles: Record<string, CSSProperties> = {
     border: '1px solid rgba(212, 175, 55, 0.3)',
     boxShadow: '0 10px 30px rgba(0, 0, 0, 0.2)',
     overflow: 'hidden',
-    '@media (max-width: 480px)': {
-      padding: '20px 16px',
-      fontSize: '0.95rem',
-    },
   },
   noteGlow: {
     position: 'absolute',
@@ -371,10 +311,6 @@ const styles: Record<string, CSSProperties> = {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
     gap: '20px',
-    '@media (max-width: 600px)': {
-      gridTemplateColumns: '1fr',
-      gap: '16px',
-    },
   },
   chantCard: {
     position: 'relative',
@@ -389,9 +325,6 @@ const styles: Record<string, CSSProperties> = {
     position: 'relative',
     padding: '20px',
     zIndex: 2,
-    '@media (max-width: 480px)': {
-      padding: '16px',
-    },
   },
   chantCardGlow: {
     position: 'absolute',
@@ -408,9 +341,6 @@ const styles: Record<string, CSSProperties> = {
     fontWeight: 'bold',
     marginBottom: '8px',
     ...gradients.goldText,
-    '@media (max-width: 480px)': {
-      fontSize: '1rem',
-    },
   },
   chantName: {
     fontSize: '0.95rem',
@@ -418,10 +348,6 @@ const styles: Record<string, CSSProperties> = {
     display: 'flex',
     alignItems: 'center',
     gap: '10px',
-    '@media (max-width: 480px)': {
-      fontSize: '0.9rem',
-      gap: '8px',
-    },
   },
   chantIcon: {
     width: '40px',
@@ -435,12 +361,6 @@ const styles: Record<string, CSSProperties> = {
     color: '#FFD700',
     marginRight: '12px',
     flexShrink: 0,
-    '@media (max-width: 480px)': {
-      width: '36px',
-      height: '36px',
-      fontSize: '1.1rem',
-      marginRight: '10px',
-    },
   },
   portalWindowDescription: {
     position: 'relative',
@@ -453,19 +373,12 @@ const styles: Record<string, CSSProperties> = {
     color: colors.text.muted,
     lineHeight: '1.6',
     boxShadow: '0 10px 20px rgba(0, 0, 0, 0.2)',
-    '@media (max-width: 480px)': {
-      padding: '16px',
-      fontSize: '0.9rem',
-    },
   },
   decorationLine: {
     width: '100%',
     height: '1px',
     background: 'linear-gradient(to right, transparent, rgba(212, 175, 55, 0.5), transparent)',
     margin: '24px 0',
-    '@media (max-width: 480px)': {
-      margin: '20px 0',
-    },
   },
   highlightText: {
     position: 'relative',
@@ -495,9 +408,6 @@ const styles: Record<string, CSSProperties> = {
     border: '1px solid rgba(123, 31, 162, 0.3)',
     boxShadow: '0 8px 20px rgba(0, 0, 0, 0.3)',
     overflow: 'hidden',
-    '@media (max-width: 480px)': {
-      padding: '12px',
-    },
   },
   audioPlayerGlow: {
     position: 'absolute',
@@ -517,9 +427,6 @@ const styles: Record<string, CSSProperties> = {
     marginBottom: '12px',
     position: 'relative',
     zIndex: 2,
-    '@media (max-width: 480px)': {
-      gap: '8px',
-    },
   },
   playButton: {
     width: '40px',
@@ -536,11 +443,6 @@ const styles: Record<string, CSSProperties> = {
     boxShadow: '0 4px 10px rgba(0, 0, 0, 0.3)',
     transition: 'transform 0.2s ease',
     flexShrink: 0,
-    '@media (max-width: 480px)': {
-      width: '36px',
-      height: '36px',
-      fontSize: '1.2rem',
-    },
   },
   audioInfo: {
     flex: '1',
@@ -556,9 +458,6 @@ const styles: Record<string, CSSProperties> = {
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
-    '@media (max-width: 480px)': {
-      fontSize: '0.85rem',
-    },
   },
   audioDescription: {
     fontSize: '0.8rem',
@@ -566,9 +465,6 @@ const styles: Record<string, CSSProperties> = {
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
-    '@media (max-width: 480px)': {
-      fontSize: '0.75rem',
-    },
   },
   progressContainer: {
     width: '100%',
@@ -578,9 +474,6 @@ const styles: Record<string, CSSProperties> = {
     position: 'relative',
     cursor: 'pointer',
     zIndex: 2,
-    '@media (max-width: 480px)': {
-      height: '5px',
-    },
   },
   progressBar: {
     position: 'absolute',
@@ -600,9 +493,6 @@ const styles: Record<string, CSSProperties> = {
     marginTop: '10px',
     zIndex: 2,
     position: 'relative',
-    '@media (max-width: 480px)': {
-      fontSize: '0.85rem',
-    },
   },
   audioButton: {
     display: 'flex',
@@ -620,11 +510,6 @@ const styles: Record<string, CSSProperties> = {
     cursor: 'pointer',
     boxShadow: '0 4px 15px rgba(0, 0, 0, 0.2)',
     transition: 'all 0.3s ease',
-    '@media (max-width: 480px)': {
-      padding: '10px',
-      fontSize: '0.9rem',
-      gap: '6px',
-    },
   },
   audioButtonActive: {
     backgroundColor: 'rgba(123, 31, 162, 0.6)',
@@ -633,9 +518,6 @@ const styles: Record<string, CSSProperties> = {
     fontSize: '1.2rem',
     color: '#FFD700',
     filter: 'drop-shadow(0 0 5px rgba(212, 175, 55, 0.5))',
-    '@media (max-width: 480px)': {
-      fontSize: '1.1rem',
-    },
   },
 };
 
@@ -988,7 +870,7 @@ export default function RitualRelampagoPage() {
         fontSize: isMobile ? '0.95rem' : '1rem',
       },
       scheduleTable: {
-        display: isTablet || isMobile ? 'block' : 'table',
+        display: isTablet || isMobile ? 'block' as 'block' : 'table' as 'table',
         overflowX: isTablet || isMobile ? 'auto' as 'auto' : 'visible' as 'visible',
       },
       tableHeader: {
@@ -1024,82 +906,27 @@ export default function RitualRelampagoPage() {
         fontSize: isMobile ? '0.95rem' : '1rem',
       },
       chantsContainer: {
-        display: 'grid',
         gridTemplateColumns: isTablet || isMobile ? '1fr' : 'repeat(auto-fit, minmax(300px, 1fr))',
         gap: isMobile ? '16px' : '20px',
-        marginTop: '24px',
-        width: '100%',
       },
       chantCard: {
-        width: '100%',
-        background: 'rgba(21, 0, 34, 0.7)',
-        borderRadius: '16px',
-        border: '1px solid rgba(255, 255, 255, 0.1)',
-        overflow: 'hidden',
-        transition: 'all 0.3s ease',
-        boxShadow: '0 10px 30px rgba(0, 0, 0, 0.2)',
+        padding: isMobile ? '16px' : '20px', 
       },
-      chantCardContent: {
-        padding: isMobile ? '16px' : '20px',
-        display: 'flex',
-        flexDirection: 'column',
+      chantCardTitle: {
+        fontSize: isMobile ? '1rem' : '1.1rem',
       },
       chantHeader: {
-        display: 'flex',
-        alignItems: 'center',
-        marginBottom: '12px',
-        gap: '10px',
-      },
-      chantTitleArea: {
-        flex: 1,
-        overflow: 'hidden',
-      },
-      chantDay: {
-        fontSize: isMobile ? '1rem' : '1.1rem',
-        fontWeight: 'bold',
-        marginBottom: '2px',
-        ...gradients.goldText,
-        whiteSpace: 'normal',
-        wordBreak: 'break-word',
-        lineHeight: 1.3,
+        gap: isMobile ? '8px' : '10px',
       },
       chantName: {
         fontSize: isMobile ? '0.9rem' : '0.95rem',
-        color: colors.text.muted,
-        whiteSpace: 'normal',
-        wordBreak: 'break-word',
-        lineHeight: 1.3,
-      },
-      chantDescription: {
-        margin: '0 0 12px 0',
-        padding: '10px',
-        background: 'rgba(123, 31, 162, 0.15)',
-        borderRadius: '8px',
-        fontSize: isMobile ? '0.85rem' : '0.9rem',
-        color: colors.text.muted,
-        fontStyle: 'italic',
-        border: '1px solid rgba(123, 31, 162, 0.2)',
-        lineHeight: 1.4,
-        wordBreak: 'break-word',
+        gap: isMobile ? '8px' : '10px',
       },
       chantIcon: {
-        width: '40px',
-        height: '40px',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: '50%',
-        background: 'rgba(123, 31, 162, 0.2)',
-        fontSize: '1.2rem',
-        color: '#FFD700',
-        marginRight: '12px',
-        flexShrink: 0,
-        '@media (max-width: 480px)': {
-          width: '36px',
-          height: '36px',
-          fontSize: '1.1rem',
-          marginRight: '10px',
-        },
+        width: isMobile ? '36px' : '40px',
+        height: isMobile ? '36px' : '40px',
+        fontSize: isMobile ? '1.1rem' : '1.2rem',
+        marginRight: isMobile ? '10px' : '12px',
       },
       portalWindowDescription: {
         padding: isMobile ? '16px' : '20px',
@@ -1139,115 +966,69 @@ export default function RitualRelampagoPage() {
       audioButtonIcon: {
         fontSize: isMobile ? '1.1rem' : '1.2rem',
       },
+      chantDescription: {
+        margin: '0 0 12px 0',
+        padding: '10px',
+        background: 'rgba(123, 31, 162, 0.15)',
+        borderRadius: '8px',
+        fontSize: isMobile ? '0.85rem' : '0.9rem',
+        color: colors.text.muted,
+        fontStyle: 'italic',
+        border: '1px solid rgba(123, 31, 162, 0.2)',
+        lineHeight: 1.4,
+      },
       
+      // Adicionar propriedades necessárias para os componentes renderizados
+      chantCardContent: {
+        padding: isMobile ? '16px' : '20px',
+      },
+      chantDay: {
+        fontSize: isMobile ? '1rem' : '1.1rem',
+      },
+      chantTitleArea: {
+        flex: 1,
+      },
+      
+      // Componentes de áudio melhorados
       improvedAudioPlayer: {
         padding: isMobile ? '14px' : '18px',
         marginTop: '0',
         borderRadius: '12px',
-        backgroundColor: 'rgba(21, 0, 34, 0.8)',
-        border: `1px solid rgba(123, 31, 162, 0.4)`,
-        boxShadow: '0 8px 20px rgba(0, 0, 0, 0.3)',
       },
       improvedPlayButton: {
         width: isMobile ? '44px' : '52px',
         height: isMobile ? '44px' : '52px',
         fontSize: isMobile ? '1.6rem' : '1.8rem',
-        background: 'linear-gradient(135deg, #7B1FA2, #9C27B0)',
-        borderRadius: '50%',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        color: 'white',
-        border: 'none',
-        cursor: 'pointer',
-        boxShadow: '0 4px 12px rgba(123, 31, 162, 0.5)',
-        flexShrink: 0,
-        margin: '0',
-        padding: '0',
         minWidth: isMobile ? '44px' : '52px',
       },
       improvedAudioInfo: {
-        flex: 1,
         marginLeft: isMobile ? '10px' : '15px',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        overflow: 'hidden',
       },
       improvedAudioTitle: {
-        fontWeight: 'bold',
         fontSize: isMobile ? '0.9rem' : '1rem',
-        color: colors.text.light,
-        whiteSpace: 'nowrap',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-        display: 'flex',
-        alignItems: 'center',
-        flexWrap: 'wrap',
-        gap: '4px',
       },
       improvedAudioStatusBadge: {
-        fontSize: '0.7rem',
-        backgroundColor: playingAudio ? 'rgba(123, 31, 162, 0.7)' : 'rgba(21, 0, 34, 0.7)',
-        color: 'white',
-        padding: '2px 6px',
-        borderRadius: '10px',
-        fontWeight: 'bold',
-        display: 'inline-block',
         marginLeft: isMobile ? '0' : '10px',
-        marginBottom: '2px',
-        whiteSpace: 'nowrap',
       },
       improvedAudioMetadata: {
-        display: 'flex', 
-        alignItems: 'center',
         marginTop: '4px',
-        justifyContent: 'space-between',
-        flexWrap: 'wrap',
       },
       improvedDuration: {
         fontSize: isMobile ? '0.75rem' : '0.8rem',
-        color: colors.text.muted,
-        display: 'flex',
-        alignItems: 'center',
-        gap: '6px',
-        whiteSpace: 'nowrap',
-        marginRight: '4px',
       },
       improvedProgressContainer: {
-        width: '100%',
         height: isMobile ? '8px' : '10px',
-        backgroundColor: 'rgba(255, 255, 255, 0.1)',
-        borderRadius: '5px',
         marginTop: '12px',
-        cursor: 'pointer',
-        position: 'relative',
         minHeight: isMobile ? '8px' : '10px',
       },
       improvedProgressBar: {
         height: '100%',
-        background: 'linear-gradient(to right, #D4AF37, #FFD700)',
-        borderRadius: '5px',
-        position: 'absolute',
-        left: 0,
-        top: 0,
-        transition: 'width 0.1s linear',
       },
       improvedVolumeControl: {
-        display: 'flex',
-        alignItems: 'center',
-        gap: '8px',
         marginTop: '12px',
-        width: '100%',
       },
       volumeIcon: {
-        cursor: 'pointer', 
         fontSize: isMobile ? '1rem' : '1.1rem',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexShrink: 0,
-        minWidth: '18px',
       },
     };
   }, [isMobile, isTablet, playingAudio]);
