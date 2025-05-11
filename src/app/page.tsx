@@ -6,6 +6,32 @@ import { NavbarWithSuspense, SpiritualQuotesWithSuspense, BonusSectionWithSuspen
 import { getCurrentLocale, toggleLocale, Locale } from '../lib/locale';
 import YouTubeLoader from '../components/YouTubeLoader';
 
+// Custom hook for window size
+function useWindowSize() {
+  const [windowSize, setWindowSize] = useState({
+    width: typeof window !== 'undefined' ? window.innerWidth : 0,
+    height: typeof window !== 'undefined' ? window.innerHeight : 0,
+  });
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    function handleResize() {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    }
+
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Initial sizing
+    
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return windowSize;
+}
+
 const styles: Record<string, CSSProperties> = {
   container: {
     minHeight: '100vh',
@@ -91,12 +117,20 @@ const VIDEO_STATE_KEY = 'portalEspiritual_videoShown';
 // Chave para verificar se o usuário já visitou os mantras do Li Wei
 const LIWEI_VISITED_KEY = 'portalEspiritual_liweiVisited';
 
+// Chave para verificar se o usuário já visitou o Ritual Relâmpago
+const RITUAL_VISITED_KEY = 'portalEspiritual_ritualVisited';
+
 export default function HomePage() {
   const [showVideo, setShowVideo] = useState<boolean>(false);
   const [locale, setLocale] = useState<Locale>('pt');
   const [mounted, setMounted] = useState<boolean>(false);
   const [showDebugButton, setShowDebugButton] = useState<boolean>(false);
   const [hasVisitedLiWei, setHasVisitedLiWei] = useState<boolean>(false);
+  const [hasVisitedRitual, setHasVisitedRitual] = useState<boolean>(false);
+  
+  // Get window size for responsive layouts
+  const { width } = useWindowSize();
+  const isMobile = width <= 600;
   
   // Referência para a div do vídeo
   const videoContainerRef = useRef<HTMLDivElement>(null);
@@ -132,6 +166,12 @@ export default function HomePage() {
       const liweiVisited = localStorage.getItem(LIWEI_VISITED_KEY);
       if (liweiVisited === 'true') {
         setHasVisitedLiWei(true);
+      }
+
+      // Verificar se o usuário já visitou o Ritual Relâmpago
+      const ritualVisited = localStorage.getItem(RITUAL_VISITED_KEY);
+      if (ritualVisited === 'true') {
+        setHasVisitedRitual(true);
       }
     } catch (error) {
       console.error('Erro ao acessar localStorage:', error);
@@ -210,13 +250,19 @@ export default function HomePage() {
       title: "Bem-vindo ao Tarô dos Anjos",
       startReading: "Iniciar minha Leitura",
       resetButton: "Resetar Vídeo",
-      liweiButton: "Acessar Mantras do Monge Li Wei"
+      liweiButton: "Acessar Mantras do Monge Li Wei",
+      ritualButton: "Acessar Ritual Relâmpago",
+      additionalContentTitle: "Conteúdo Adicional",
+      additionalContentDescription: "Acesse nossas práticas espirituais especiais"
     },
     es: {
       title: "Bienvenido al Tarot de los Ángeles",
       startReading: "Iniciar mi Lectura",
       resetButton: "Resetear Video",
-      liweiButton: "Acceder a los Mantras del Monje Li Wei"
+      liweiButton: "Acceder a los Mantras del Monje Li Wei",
+      ritualButton: "Acceder al Ritual Relámpago",
+      additionalContentTitle: "Contenido Adicional",
+      additionalContentDescription: "Accede a nuestras prácticas espirituales especiales"
     }
   };
   
@@ -261,97 +307,164 @@ export default function HomePage() {
             <div style={styles.videoContainer} ref={videoContainerRef} />
           )}
           
-          {/* Botão de acesso aos mantras do Li Wei para usuários recorrentes */}
-          {showVideo && hasVisitedLiWei && (
+          {/* Seção "Conteúdo Adicional" para usuários que visitaram qualquer uma das páginas */}
+          {showVideo && (hasVisitedLiWei || hasVisitedRitual) && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
               style={{ 
-                display: 'flex', 
-                justifyContent: 'center', 
-                marginTop: '2rem',
-                marginBottom: '1rem'
+                width: '100%',
+                maxWidth: '48rem',
+                margin: '2rem auto 1rem auto',
+                padding: '1.5rem',
+                background: 'rgba(21, 0, 34, 0.7)',
+                backdropFilter: 'blur(10px)',
+                borderRadius: '1rem',
+                border: '1px solid rgba(123, 31, 162, 0.3)',
+                boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3)',
+                position: 'relative',
+                overflow: 'hidden',
               }}
             >
-              <motion.a
-                href="/liwei"
-                style={{
-                  padding: '0.85rem 1.8rem',
-                  background: 'linear-gradient(135deg, rgba(123, 31, 162, 0.8), rgba(103, 21, 142, 0.9))',
-                  color: '#FFD700',
-                  borderRadius: '0.5rem',
-                  textDecoration: 'none',
-                  border: '1px solid rgba(212, 175, 55, 0.5)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.7rem',
-                  fontWeight: 600,
-                  boxShadow: '0 4px 15px rgba(0, 0, 0, 0.3), 0 0 10px rgba(212, 175, 55, 0.2)',
-                  position: 'relative',
-                  overflow: 'hidden',
-                }}
-                whileHover={{
-                  scale: 1.05,
-                  boxShadow: '0 6px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(212, 175, 55, 0.4)',
-                  border: '1px solid rgba(212, 175, 55, 0.8)',
-                  color: '#FFDF00',
-                }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <motion.span
-                  style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    height: '2px',
-                    background: 'linear-gradient(to right, transparent, rgba(212, 175, 55, 0.7), transparent)'
-                  }}
-                  animate={{
-                    opacity: [0.5, 1, 0.5],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                />
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  width="18" 
-                  height="18" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="#FFD700" 
-                  strokeWidth="2" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round"
-                >
-                  <circle cx="12" cy="12" r="10" />
-                  <circle cx="12" cy="12" r="3" />
-                </svg>
-                {t.liweiButton}
-                <motion.span
-                  style={{
-                    position: 'absolute',
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    height: '2px',
-                    background: 'linear-gradient(to right, transparent, rgba(212, 175, 55, 0.7), transparent)'
-                  }}
-                  animate={{
-                    opacity: [0.5, 1, 0.5],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: 1
-                  }}
-                />
-              </motion.a>
+              {/* Glow de fundo */}
+              <div style={{
+                position: 'absolute',
+                width: '300px',
+                height: '300px',
+                borderRadius: '50%',
+                background: 'radial-gradient(circle, rgba(123, 31, 162, 0.15), transparent 70%)',
+                top: '-150px',
+                right: '-150px',
+                zIndex: 1,
+                pointerEvents: 'none',
+              }} />
+
+              <h2 style={{
+                fontSize: '1.5rem',
+                textAlign: 'center',
+                fontWeight: 'bold',
+                marginBottom: '1rem',
+                background: 'linear-gradient(to right, #D4AF37, #FFD700, #D4AF37)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                position: 'relative',
+                zIndex: 2,
+              }}>
+                {t.additionalContentTitle}
+              </h2>
+              
+              <p style={{
+                fontSize: '1rem',
+                color: 'rgba(255, 255, 255, 0.7)',
+                textAlign: 'center',
+                marginBottom: '1.5rem',
+                position: 'relative',
+                zIndex: 2,
+              }}>
+                {t.additionalContentDescription}
+              </p>
+              
+              <div style={{
+                display: 'flex',
+                flexDirection: isMobile ? 'column' : 'row',
+                gap: '1rem',
+                justifyContent: 'center',
+                position: 'relative',
+                zIndex: 2,
+              }}>
+                {/* Botão para os mantras do Monge Li Wei - Mostrar apenas se visitou a página Li Wei */}
+                {hasVisitedLiWei && (
+                  <motion.a
+                    href="/liwei"
+                    style={{
+                      flex: 1,
+                      padding: '0.85rem 1.2rem',
+                      background: 'linear-gradient(135deg, rgba(123, 31, 162, 0.8), rgba(103, 21, 142, 0.9))',
+                      color: '#FFD700',
+                      borderRadius: '0.5rem',
+                      textDecoration: 'none',
+                      border: '1px solid rgba(212, 175, 55, 0.5)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '0.7rem',
+                      fontWeight: 600,
+                      boxShadow: '0 4px 15px rgba(0, 0, 0, 0.3), 0 0 10px rgba(212, 175, 55, 0.2)',
+                      textAlign: 'center',
+                    }}
+                    whileHover={{
+                      scale: 1.05,
+                      boxShadow: '0 6px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(212, 175, 55, 0.4)',
+                      border: '1px solid rgba(212, 175, 55, 0.8)',
+                      color: '#FFDF00',
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <svg 
+                      xmlns="http://www.w3.org/2000/svg" 
+                      width="18" 
+                      height="18" 
+                      viewBox="0 0 24 24" 
+                      fill="none" 
+                      stroke="#FFD700" 
+                      strokeWidth="2" 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round"
+                    >
+                      <circle cx="12" cy="12" r="10" />
+                      <circle cx="12" cy="12" r="3" />
+                    </svg>
+                    {t.liweiButton}
+                  </motion.a>
+                )}
+                
+                {/* Botão para o Ritual Relâmpago - Mostrar apenas se visitou a página Ritual Relâmpago */}
+                {hasVisitedRitual && (
+                  <motion.a
+                    href="/ritual-relampago"
+                    style={{
+                      flex: 1,
+                      padding: '0.85rem 1.2rem',
+                      background: 'linear-gradient(135deg, rgba(123, 31, 162, 0.8), rgba(103, 21, 142, 0.9))',
+                      color: '#FFD700',
+                      borderRadius: '0.5rem',
+                      textDecoration: 'none',
+                      border: '1px solid rgba(212, 175, 55, 0.5)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '0.7rem',
+                      fontWeight: 600,
+                      boxShadow: '0 4px 15px rgba(0, 0, 0, 0.3), 0 0 10px rgba(212, 175, 55, 0.2)',
+                      textAlign: 'center',
+                    }}
+                    whileHover={{
+                      scale: 1.05,
+                      boxShadow: '0 6px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(212, 175, 55, 0.4)',
+                      border: '1px solid rgba(212, 175, 55, 0.8)',
+                      color: '#FFDF00',
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <svg 
+                      xmlns="http://www.w3.org/2000/svg" 
+                      width="18" 
+                      height="18" 
+                      viewBox="0 0 24 24" 
+                      fill="none" 
+                      stroke="#FFD700" 
+                      strokeWidth="2" 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round"
+                    >
+                      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                    </svg>
+                    {t.ritualButton}
+                  </motion.a>
+                )}
+              </div>
             </motion.div>
           )}
           
