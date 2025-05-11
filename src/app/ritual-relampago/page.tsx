@@ -906,11 +906,12 @@ export default function RitualRelampagoPage() {
         fontSize: isMobile ? '0.95rem' : '1rem',
       },
       chantsContainer: {
-        gridTemplateColumns: isTablet || isMobile ? '1fr' : 'repeat(auto-fit, minmax(300px, 1fr))',
+        gridTemplateColumns: isMobile ? '1fr' : isTablet ? 'repeat(auto-fit, minmax(280px, 1fr))' : 'repeat(auto-fit, minmax(300px, 1fr))',
         gap: isMobile ? '16px' : '20px',
       },
       chantCard: {
-        padding: isMobile ? '16px' : '20px', 
+        padding: isMobile ? '16px' : '20px',
+        width: '100%', 
       },
       chantCardTitle: {
         fontSize: isMobile ? '1rem' : '1.1rem',
@@ -991,44 +992,106 @@ export default function RitualRelampagoPage() {
       
       // Componentes de áudio melhorados
       improvedAudioPlayer: {
-        padding: isMobile ? '14px' : '18px',
+        padding: isMobile ? '12px 14px' : '18px',
         marginTop: '0',
         borderRadius: '12px',
+        background: 'rgba(21, 0, 34, 0.8)',
+        border: '1px solid rgba(123, 31, 162, 0.4)',
+        boxShadow: '0 8px 20px rgba(0, 0, 0, 0.3)',
       },
       improvedPlayButton: {
-        width: isMobile ? '44px' : '52px',
-        height: isMobile ? '44px' : '52px',
-        fontSize: isMobile ? '1.6rem' : '1.8rem',
-        minWidth: isMobile ? '44px' : '52px',
+        width: isMobile ? '38px' : '52px',
+        height: isMobile ? '38px' : '52px',
+        fontSize: isMobile ? '1.4rem' : '1.8rem',
+        minWidth: isMobile ? '38px' : '52px',
+        background: 'linear-gradient(135deg, #7B1FA2, #9C27B0)',
+        borderRadius: '50%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        color: 'white',
+        border: 'none',
+        cursor: 'pointer',
+        boxShadow: '0 4px 12px rgba(123, 31, 162, 0.5)',
+        flexShrink: 0,
+        margin: '0',
+        padding: '0',
       },
       improvedAudioInfo: {
-        marginLeft: isMobile ? '10px' : '15px',
+        marginLeft: isMobile ? '8px' : '15px',
+        display: 'flex',
+        flexDirection: 'column' as 'column',
+        flex: 1,
+        overflow: 'hidden',
       },
       improvedAudioTitle: {
-        fontSize: isMobile ? '0.9rem' : '1rem',
+        fontSize: isMobile ? '0.85rem' : '1rem',
+        fontWeight: 'bold',
+        color: colors.text.light,
+        display: 'flex',
+        alignItems: 'center',
+        flexWrap: 'wrap' as 'wrap',
+        gap: '4px',
       },
       improvedAudioStatusBadge: {
+        fontSize: '0.7rem',
+        backgroundColor: 'rgba(123, 31, 162, 0.7)',
+        color: 'white',
+        padding: '2px 6px',
+        borderRadius: '10px',
+        fontWeight: 'bold',
+        display: 'inline-block',
         marginLeft: isMobile ? '0' : '10px',
+        marginBottom: '2px',
       },
       improvedAudioMetadata: {
+        display: 'flex', 
+        alignItems: 'center',
         marginTop: '4px',
+        justifyContent: 'space-between',
       },
       improvedDuration: {
-        fontSize: isMobile ? '0.75rem' : '0.8rem',
+        fontSize: isMobile ? '0.7rem' : '0.8rem',
+        color: colors.text.muted,
+        display: 'flex',
+        alignItems: 'center',
+        gap: '6px',
+        whiteSpace: 'nowrap',
       },
       improvedProgressContainer: {
-        height: isMobile ? '8px' : '10px',
-        marginTop: '12px',
-        minHeight: isMobile ? '8px' : '10px',
+        width: '100%',
+        height: isMobile ? '6px' : '10px',
+        backgroundColor: 'rgba(255, 255, 255, 0.1)',
+        borderRadius: '5px',
+        marginTop: '10px',
+        cursor: 'pointer',
+        position: 'relative' as 'relative',
+        minHeight: isMobile ? '6px' : '10px',
       },
       improvedProgressBar: {
         height: '100%',
+        background: 'linear-gradient(to right, #D4AF37, #FFD700)',
+        borderRadius: '5px',
+        position: 'absolute' as 'absolute',
+        left: 0,
+        top: 0,
+        transition: 'width 0.1s linear',
       },
       improvedVolumeControl: {
-        marginTop: '12px',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '8px',
+        marginTop: '10px',
+        width: '100%',
       },
       volumeIcon: {
-        fontSize: isMobile ? '1rem' : '1.1rem',
+        cursor: 'pointer', 
+        fontSize: isMobile ? '0.9rem' : '1.1rem',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexShrink: 0,
+        minWidth: '18px',
       },
     };
   }, [isMobile, isTablet, playingAudio]);
@@ -1808,7 +1871,6 @@ export default function RitualRelampagoPage() {
                     
                     {/* Improved Audio Player - Always visible */}
                     <div style={{
-                      position: 'relative',
                       ...responsiveStyles.improvedAudioPlayer
                     }}>
                       <div style={styles.audioPlayerGlow} />
@@ -1838,7 +1900,7 @@ export default function RitualRelampagoPage() {
                               whiteSpace: 'nowrap',
                               overflow: 'hidden',
                               textOverflow: 'ellipsis',
-                              maxWidth: isMobile ? '120px' : '150px'
+                              maxWidth: isMobile ? '100px' : '150px'
                             }}>
                               {t[chant.chant as keyof typeof t]}
                             </span>
@@ -1849,11 +1911,11 @@ export default function RitualRelampagoPage() {
                           
                           <div style={responsiveStyles.improvedAudioMetadata}>
                             <div style={responsiveStyles.improvedDuration}>
-                              <BsMusicNoteBeamed /> {chant.duration}
+                              <BsMusicNoteBeamed style={{ fontSize: isMobile ? '0.7rem' : '0.8rem' }} /> {chant.duration}
                             </div>
                             
                             <div style={{
-                              fontSize: isMobile ? '0.75rem' : '0.8rem',
+                              fontSize: isMobile ? '0.7rem' : '0.8rem',
                               color: colors.text.muted,
                               textAlign: 'right',
                               whiteSpace: 'nowrap',
@@ -1877,26 +1939,28 @@ export default function RitualRelampagoPage() {
                         />
                       </div>
                       
-                      {/* Volume control */}
-                      <div style={responsiveStyles.improvedVolumeControl}>
-                        <div style={responsiveStyles.volumeIcon} 
-                          onClick={() => changeVolume(chant.id, (volume[chant.id] || 0.8) === 0 ? 0.8 : 0)}
-                        >
-                          {(volume[chant.id] || 0.8) === 0 ? <BsVolumeMuteFill /> : <BsVolumeUpFill />}
+                      {/* Volume control - esconder em mobile */}
+                      {!isMobile && (
+                        <div style={responsiveStyles.improvedVolumeControl}>
+                          <div style={responsiveStyles.volumeIcon} 
+                            onClick={() => changeVolume(chant.id, (volume[chant.id] || 0.8) === 0 ? 0.8 : 0)}
+                          >
+                            {(volume[chant.id] || 0.8) === 0 ? <BsVolumeMuteFill /> : <BsVolumeUpFill />}
+                          </div>
+                          <input 
+                            type="range" 
+                            min="0" 
+                            max="1" 
+                            step="0.05" 
+                            value={volume[chant.id] || 0.8}
+                            onChange={(e) => changeVolume(chant.id, parseFloat(e.target.value))}
+                            style={{ 
+                              width: '100%',
+                              accentColor: '#7B1FA2'
+                            }}
+                          />
                         </div>
-                        <input 
-                          type="range" 
-                          min="0" 
-                          max="1" 
-                          step="0.05" 
-                          value={volume[chant.id] || 0.8}
-                          onChange={(e) => changeVolume(chant.id, parseFloat(e.target.value))}
-                          style={{ 
-                            width: '100%',
-                            accentColor: '#7B1FA2'
-                          }}
-                        />
-                      </div>
+                      )}
                     </div>
                   </div>
                 </motion.div>
