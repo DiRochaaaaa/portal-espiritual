@@ -63,7 +63,7 @@ export default function BonusPage() {
           title: "Grupo de WhatsApp Exclusivo", 
           description: "Únete a nuestro grupo para recibir mensajes diarios",
           icon: "whatsapp",
-          link: "https://chat.whatsapp.com/LGi8EoO6OB804uGRossRNO"
+          link: "https://chat.whatsapp.com/CaYhi6V14y00Wr0iuSK6Rl"
         },
         { 
           title: "Oraciones de Sanación", 

@@ -68,7 +68,10 @@ const styles: Record<string, CSSProperties> = {
 
 // Links para os recursos e contatos
 const links = {
-  whatsapp: 'https://chat.whatsapp.com/LGi8EoO6OB804uGRossRNO',
+  whatsapp: {
+    pt: 'https://chat.whatsapp.com/LGi8EoO6OB804uGRossRNO',
+    es: 'https://chat.whatsapp.com/CaYhi6V14y00Wr0iuSK6Rl'
+  },
   celestino: 'https://wa.me/5511967973944',
   prayers: '/oracoes',
   gift: '/presente',
@@ -109,7 +112,7 @@ export default function BonusSection({ locale }: BonusSectionProps) {
           title: "Grupo do WhatsApp Exclusivo",
           description: "Junte-se ao nosso grupo para receber mensagens diárias",
           icon: "whatsapp",
-          link: links.whatsapp
+          link: links.whatsapp.pt
         },
         {
           title: "Contato Direto com Celestino",
@@ -151,7 +154,7 @@ export default function BonusSection({ locale }: BonusSectionProps) {
           title: "Grupo de WhatsApp Exclusivo",
           description: "Únete a nuestro grupo para recibir mensajes diarios",
           icon: "whatsapp",
-          link: links.whatsapp
+          link: links.whatsapp.es
         },
         {
           title: "Contacto Directo con Celestino",
