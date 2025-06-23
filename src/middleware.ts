@@ -3,6 +3,19 @@ import { NextRequest, NextResponse } from 'next/server';
 const locales = ['pt', 'es'];
 const defaultLocale = 'pt';
 
+// Função para detectar e processar slugs de idioma na URL
+function detectLanguageFromUrl(pathname: string): { locale: string | null, cleanPath: string } {
+  // Verifica se a URL começa com /es, /br ou /pt
+  if (pathname.startsWith('/es')) {
+    return { locale: 'es', cleanPath: pathname.replace(/^\/es/, '') || '/' };
+  }
+  if (pathname.startsWith('/br') || pathname.startsWith('/pt')) {
+    return { locale: 'pt', cleanPath: pathname.replace(/^\/(?:br|pt)/, '') || '/' };
+  }
+  
+  return { locale: null, cleanPath: pathname };
+}
+
 async function detectLanguageFromIP(request: NextRequest): Promise<{ locale: string, isDetected: boolean }> {
   try {
     // Get IP address from request headers (if deployed on Vercel)
@@ -54,6 +67,25 @@ export async function middleware(request: NextRequest) {
     pathname.startsWith('/locales/')
   ) {
     return NextResponse.next();
+  }
+  
+  // Detectar idioma da URL primeiro
+  const { locale: urlLocale, cleanPath } = detectLanguageFromUrl(pathname);
+  
+  // Se encontrou um slug de idioma na URL, define o idioma e redireciona
+  if (urlLocale) {
+    const response = NextResponse.redirect(new URL(cleanPath, request.url));
+    
+    // Define o cookie de idioma
+    response.cookies.set('NEXT_LOCALE', urlLocale, { 
+      maxAge: 60 * 60 * 24 * 30, // 30 dias
+      path: '/' 
+    });
+    
+    // Remove o cookie de necessidade de seleção de idioma, se existir
+    response.cookies.delete('NEEDS_LANGUAGE_SELECTION');
+    
+    return response;
   }
   
   // Check if locale is set in cookie
