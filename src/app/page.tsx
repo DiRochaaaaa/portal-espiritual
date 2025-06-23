@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef, CSSProperties, memo } from 'react';import { motion, AnimatePresence } from 'framer-motion';import Link from 'next/link';import { NavbarWithSuspense, SpiritualQuotesWithSuspense, BonusSectionWithSuspense, FooterWithSuspense } from '../lib/LazyComponents';import { getCurrentLocale, toggleLocale, Locale } from '../lib/locale';import YouTubeLoader from '../components/YouTubeLoader';
+import { useState, useEffect, useRef, CSSProperties, memo } from 'react';import { motion, AnimatePresence } from 'framer-motion';import Link from 'next/link';import { NavbarWithSuspense, SpiritualQuotesWithSuspense, BonusSectionWithSuspense, FooterWithSuspense, GuardianAngelSectionWithSuspense } from '../lib/LazyComponents';import { getCurrentLocale, toggleLocale, Locale } from '../lib/locale';import YouTubeLoader from '../components/YouTubeLoader';
 
 // Custom hook for window size
 function useWindowSize() {
@@ -463,6 +463,9 @@ export default function HomePage() {
               <BonusSectionWithSuspense locale={locale} />
               <div style={styles.divider} />
               <SpiritualQuotesWithSuspense />
+              
+              {/* Seção do Anjo da Guarda - Posicionada no final do portal */}
+              <GuardianAngelSectionWithSuspense locale={locale} />
             </>
           )}
         </motion.div>

@@ -13,6 +13,7 @@ export const LazyNavbar = lazy(() => import('../components/Navbar'));
 export const LazyLanguageSelector = lazy(() => import('../components/LanguageSelector'));
 export const LazyLanguageProvider = lazy(() => import('../components/LanguageProvider'));
 export const LazyFooter = lazy(() => import('../components/Footer'));
+export const LazyGuardianAngelSection = lazy(() => import('../components/GuardianAngelSection'));
 
 // Componentes de fallback
 export const MeditationPlayerWithSuspense = (props: any) => (
@@ -211,5 +212,27 @@ export const FooterWithSuspense = (props: any) => (
     </footer>
   }>
     <LazyFooter {...props} />
+  </Suspense>
+);
+
+export const GuardianAngelSectionWithSuspense = (props: any) => (
+  <Suspense fallback={
+    <div style={{
+      width: '100%',
+      maxWidth: '900px',
+      margin: '3rem auto',
+      padding: '2.5rem',
+      background: 'linear-gradient(135deg, rgba(21, 0, 34, 0.95), rgba(74, 0, 114, 0.9))',
+      backdropFilter: 'blur(20px)',
+      borderRadius: '24px',
+      border: '1px solid rgba(212, 175, 55, 0.3)',
+      textAlign: 'center',
+    }}>
+      <div style={{ fontSize: '1rem', color: 'rgba(255, 255, 255, 0.7)' }}>
+        Carregando seção do anjo da guarda...
+      </div>
+    </div>
+  }>
+    <LazyGuardianAngelSection {...props} />
   </Suspense>
 ); 
