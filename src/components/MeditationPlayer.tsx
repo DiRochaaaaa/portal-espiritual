@@ -53,7 +53,8 @@ const translations = {
     nextMantra: "Próximo",
     prevMantra: "Anterior",
     loading: "Carregando...",
-    error: "Erro ao carregar o áudio"
+    error: "Erro ao carregar o áudio",
+    browserNotSupported: "Seu navegador não suporta o elemento de áudio."
   },
   es: {
     play: "Reproducir",
@@ -62,7 +63,18 @@ const translations = {
     nextMantra: "Siguiente",
     prevMantra: "Anterior",
     loading: "Cargando...",
-    error: "Error al cargar el audio"
+    error: "Error al cargar el audio",
+    browserNotSupported: "Su navegador no soporta el elemento de audio."
+  },
+  en: {
+    play: "Play",
+    pause: "Pause",
+    objective: "Objective",
+    nextMantra: "Next",
+    prevMantra: "Previous",
+    loading: "Loading...",
+    error: "Error loading audio",
+    browserNotSupported: "Your browser does not support the audio element."
   }
 };
 
@@ -473,7 +485,7 @@ const MeditationPlayer: React.FC<MeditationPlayerProps> = ({ mantras, locale }) 
           src={AUDIO_FILES[currentMantra.youtubeId] ? AUDIO_FILES[currentMantra.youtubeId] : ''} 
           type="audio/mpeg" 
         />
-        Seu navegador não suporta o elemento de áudio.
+        {t.browserNotSupported}
       </audio>
       
       <motion.div 

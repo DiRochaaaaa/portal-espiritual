@@ -434,6 +434,11 @@ const translations = {
     },
     elementsTitle: "Proteção Energética com Elementos Naturais",
     elementsDescription: "Os quatro elementos podem ser incorporados à sua prática para criar uma barreira de proteção:",
+    clickInstruction: "Clique nos mantras para reproduzir o áudio",
+    play: "Reproduzir",
+    pause: "Pausar",
+    tip: "Dica:",
+    tipText: "Ao usar os quatro elementos em conjunto, você cria uma barreira energética completa que harmoniza seu ambiente e potencializa suas práticas espirituais.",
     earthElement: {
       title: "Terra",
       description: "Promove enraizamento e estabilidade. Use cristais ou plantas durante sua prática."
@@ -650,6 +655,11 @@ const translations = {
     },
     elementsTitle: "Protección Energética con Elementos Naturales",
     elementsDescription: "Los cuatro elementos pueden incorporarse a tu práctica para crear una barrera de protección:",
+    clickInstruction: "Haga clic en los mantras para reproducir el audio",
+    play: "Reproducir",
+    pause: "Pausar",
+    tip: "Consejo:",
+    tipText: "Al usar los cuatro elementos juntos, creas una barrera energética completa que armoniza tu ambiente y potencia tus prácticas espirituales.",
     earthElement: {
       title: "Tierra",
       description: "Promueve el enraizamiento y la estabilidad. Usa cristales o plantas durante tu práctica."
@@ -866,6 +876,11 @@ const translations = {
     },
     elementsTitle: "Energy Protection with Natural Elements",
     elementsDescription: "The four elements can be incorporated into your practice to create a protective barrier:",
+    clickInstruction: "Click on the mantras to play the audio",
+    play: "Play",
+    pause: "Pause",
+    tip: "Tip:",
+    tipText: "By using the four elements together, you create a complete energetic barrier that harmonizes your environment and enhances your spiritual practices.",
     earthElement: {
       title: "Earth",
       description: "Promotes grounding and stability. Use crystals or plants during your practice."
@@ -1133,9 +1148,7 @@ export default function LiWeiPage() {
             }}
           >
             <BsPlayCircleFill size={18} />
-            {activeMantra === index 
-              ? (locale === 'pt' ? 'Pausar' : 'Pausar') 
-              : (locale === 'pt' ? 'Reproduzir' : 'Reproducir')}
+            {activeMantra === index ? t.pause : t.play}
           </motion.button>
         </div>
         
@@ -1201,7 +1214,7 @@ export default function LiWeiPage() {
               fontSize: '0.9rem',
               color: colors.text.light,
             }}>
-              {locale === 'pt' ? 'Clique nos mantras para reproduzir o áudio' : 'Haga clic en los mantras para reproducir el audio'}
+              {t.clickInstruction}
             </p>
           </div>
           
@@ -1371,7 +1384,7 @@ export default function LiWeiPage() {
             color: 'rgba(255, 255, 255, 0.85)',
             lineHeight: 1.6,
           }}>
-            <span style={{color: '#FFD700', fontWeight: 'bold'}}>Dica:</span> Ao usar os quatro elementos em conjunto, você cria uma barreira energética completa que harmoniza seu ambiente e potencializa suas práticas espirituais.
+            <span style={{color: '#FFD700', fontWeight: 'bold'}}>{t.tip}</span> {t.tipText}
           </div>
           
           <div style={styles.elementGrid}>

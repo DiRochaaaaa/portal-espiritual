@@ -26,12 +26,13 @@ type TranslationContent = {
   contents: ChapterData[];
   nextChapter: string;
   backToToc: string;
+  highlightText: string;
 };
 
 type Translations = {
   pt: TranslationContent;
   es: TranslationContent;
-  en?: TranslationContent; // Optional for now
+  en: TranslationContent;
 };
 
 const styles: Record<string, CSSProperties> = {
@@ -587,6 +588,7 @@ export default function PresenteSurpresaPage() {
       closeButton: "Fechar",
       nextChapter: "Próximo: ",
       backToToc: "Voltar ao Sumário",
+      highlightText: "Sinto muito. Me perdoe. Eu te amo. Sou grato.",
       mantras: [
         "Sinto muito",
         "Me perdoe",
@@ -708,6 +710,7 @@ export default function PresenteSurpresaPage() {
       closeButton: "Cerrar",
       nextChapter: "Siguiente: ",
       backToToc: "Volver al Índice",
+      highlightText: "Lo siento. Perdóname. Te amo. Gracias.",
       mantras: [
         "Lo siento",
         "Perdóname",
@@ -814,6 +817,128 @@ export default function PresenteSurpresaPage() {
             {
               title: "6.3 Creando una vida de amor, gratitud y armonía",
               content: "El compromiso diario con la responsabilidad personal, el perdón y la gratitud crea un ciclo virtuoso de bienestar interno que se refleja en todas las áreas de la vida."
+            }
+          ]
+        }
+      ]
+    },
+    en: {
+      title: "THE POWER OF HOʻOPONOPONO",
+      subtitle: "The Art of Healing and Transforming • Celestino – The Voice of Truth",
+      tocTitle: "TABLE OF CONTENTS",
+      backToTop: "↑",
+      practiceTitle: "PRACTICE THE MANTRAS",
+      practiceButton: "Practice Ho'oponopono now",
+      closeButton: "Close",
+      nextChapter: "Next: ",
+      backToToc: "Back to Contents",
+      highlightText: "I'm sorry. Forgive me. I love you. Thank you.",
+      mantras: [
+        "I'm sorry",
+        "Forgive me", 
+        "I love you",
+        "Thank you"
+      ],
+      contents: [
+        {
+          title: "Chapter 1 – Introduction to Ho'oponopono",
+          sections: [
+            {
+              title: "1.1 Origin and history of Ho'oponopono",
+              content: "Ho'oponopono is a healing and problem-solving technique originating from Hawaii. Ancient kahunas taught that illnesses and difficulties arise from negative memories stored in the subconscious. The term literally means \"to correct an error\" or \"to make right\". The method gained worldwide recognition with Hawaiian psychologist Dr. Ihaleakala Hew Len, who practiced it—with remarkable results—in a maximum-security psychiatric hospital."
+            },
+            {
+              title: "1.2 Basic principles of Ho'oponopono",
+              content: "There's no need to analyze the problem; simply take 100% responsibility and clean the memories linked to it.\n\nWhat each person heals within themselves impacts the collective, because we are all one."
+            },
+            {
+              title: "1.3 The importance of personal responsibility",
+              content: "Assuming that \"I created this\" frees us from the victim position, opens the path to forgiveness, and allows access to the Divine to clean and transmute memories."
+            }
+          ]
+        },
+        {
+          title: "Chapter 2 – The power of negative memories",
+          sections: [
+            {
+              title: "2.1 How negative memories affect our life",
+              content: "Painful memories condition emotions, behaviors, and perceptions; they sustain anxiety, depression, low self-esteem, and may even manifest as physical symptoms."
+            },
+            {
+              title: "2.2 Identifying and recognizing negative memories",
+              content: "Observe recurring patterns and intense emotional reactions. Situations that trigger disproportionate fear, anger, or sadness often point to underlying memories that need to be cleared."
+            },
+            {
+              title: "2.3 The effects of negative memories on physical and emotional health",
+              content: "Chronic stress linked to negative memories increases inflammation, compromises sleep and immunity, favoring heart diseases, digestive disorders, and mental conditions."
+            }
+          ]
+        },
+        {
+          title: "Chapter 3 – The Ho'oponopono technique",
+          sections: [
+            {
+              title: "3.1 The four phrases: \"I'm sorry\", \"Forgive me\", \"I love you\", \"Thank you\"",
+              content: "I'm sorry – I acknowledge and take responsibility.\n\nForgive me – I ask forgiveness from myself, others, and the Divine.\n\nI love you – I offer unconditional love to everything and everyone.\n\nThank you – I celebrate the opportunity for purification and healing.\n\nSaid in any order, they serve as a \"cleaning key\" to dissolve subconscious programs."
+            },
+            {
+              title: "3.2 How to practice Ho'oponopono daily",
+              content: "Repeat mentally or aloud whenever discomfort arises; write the phrases in a notebook; place visual reminders in your environment. Consistency deepens the cleansing."
+            },
+            {
+              title: "3.3 Meditation and writing as Ho'oponopono tools",
+              content: "Meditate focusing on the four phrases, allowing emotions to come and release. Repetitive writing or insight journaling makes the liberation process tangible."
+            }
+          ]
+        },
+        {
+          title: "Chapter 4 – Applying Ho'oponopono in personal situations",
+          sections: [
+            {
+              title: "4.1 Resolving internal conflicts",
+              content: "Use the phrases to release self-destructive patterns, internal criticism, and old guilt—finding peace and mental clarity."
+            },
+            {
+              title: "4.2 Improving relationships",
+              content: "Clear resentments and expectations; forgive and send love to others. Couples can practice together to restore communication."
+            },
+            {
+              title: "4.3 Healing physical and emotional ailments",
+              content: "As a complementary practice, Ho'oponopono helps break the energetic root of chronic diseases and disorders like anxiety and depression."
+            }
+          ]
+        },
+        {
+          title: "Chapter 5 – The transformative power of forgiveness",
+          sections: [
+            {
+              title: "5.1 The importance of forgiveness in our healing journey",
+              content: "Forgiveness frees us from the weight of painful memories, interrupting cycles of suffering."
+            },
+            {
+              title: "5.2 Forgiving yourself",
+              content: "Repeat the four phrases to embrace personal failures with compassion, learning from them without carrying guilt."
+            },
+            {
+              title: "5.3 Forgiving others to achieve inner peace",
+              content: "By genuinely forgiving, we release the energy that keeps us bound to the past and open space for authentic relationships."
+            }
+          ]
+        },
+        {
+          title: "Chapter 6 – Expanding Ho'oponopono to the world",
+          sections: [
+            {
+              title: "6.1 The role of Ho'oponopono in global transformation",
+              content: "By healing within ourselves, we collaborate to heal the whole—since collective reality reflects the inner state of each individual."
+            },
+            {
+              title: "6.2 Practices to bring peace to the world",
+              content: "Repeat the four phrases directed to humanity.\n\nWrite or meditate in groups.\n\nVisualize the planet flooded with love and gratitude."
+            },
+            {
+              title: "6.3 Creating a life of love, gratitude, and harmony",
+              content: "Daily commitment to personal responsibility, forgiveness, and gratitude creates a virtuous cycle of inner well-being that mirrors in all areas of life."
             }
           ]
         }
@@ -950,7 +1075,7 @@ export default function PresenteSurpresaPage() {
                 transition={{ duration: 0.6, delay: 0.3 }}
               >
                 <span style={{...styles.highlightQuote, ...styles.highlightQuoteLeft}}>"</span>
-                Sinto muito. Me perdoe. Eu te amo. Sou grato.
+                {t.highlightText}
                 <span style={{...styles.highlightQuote, ...styles.highlightQuoteRight}}>"</span>
               </motion.div>
             )}
