@@ -105,6 +105,32 @@ const mantras = {
       objective: "Abundancia",
       color: colors.gold.main
     }
+  ],
+  en: [
+    {
+      id: "mantra-1",
+      title: "Angelic Sound to Attract Angels",
+      youtubeId: "DXNA9A68GTY",
+      description: "This angelic sound was created to elevate your vibration and help connect with the energy of angels. Recommended for daily meditation.",
+      objective: "Angelic Connection",
+      color: "#7B68EE"
+    },
+    {
+      id: "mantra-2",
+      title: "432Hz Frequency for Energy Cleansing",
+      youtubeId: "lUKJrkKnQOQ",
+      description: "The 432Hz frequency is aligned with the natural vibration of the universe. This meditation helps clear energy blockages and promote inner harmony.",
+      objective: "Energy Cleansing",
+      color: "#4CAF50"
+    },
+    {
+      id: "mantra-3",
+      title: "Mantra for Abundance and Prosperity",
+      youtubeId: "nnjICT7yu1U",
+      description: "This powerful mantra helps attract abundance and prosperity into your life, removing blockages and opening channels to receive blessings.",
+      objective: "Abundance",
+      color: colors.gold.main
+    }
   ]
 };
 
@@ -131,11 +157,17 @@ export default function CancaoAngelicalPage() {
       subtitle: "Música para elevar tu vibración espiritual",
       explanation: "Elige uno de los mantras a continuación y haz clic en 'Reproducir' para comenzar tu viaje de meditación. Estas canciones han sido cuidadosamente seleccionadas para elevar tu frecuencia vibracional y ayudar en la conexión con energías superiores.",
       tip: "Haz clic en el botón 'Reproducir' o directamente en el círculo central para iniciar la reproducción del audio. Asegúrate de que el sonido de tu dispositivo esté encendido."
+    },
+    en: {
+      title: "Angelic Song",
+      subtitle: "Music to elevate your spiritual vibration",
+      explanation: "Choose one of the mantras below and click 'Play' to begin your meditation journey. These songs have been carefully selected to elevate your vibrational frequency and help connect with higher energies.",
+      tip: "Click the 'Play' button or directly on the center circle to start audio playback. Make sure your device's sound is turned on."
     }
   };
 
   const t = getTranslatedContent(translations, locale);
-  const currentMantras = mantras[locale];
+  const currentMantras = mantras[locale as keyof typeof mantras] || mantras.pt;
 
   return (
     <main style={styles.container}>

@@ -190,7 +190,9 @@ export default function HomePage() {
     existingScripts.forEach(script => script.remove());
     
     // Definir o ID do vídeo com base no idioma
-    const videoId = locale === 'pt' ? '6734ea56e0f4c0000b8e807e' : '68193ae1d508bf236b3df1a1';
+    const videoId = locale === 'pt' ? '6734ea56e0f4c0000b8e807e' : 
+                    locale === 'es' ? '68193ae1d508bf236b3df1a1' : 
+                    '6861ab32032c2fa15600484e'; // English video ID
     
     // Configurar o HTML do vídeo
     videoContainerRef.current.innerHTML = `
@@ -259,6 +261,15 @@ export default function HomePage() {
       ritualButton: "Acceder al Ritual Relámpago",
       additionalContentTitle: "Contenido Adicional",
       additionalContentDescription: "Accede a nuestras prácticas espirituales especiales"
+    },
+    en: {
+      title: "Welcome to Angel Tarot",
+      startReading: "Start my Reading",
+      resetButton: "Reset Video",
+      liweiButton: "Access Li Wei Monk Mantras",
+      ritualButton: "Access Lightning Ritual",
+      additionalContentTitle: "Additional Content",
+      additionalContentDescription: "Access our special spiritual practices"
     }
   };
   

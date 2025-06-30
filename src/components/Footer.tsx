@@ -57,6 +57,15 @@ const Footer: React.FC<FooterProps> = ({ showDebugButton = false, onResetVideo }
       contact: "Contacto",
       company: "ARTEMI LTDA",
       resetButton: "Reiniciar Video"
+    },
+    en: {
+      rights: "All rights reserved",
+      privacyPolicy: "Privacy Policy",
+      termsOfUse: "Terms of Use",
+      cookies: "Cookie Policy",
+      contact: "Contact",
+      company: "ARTEMI LTDA",
+      resetButton: "Reset Video"
     }
   };
 

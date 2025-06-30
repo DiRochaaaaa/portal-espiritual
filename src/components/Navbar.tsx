@@ -210,6 +210,12 @@ const NavbarComponent = () => {
       messages: "Mensajes",
       music: "Canción",
       portalName: "El Portal Espiritual"
+    },
+    en: {
+      back: "Back",
+      messages: "Messages",
+      music: "Song",
+      portalName: "Spiritual Portal"
     }
   };
 
@@ -318,9 +324,15 @@ const NavbarComponent = () => {
             }}
             whileTap={{ scale: 0.9 }}
             onClick={handleToggleLanguage}
-            aria-label={locale === 'pt' ? 'Mudar para Espanhol' : 'Cambiar a Portugués'}
+            aria-label={
+              locale === 'pt' ? 'Mudar para Espanhol' : 
+              locale === 'es' ? 'Cambiar a Inglés' : 
+              'Change to Portuguese'
+            }
           >
-            <span>{locale === 'pt' ? 'ES' : 'PT'}</span>
+            <span>
+              {locale === 'pt' ? 'ES' : locale === 'es' ? 'EN' : 'PT'}
+            </span>
           </motion.button>
         </div>
       </div>

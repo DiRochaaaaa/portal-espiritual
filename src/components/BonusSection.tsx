@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { BonusCardWithSuspense } from '../lib/LazyComponents';
 
 interface BonusSectionProps {
-  locale: 'pt' | 'es';
+  locale: 'pt' | 'es' | 'en';
 }
 
 const styles: Record<string, CSSProperties> = {
@@ -159,6 +159,48 @@ export default function BonusSection({ locale }: BonusSectionProps) {
         {
           title: "Contacto Directo con Celestino",
           description: "Contacto directo con nuestro mentor espiritual",
+          icon: "celestino",
+          link: links.celestino
+        }
+      ]
+    },
+    en: {
+      mainTitle: "Spiritual Portal",
+      featuresTitle: "Spiritual Resources",
+      featuresDescription: "Explore the resources available on our portal to enrich your spiritual journey:",
+      contactTitle: "Contact and Community",
+      contactDescription: "Connect with us and become part of our spiritual community:",
+      buttonText: "ACCESS",
+      features: [
+        {
+          title: "Healing Prayers",
+          description: "Powerful prayers for spiritual healing",
+          icon: "prayer",
+          link: links.prayers
+        },
+        {
+          title: "Surprise Gift",
+          description: "A special gift for you",
+          icon: "gift",
+          link: links.gift
+        },
+        {
+          title: "Angelic Song",
+          description: "Music to elevate your vibration",
+          icon: "music",
+          link: links.song
+        }
+      ],
+      contacts: [
+        {
+          title: "Exclusive WhatsApp Group",
+          description: "Join our group to receive daily messages",
+          icon: "whatsapp",
+          link: links.whatsapp.pt // Using PT group for now, can be updated later
+        },
+        {
+          title: "Direct Contact with Celestino",
+          description: "Direct contact with our spiritual mentor",
           icon: "celestino",
           link: links.celestino
         }

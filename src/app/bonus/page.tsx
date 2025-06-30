@@ -90,10 +90,47 @@ export default function BonusPage() {
           link: "/cancao"
         }
       ]
+    },
+    en: {
+      title: "BONUSES",
+      subtitle: "Access our exclusive content",
+      buttonText: "ACCESS",
+      bonusList: [
+        { 
+          title: "Exclusive WhatsApp Group", 
+          description: "Join our group to receive daily messages",
+          icon: "whatsapp",
+          link: "https://chat.whatsapp.com/LGi8EoO6OB804uGRossRNO"
+        },
+        { 
+          title: "Healing Prayers", 
+          description: "Powerful prayers for spiritual healing",
+          icon: "prayer",
+          link: "/oracoes"
+        },
+        { 
+          title: "Surprise Gift", 
+          description: "A special gift for you",
+          icon: "gift",
+          link: "/presente"
+        },
+        { 
+          title: "Contact with Celestino", 
+          description: "Direct contact with our spiritual mentor",
+          icon: "celestino",
+          link: "https://wa.me/5511967973944"
+        },
+        { 
+          title: "Angelic Song", 
+          description: "Music to elevate your vibration",
+          icon: "music",
+          link: "/cancao"
+        }
+      ]
     }
   };
   
-  const t = translations[locale];
+  const t = translations[locale as keyof typeof translations] || translations.pt;
   
   return (
     <main className="flex min-h-screen flex-col bg-gradient-to-b from-darkBg via-purpleDark/50 to-darkBg text-white">

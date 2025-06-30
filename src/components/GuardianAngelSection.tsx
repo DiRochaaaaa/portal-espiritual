@@ -7,7 +7,7 @@ import { FaFeatherAlt, FaHeart, FaEye } from 'react-icons/fa';
 import { GiAngelWings, GiCrystalBall, GiMagicSwirl } from 'react-icons/gi';
 
 interface GuardianAngelSectionProps {
-  locale: 'pt' | 'es';
+  locale: 'pt' | 'es' | 'en';
 }
 
 const GuardianAngelSection: React.FC<GuardianAngelSectionProps> = ({ locale }) => {
@@ -41,12 +41,28 @@ const GuardianAngelSection: React.FC<GuardianAngelSectionProps> = ({ locale }) =
       buttonText: "Descubrir Mi Ángel",
       testimonialText: "\"Descubrir mi ángel cambió completamente mi perspectiva espiritual\"",
       urgencyText: "Experiencia Personalizada"
+    },
+    en: {
+      title: "Discover Your Guardian Angel",
+      subtitle: "A unique spiritual journey for you",
+      description: "Connect with your celestial protector and receive personalized guidance for your spiritual life",
+      features: [
+        "✨ Revelation of your personal Angel",
+        "🔮 Exclusive message from your Angel",
+        "🛡️ Personalized spiritual protection",
+        "💫 Guidance for your journey"
+      ],
+      buttonText: "Discover My Angel",
+      testimonialText: "\"Discovering my angel completely changed my spiritual perspective\"",
+      urgencyText: "Personalized Experience"
     }
   };
 
   const t = translations[locale];
   const link = locale === 'es' 
     ? 'https://lp.portaldosanjos.online/es' 
+    : locale === 'en'
+    ? 'https://lp.portaldosanjos.online/en'
     : 'https://lp.portaldosanjos.online/br';
 
   const styles = {

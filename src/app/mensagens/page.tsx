@@ -67,10 +67,14 @@ export default function MensagensPage() {
     es: {
       title: "Mensajes de Sabiduría Espiritual",
       subtitle: "Explore nuestra colección de inspiraciones que pueden guiar su viaje espiritual y traer paz interior."
+    },
+    en: {
+      title: "Messages of Spiritual Wisdom",
+      subtitle: "Browse through our collection of inspirations that can guide your spiritual journey and bring inner peace."
     }
   };
   
-  const t = translations[locale];
+  const t = translations[locale as keyof typeof translations] || translations.pt;
   
   return (
     <main style={styles.container}>

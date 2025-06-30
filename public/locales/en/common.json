@@ -1,0 +1,15 @@
+{
+  "title": "Welcome to Angel Tarot",
+  "startReading": "Start my Reading",
+  "bonuses": "BONUSES",
+  "access": "Access",
+  "language": "Language",
+  "changeLanguage": "Change to Portuguese",
+  "bonusList": [
+    { "title": "Exclusive WhatsApp Group", "description": "Join our group to receive daily messages" },
+    { "title": "Healing Prayers", "description": "Powerful prayers for spiritual healing" },
+    { "title": "Surprise Gift", "description": "A special gift for you" },
+    { "title": "Contact with Celestino", "description": "Direct contact with our spiritual mentor" },
+    { "title": "Angelic Song", "description": "Music to elevate your vibration" }
+  ]
+} 

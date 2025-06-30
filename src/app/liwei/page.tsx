@@ -666,6 +666,222 @@ const translations = {
       title: "Aire",
       description: "Representa claridad. Practica al aire libre o cerca de una ventana abierta."
     }
+  },
+  en: {
+    title: "Sacred Mantras of Monk Li Wei",
+    subtitle: "Ancient practices for spiritual elevation and inner harmony",
+    mantrasTitle: "Sacred Mantras",
+    mantrasDescription: "Choose one of the mantras below to begin your practice. It's recommended to recite the mantra 108 times or listen for at least 10 minutes daily.",
+    bonusTitle: "Bonus Audio for Meditation",
+    bonusDescription: "An exclusive meditation to complement your spiritual practice",
+    manualsTitle: "Spiritual Manuals",
+    manualsDescription: "Exclusive content to enhance your spiritual practice. Choose a manual to view:",
+    manualEffectsButton: "Amplifying the Effects of Mantras",
+    manualProtectionButton: "Energy Protection with Natural Elements",
+    amplifyTitle: "Amplifying the Effects of Mantras",
+    amplifyDescription: "Discover a holistic approach to enhance the effects of mantras through a daily routine of simple yet powerful practices.",
+    amplifyContent: {
+      respiracoes: {
+        title: "Breathing and Concentration Exercises",
+        description: "Starting your daily routine with conscious breathing practices and concentration exercises prepares your body and mind for mantra practice.",
+        practices: [
+          {
+            name: "Pranayama",
+            description: "Breathe slowly and deeply, observing the flow of air. Try techniques like alternate nostril breathing to calm the mind."
+          },
+          {
+            name: "Trataka",
+            description: "Gently fix your gaze on a flame, crystal, or sacred image. Let your attention focus on this focal point, minimizing distractions."
+          },
+          {
+            name: "Guided Meditation",
+            description: "Use apps or audio to guide you in focused meditation, helping to calm the mind and prepare for mantra practice."
+          }
+        ]
+      },
+      posturas: {
+        title: "Postures and Movements to Align Energy",
+        description: "Incorporating postures and gentle movements into your daily routine helps align your energy and prepare your body for mantra practice.",
+        practices: [
+          {
+            name: "Yoga Postures",
+            description: "Choose postures like Sukhasana (Easy Pose), Balasana (Child's Pose), or Viparita Karani (Legs-Up-the-Wall Pose) to calm the mind and align your energy."
+          },
+          {
+            name: "Qi Gong Movements",
+            description: "Explore Qi Gong exercises like the Energy Circle or Cloud Dancing to promote energy circulation and connection to your center."
+          },
+          {
+            name: "Conscious Stretching",
+            description: "Include some gentle and conscious stretches like Tree Stretch or Tide Movement to release tension and prepare your body."
+          }
+        ]
+      },
+      meditacao: {
+        title: "Meditation and Visualization",
+        description: "Adding meditation and visualization practices to your daily routine amplifies the effects of mantras, allowing deeper connection with your purpose.",
+        practices: [
+          {
+            name: "Vipassana Meditation",
+            description: "Practice mindful observation of your bodily sensations and mental processes. Keep your attention present, without judgment, allowing your thoughts to flow naturally."
+          },
+          {
+            name: "Trataka Meditation",
+            description: "Sit comfortably and gently fix your gaze on a lit candle or other focal point. Let your mind concentrate on this point, breathing slowly and deeply."
+          },
+          {
+            name: "Guided Visualization",
+            description: "Visualize sacred images or symbols related to the mantras, imagining them with rich detail. Let yourself be enveloped by the energy and meaning of these elements."
+          }
+        ]
+      },
+      rituais: {
+        title: "Rituals to Start and End the Day",
+        description: "Incorporating intentional rituals at the beginning and end of the day helps create an energy field conducive to mantra practice.",
+        practices: [
+          {
+            name: "Morning Ritual",
+            description: "Begin your day with a space cleansing ritual, such as burning incense or sprinkling holy water. Then, light a candle and recite your mantras with intention, visualizing your goals being achieved."
+          },
+          {
+            name: "Evening Ritual",
+            description: "End your day with a ritual of gratitude and integration. Remember your achievements, express gratitude, and visualize how your day was blessed. Then, recite your mantras with the intention of sealing your energies for the next day."
+          }
+        ]
+      },
+      conclusao: {
+        title: "Transforming Your Life with Mantras",
+        benefits: [
+          "Deep Connection: Become more present, attentive, and connected to yourself and the subtle energies around you.",
+          "Focus and Concentration: Improve your ability to focus and concentrate on mantras.",
+          "Positive Transformation: Release blockages, transform limiting patterns, and attract blessings into your life."
+        ]
+      },
+      dicas: {
+        title: "Tips for Maintaining a Consistent Routine",
+        tips: [
+          "Fixed Schedule: Choose a specific time of day for your practices and try to keep it consistent.",
+          "Weekly Planning: Set aside time each week to plan your routine and ensure it fits into your schedule.",
+          "Reminders: Use reminders on your phone or calendar to keep you engaged in your daily practice.",
+          "Self-Compassion: Be gentle with yourself if you miss a practice. Resume with determination the next day."
+        ]
+      }
+    },
+    protectionTitle: "Energy Protection Manual with Natural Elements",
+    protectionDescription: "This exclusive manual teaches how to use natural elements – such as crystals, plants, and incense – to strengthen your energy field and create a protected environment.",
+    protectionContent: {
+      introduction: {
+        title: "The power of natural elements for energy protection",
+        description: "Since ancient times, societies have turned to natural elements seeking balance, healing, and energy protection. Crystals, plants, and incense possess unique properties that, when used in harmony, create a field of positive energy and ward off negative influences."
+      },
+      crystals: {
+        title: "Crystals: Properties, selection and use",
+        sections: [
+          {
+            title: "Unique Properties",
+            description: "Each crystal has a unique vibrational frequency that interacts with our energy field in specific ways. Some crystals, like amethyst, have calming properties, while others, like quartz, amplify energy."
+          },
+          {
+            title: "Conscious Selection",
+            description: "Choose crystals that feel intuitively right for you and your intention. Keep them close, carry them in your bag, or place them in your environment so they can work on your energy."
+          },
+          {
+            title: "Powerful Uses",
+            description: "Crystals can be used in meditation, energy cleansing rituals, as decoration in environments, and even as jewelry. Their constant presence enhances the positive vibration around you."
+          }
+        ]
+      },
+      plants: {
+        title: "Plants: Strategic species for balanced environment",
+        sections: [
+          {
+            title: "Purifying Plants",
+            description: "Fern, monstera, and rue are known for their purifying properties, helping to remove toxins and impurities from the air, creating a cleaner and revitalized environment."
+          },
+          {
+            title: "Energizing Plants",
+            description: "Rosemary, lavender, and thyme emanate positive vibration, elevating the space's energy and promoting lightness and vitality."
+          },
+          {
+            title: "Anti-stress Plants",
+            description: "Chamomile, peace lily, and aloe have calming effects, helping to relieve tension and promote a relaxing and serene environment."
+          }
+        ]
+      },
+      incense: {
+        title: "Incense: Aromas and rituals to purify and energize",
+        sections: [
+          {
+            title: "Purification",
+            description: "Sandalwood, palo santo, and myrrh incense are excellent for removing heavy and negative energies, leaving the environment light and invigorated."
+          },
+          {
+            title: "Energization",
+            description: "Herb-based incense like rosemary, ginger, and cinnamon activate the space's energy, bringing a sense of vitality and focus."
+          },
+          {
+            title: "Sacred Rituals",
+            description: "Burning incense intentionally, accompanied by meditation and gratitude, is a powerful practice for cleansing and strengthening the energy field."
+          }
+        ]
+      },
+      techniques: {
+        title: "Techniques for cleansing and strengthening the energy field",
+        sections: [
+          {
+            title: "Daily Cleansing",
+            description: "Start your day with quick meditation, burning incense, and visualization of your energy field bright and protected. Repeat whenever you feel the need to rebalance your energy."
+          },
+          {
+            title: "Deep Purification",
+            description: "Once a week, do deep energy cleansing with herb baths, crystal use, and techniques for releasing accumulated negative energies."
+          },
+          {
+            title: "Regular Strengthening",
+            description: "Keep your energy field strong with weekly practice of meditation, visualization, and connection with nature, preventing the entry of negative influences."
+          }
+        ]
+      },
+      routine: {
+        title: "Daily routine of practices with natural elements",
+        sections: [
+          {
+            title: "Upon Waking",
+            description: "Start the day with quick meditation using crystals and incense to activate positive energy. Example: rose quartz crystal for self-love and sandalwood incense for inner peace."
+          },
+          {
+            title: "In the Environment",
+            description: "Distribute plants, crystals, and incense at work and home to maintain elevated vibration. Example: peace lily to purify air, amethyst to transmute negative energies."
+          },
+          {
+            title: "At Rest",
+            description: "Before sleeping, perform energy cleansing ritual with lavender incense to relax, selenite crystal to calm, and visualization of purifying white light surrounding your body during the night."
+          }
+        ]
+      },
+      conclusion: {
+        title: "Live with more lightness, clarity and energy protection",
+        description: "By incorporating natural elements into your routine, you will create an enriched, balanced, and protected environment. Feel confident, light, and aligned, knowing you are surrounded by positive vibrations that repel negative influences."
+      }
+    },
+    elementsTitle: "Energy Protection with Natural Elements",
+    elementsDescription: "The four elements can be incorporated into your practice to create a protective barrier:",
+    earthElement: {
+      title: "Earth",
+      description: "Promotes grounding and stability. Use crystals or plants during your practice."
+    },
+    waterElement: {
+      title: "Water",
+      description: "Brings fluidity and purification. Keep a glass of water nearby and drink after practice."
+    },
+    fireElement: {
+      title: "Fire",
+      description: "Symbolizes transformation. Light a candle during mantra recitation."
+    },
+    airElement: {
+      title: "Air",
+      description: "Represents clarity. Practice outdoors or near an open window."
+    }
   }
 };
 
@@ -715,9 +931,9 @@ export default function LiWeiPage() {
   const [activeManual, setActiveManual] = useState<'effects' | 'protection' | null>(null);
 
   // Memo values defined consistently at the top level of component
-  const t = useMemo(() => translations[locale], [locale]);
-  const currentMantras = useMemo(() => mantras[locale], [locale]);
-  const currentBonusAudio = useMemo(() => bonusAudio[locale], [locale]);
+  const t = useMemo(() => translations[locale as keyof typeof translations] || translations.pt, [locale]);
+  const currentMantras = useMemo(() => mantras[locale as keyof typeof mantras] || mantras.pt, [locale]);
+  const currentBonusAudio = useMemo(() => bonusAudio[locale as keyof typeof bonusAudio] || bonusAudio.pt, [locale]);
   
   const adaptedMantras = useMemo(() => 
     currentMantras.map(adaptMantraFormat), 
@@ -816,7 +1032,7 @@ export default function LiWeiPage() {
                 color: mantraTheme.secondary,
                 marginBottom: '-5px',
               }}>
-                {locale === 'pt' ? 'Benefícios:' : 'Beneficios:'}
+                {locale === 'pt' ? 'Benefícios:' : locale === 'es' ? 'Beneficios:' : 'Benefits:'}
               </div>
               
               {/* Descrição com estilo aprimorado */}

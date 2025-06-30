@@ -129,6 +129,68 @@ const quotes = {
       text: "La sonrisa es una luz en la ventana del alma, indicando que el corazón está en casa.",
       source: "Kardec"
     }
+  ],
+  en: [
+    {
+      text: "Peace comes from within. Do not seek it outside.",
+      source: "Buddha"
+    },
+    {
+      text: "Wherever you are, be there totally.",
+      source: "Eckhart Tolle"
+    },
+    {
+      text: "Forgiveness is the fragrance that the violet leaves on the heel that has crushed it.",
+      source: "Mark Twain"
+    },
+    {
+      text: "Gratitude transforms what we have into enough, and more.",
+      source: "Melody Beattie"
+    },
+    {
+      text: "Your task is not to seek love, but merely to seek and find all the barriers within yourself that you have built against it.",
+      source: "Rumi"
+    },
+    {
+      text: "You are not a drop in the ocean. You are the entire ocean in a drop.",
+      source: "Rumi"
+    },
+    {
+      text: "The way you think determines the way you feel, and the way you feel influences how you act.",
+      source: "Rick Warren"
+    },
+    {
+      text: "Who looks outside, dreams; who looks inside, awakens.",
+      source: "Carl Jung"
+    },
+    {
+      text: "The universe does not conspire against you, but it also does not deviate to align your path.",
+      source: "Deepak Chopra"
+    },
+    {
+      text: "I learned to give not because I have much, but because I know exactly what it means to have nothing.",
+      source: "Bob Marley"
+    },
+    {
+      text: "Time is the most valuable resource we have, because it is the most limited. We can produce more money, but we cannot produce more time.",
+      source: "Dalai Lama"
+    },
+    {
+      text: "Happiness is the natural consequence of doing what you love and serving those you love.",
+      source: "Wayne Dyer"
+    },
+    {
+      text: "The practice of Ho'oponopono consists of cleaning painful memories that manifest as problems, through the repetition of the words: 'I'm sorry, forgive me, I love you, I'm grateful'.",
+      source: "Ihaleakala Hew Len"
+    },
+    {
+      text: "When you think you've reached your limit, go a little further and you'll find infinite strength.",
+      source: "Chico Xavier"
+    },
+    {
+      text: "A smile is a light in the window of the soul, indicating that the heart is at home.",
+      source: "Kardec"
+    }
   ]
 };
 
@@ -176,7 +238,7 @@ const SpiritualQuotes = () => {
 
   if (!mounted) return null;
 
-  const currentMessages = quotes[locale];
+  const currentMessages = quotes[locale as keyof typeof quotes] || quotes.pt;
   const currentMessage = currentMessages[currentQuote];
 
   const containerStyle: CSSProperties = {
@@ -328,6 +390,10 @@ const SpiritualQuotes = () => {
     es: {
       title: "Mensajes Espirituales",
       instructions: "Use los botones para navegar entre los mensajes"
+    },
+    en: {
+      title: "Spiritual Messages",
+      instructions: "Use the buttons to navigate between messages"
     }
   };
 

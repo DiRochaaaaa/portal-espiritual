@@ -432,6 +432,124 @@ En el nombre de Jesús, Amén.`
       },
       backToHome: "Volver al Inicio",
       nextPage: "Página Siguiente",
+    },
+    en: {
+      title: "Healing Prayers",
+      subtitle: "Powerful prayers for spiritual healing and divine protection",
+      introduction: `Healing is one of humanity's greatest desires. When we are ill, we feel the need to be healed, to recover our health and quality of life.
+
+Prayer is a powerful way to express our desire for healing. When we pray, we connect with God, the Creator of all things, and ask for His intervention in our lives.
+
+Faith is an essential element in healing prayer. When we pray with faith, we place our trust in God and believe that He can heal us.
+
+This bonus guide presents 7 healing prayers. They can be used to ask for healing for yourself or for another person.`,
+      prayerTitle: (id: number) => {
+        const titles = {
+          1: "PRAYER FOR PHYSICAL HEALING",
+          2: "PRAYER FOR SPIRITUAL HEALING",
+          3: "PRAYER FOR EMOTIONAL HEALING",
+          4: "PRAYER FOR HEALING FROM DEPRESSION",
+          5: "PRAYER FOR HEALING FROM ANXIETY",
+          6: "PRAYER FOR HEALING FROM PAIN",
+          7: "PRAYER FOR HEALING FROM ADDICTION"
+        };
+        return titles[id as keyof typeof titles];
+      },
+      prayerText: (id: number) => {
+        const prayers = {
+          1: `Lord God, Creator of the universe,
+You are the Divine Physician,
+who can heal all diseases.
+I ask You, Lord,
+for the healing of my illness (name of illness).
+I know that You can heal me,
+even if doctors have said there is no cure.
+I place my faith in You,
+and believe that You can do the impossible.
+Thank You, Lord,
+for Your mercy and Your love.
+In the name of Jesus, Amen.`,
+          2: `Lord God,
+You are the God of healing,
+who can heal both body and soul.
+I ask You, Lord,
+for the healing of my soul.
+I know that many times I have made mistakes,
+and that has brought me suffering.
+I ask for Your forgiveness, Lord,
+and surrender to Your love.
+I believe that You can heal me,
+and give me a new life.
+Thank You, Lord,
+for Your mercy and Your love.
+In the name of Jesus, Amen.`,
+          3: `Lord God,
+You are the God of healing,
+who can heal both body and soul.
+I ask You, Lord,
+for the healing of my emotions.
+I know that many times I have suffered,
+and that has left me with emotional wounds.
+I ask that You heal me, Lord,
+and give me peace and joy.
+I believe that You can heal me,
+and give me a new life.
+Thank You, Lord,
+for Your mercy and Your love.
+In the name of Jesus, Amen.`,
+          4: `Lord God,
+You are the God of healing,
+who can heal both body and soul.
+I ask You, Lord,
+for the healing of my depression.
+I know that this illness is causing me much suffering,
+and I want to be healed.
+I place my faith in You,
+and believe that You can heal me.
+Thank You, Lord,
+for Your mercy and Your love.
+In the name of Jesus, Amen.`,
+          5: `Lord God,
+You are the God of healing,
+who can heal both body and soul.
+I ask You, Lord,
+for the healing of my anxiety.
+I know that this illness is causing me much suffering,
+and I want to be healed.
+I place my faith in You,
+and believe that You can heal me.
+Thank You, Lord,
+for Your mercy and Your love.
+In the name of Jesus, Amen.`,
+          6: `Lord God,
+You are the God of healing,
+who can heal both body and soul.
+I ask You, Lord,
+for the healing of my pain.
+I know that this pain is causing me much suffering,
+and I want to be healed.
+I place my faith in You,
+and believe that You can heal me.
+Thank You, Lord,
+for Your mercy and Your love.
+In the name of Jesus, Amen.`,
+          7: `Lord God,
+You are the God of healing,
+who can heal both body and soul.
+I ask You, Lord,
+for the healing of my addiction.
+I know that this illness is destroying me,
+and I want to be healed.
+I place my faith in You,
+and believe that You can heal me.
+Thank You, Lord,
+for Your mercy and Your love.
+In the name of Jesus, Amen.`
+        };
+        return prayers[id as keyof typeof prayers];
+      },
+      backToHome: "Back to Home",
+      nextPage: "Next Page",
     }
   };
 

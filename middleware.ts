@@ -1,11 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-const locales = ['pt', 'es'];
+const locales = ['pt', 'es', 'en'];
 const defaultLocale = 'pt';
 
 // Função para detectar e processar slugs de idioma na URL
 function detectLanguageFromUrl(pathname: string): { locale: string | null, cleanPath: string } {
-  // Verifica se a URL começa com /es, /br ou /pt
+  // Verifica se a URL começa com /en, /es, /br ou /pt
+  if (pathname.startsWith('/en')) {
+    return { locale: 'en', cleanPath: pathname.replace(/^\/en/, '') || '/' };
+  }
   if (pathname.startsWith('/es')) {
     return { locale: 'es', cleanPath: pathname.replace(/^\/es/, '') || '/' };
   }
@@ -36,6 +39,16 @@ async function detectLanguageFromIP(request: NextRequest): Promise<{ locale: str
     
     if (country_code === 'BR' || country_code === 'PT') {
       return { locale: 'pt', isDetected: true };
+    }
+    
+    // English-speaking countries
+    const englishCountries = [
+      'US', 'GB', 'AU', 'CA', 'NZ', 'IE', 'ZA', 'IN', 
+      'SG', 'MY', 'PH', 'NG', 'KE', 'GH', 'JM', 'TT'
+    ];
+    
+    if (englishCountries.includes(country_code)) {
+      return { locale: 'en', isDetected: true };
     }
     
     // Spanish-speaking countries
