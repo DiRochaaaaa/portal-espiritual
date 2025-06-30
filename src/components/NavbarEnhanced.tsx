@@ -211,19 +211,20 @@ export default function NavbarEnhanced() {
   }, []);
   
   const getBreadcrumbsName = (path: string) => {
+    const t = translations[locale as keyof typeof translations] || translations.pt;
     switch (path) {
       case '/':
-        return translations[locale].home;
+        return t.home;
       case '/oracoes':
-        return translations[locale].prayers;
+        return t.prayers;
       case '/presente':
-        return translations[locale].gift;
+        return t.gift;
       case '/cancao':
-        return translations[locale].song;
+        return t.song;
       case '/bonus':
-        return translations[locale].bonus;
+        return t.bonus;
       case '/liwei':
-        return translations[locale].liwei;
+        return t.liwei;
       default:
         return path.split('/').pop();
     }
@@ -258,7 +259,7 @@ export default function NavbarEnhanced() {
     }
   };
 
-  const t = translations[locale];
+  const t = translations[locale as keyof typeof translations] || translations.pt;
   
   const menuItems = [
     { path: '/', label: t.home, icon: '🏠' },

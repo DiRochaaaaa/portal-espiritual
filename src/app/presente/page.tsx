@@ -14,20 +14,24 @@ type ChapterData = {
   }[];
 };
 
+type TranslationContent = {
+  title: string;
+  subtitle: string;
+  tocTitle: string;
+  backToTop: string;
+  practiceTitle: string;
+  practiceButton: string;
+  closeButton: string;
+  mantras: string[];
+  contents: ChapterData[];
+  nextChapter: string;
+  backToToc: string;
+};
+
 type Translations = {
-  [key in Locale]: {
-    title: string;
-    subtitle: string;
-    tocTitle: string;
-    backToTop: string;
-    practiceTitle: string;
-    practiceButton: string;
-    closeButton: string;
-    mantras: string[];
-    contents: ChapterData[];
-    nextChapter: string;
-    backToToc: string;
-  };
+  pt: TranslationContent;
+  es: TranslationContent;
+  en?: TranslationContent; // Optional for now
 };
 
 const styles: Record<string, CSSProperties> = {
@@ -550,7 +554,7 @@ export default function PresenteSurpresaPage() {
   // Efeito para TTS (Text-to-Speech) para os mantras
   useEffect(() => {
     if (activeMantra !== null && mounted && typeof window !== 'undefined') {
-      const t = translations[locale];
+      const t = translations[locale as keyof typeof translations] || translations.pt;
       const mantra = t.mantras[activeMantra];
       
       if ('speechSynthesis' in window) {
@@ -850,7 +854,7 @@ export default function PresenteSurpresaPage() {
     })) : []
   ];
 
-  const t = translations[locale];
+  const t = translations[locale as keyof typeof translations] || translations.pt;
 
   // Função para formatar o conteúdo com quebras de linha
   const formatContent = (content: string) => {

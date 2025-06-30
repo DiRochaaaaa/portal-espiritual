@@ -838,7 +838,7 @@ export default function RitualRelampagoPage() {
   const isTablet = width <= 600 && width > 480;
 
   // Memo values defined
-  const t = useMemo(() => translations[locale], [locale]);
+  const t = useMemo(() => translations[locale as keyof typeof translations] || translations.pt, [locale]);
   
   // Create responsive styles object
   const responsiveStyles = useMemo(() => {

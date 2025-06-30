@@ -223,7 +223,7 @@ export default function TermsOfUsePage() {
     }
   };
   
-  const t = translations[locale];
+  const t = translations[locale as keyof typeof translations] || translations.pt;
   
   return (
     <main style={styles.container}>
