@@ -100,7 +100,7 @@ export default function BonusPage() {
           title: "Exclusive WhatsApp Group", 
           description: "Join our group to receive daily messages",
           icon: "whatsapp",
-          link: "https://chat.whatsapp.com/LGi8EoO6OB804uGRossRNO"
+          link: "https://chat.whatsapp.com/FlCvIHaJoWgLfdqH5vnX5Q"
         },
         { 
           title: "Healing Prayers", 
