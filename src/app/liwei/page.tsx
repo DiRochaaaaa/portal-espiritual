@@ -146,6 +146,14 @@ const bonusAudio = {
     description: "Una meditación exclusiva guiada basada en las enseñanzas del Monje Li Wei para relajación profunda y expansión de la conciencia.",
     objective: "Relajación Profunda",
     color: colors.purple.light
+  },
+  fr: {
+    id: "liwei-bonus",
+    title: "Méditation Guidée du Moine Li Wei",
+    youtubeId: "bIr6dABjMWk",
+    description: "Une méditation exclusive guidée basée sur les enseignements du Moine Li Wei pour une relaxation profonde et l'expansion de la conscience.",
+    objective: "Relaxation Profonde",
+    color: colors.purple.light
   }
 };
 
@@ -222,6 +230,44 @@ const mantras = {
       title: "Om Shanti Shanti Shanti",
       description: "El mantra de la paz. Trae tranquilidad para la mente, cuerpo y espíritu en momentos de ansiedad o agitación.",
       objective: "Paz Interior",
+      youtubeId: "KtvyJBtQUag",
+      color: colors.green.light,
+      text: "Om Shanti Shanti Shanti"
+    }
+  ],
+  fr: [
+    {
+      id: "liwei-1",
+      title: "Om Mani Padme Hum",
+      description: "Le mantra de la compassion. Invoque purification et transformation. Aide à ouvrir le cœur et la connexion avec tous les êtres.",
+      objective: "Compassion et Purification",
+      youtubeId: "iGslNuNUVd4",
+      color: colors.purple.light,
+      text: "Om Mani Padme Hum"
+    },
+    {
+      id: "liwei-2",
+      title: "Om Gam Ganapataye Namaha",
+      description: "Le mantra du supprimeur d'obstacles. Aide à surmonter les défis et ouvrir des chemins vers nos objectifs.",
+      objective: "Supprimer les Obstacles",
+      youtubeId: "HxXgTU9c8n0",
+      color: colors.blue.light,
+      text: "Om Gam Ganapataye Namaha"
+    },
+    {
+      id: "liwei-3",
+      title: "Om Namah Shivaya",
+      description: "Le mantra de la transformation. Honore notre nature divine et aide dans le voyage de découverte de soi et de croissance.",
+      objective: "Transformation Personnelle",
+      youtubeId: "EWZdQcNAkQ8",
+      color: colors.teal.light,
+      text: "Om Namah Shivaya"
+    },
+    {
+      id: "liwei-4",
+      title: "Om Shanti Shanti Shanti",
+      description: "Le mantra de la paix. Apporte tranquillité à l'esprit, au corps et à l'âme dans les moments d'anxiété ou d'agitation.",
+      objective: "Paix Intérieure",
       youtubeId: "KtvyJBtQUag",
       color: colors.green.light,
       text: "Om Shanti Shanti Shanti"
@@ -895,6 +941,227 @@ const translations = {
     airElement: {
       title: "Air",
       description: "Represents clarity. Practice outdoors or near an open window."
+    }
+  },
+  fr: {
+    title: "Mantras Sacrés du Moine Li Wei",
+    subtitle: "Pratiques millénaires pour l'élévation spirituelle et l'harmonie intérieure",
+    mantrasTitle: "Mantras Sacrés",
+    mantrasDescription: "Choisissez l'un des mantras ci-dessous pour commencer votre pratique. Il est recommandé de réciter le mantra 108 fois ou d'écouter pendant au moins 10 minutes par jour.",
+    bonusTitle: "Audio Bonus pour la Méditation",
+    bonusDescription: "Une méditation exclusive pour compléter votre pratique spirituelle",
+    manualsTitle: "Manuels Spirituels",
+    manualsDescription: "Contenus exclusifs pour potentialiser votre pratique spirituelle. Choisissez un manuel à visualiser :",
+    manualEffectsButton: "Amplifier les Effets des Mantras",
+    manualProtectionButton: "Protection Énergétique avec les Éléments Naturels",
+    amplifyTitle: "Amplifier les Effets des Mantras",
+    amplifyDescription: "Découvrez une approche holistique pour potentialiser les effets des mantras à travers une routine quotidienne de pratiques simples mais puissantes.",
+    amplifyContent: {
+      respiracoes: {
+        title: "Respirations et Exercices de Concentration",
+        description: "Commencer votre routine quotidienne avec des pratiques de respiration consciente et des exercices de concentration prépare votre corps et votre esprit à la pratique des mantras.",
+        practices: [
+          {
+            name: "Pranayama",
+            description: "Respirez lentement et profondément, en observant le flux d'air. Essayez des techniques comme la respiration alternée par les narines pour calmer l'esprit."
+          },
+          {
+            name: "Trataka",
+            description: "Fixez doucement le regard sur une flamme, un cristal ou une image sacrée. Laissez votre attention se concentrer sur ce point focal, minimisant les distractions."
+          },
+          {
+            name: "Méditation Guidée",
+            description: "Utilisez des applications ou des audios pour vous guider dans une méditation focalisée, aidant à calmer l'esprit et à préparer la pratique des mantras."
+          }
+        ]
+      },
+      posturas: {
+        title: "Postures et Mouvements pour Aligner l'Énergie",
+        description: "Incorporer des postures et des mouvements doux dans votre routine quotidienne aide à aligner votre énergie et à préparer votre corps à la pratique des mantras.",
+        practices: [
+          {
+            name: "Postures de Yoga",
+            description: "Choisissez des postures comme Sukhasana (Posture Facile), Balasana (Posture de l'Enfant) ou Viparita Karani (Posture de la Lune Croissante) pour calmer l'esprit et aligner votre énergie."
+          },
+          {
+            name: "Mouvements de Qi Gong",
+            description: "Explorez des exercices de Qi Gong comme le Cercle d'Énergie ou la Danse des Nuages pour promouvoir la circulation énergétique et la connexion avec votre centre."
+          },
+          {
+            name: "Étirements Conscients",
+            description: "Incluez quelques étirements doux et conscients comme l'Étirement de l'Arbre ou le Mouvement de la Marée pour libérer les tensions et préparer votre corps."
+          }
+        ]
+      },
+      meditacao: {
+        title: "Méditation et Visualisation",
+        description: "Ajouter des pratiques de méditation et de visualisation à votre routine quotidienne amplifie les effets des mantras, permettant une connexion plus profonde avec votre objectif.",
+        practices: [
+          {
+            name: "Méditation Vipassana",
+            description: "Pratiquez l'observation attentive de vos sensations corporelles et processus mentaux. Maintenez votre attention présente, sans jugement, permettant à vos pensées de couler naturellement."
+          },
+          {
+            name: "Méditation Trataka",
+            description: "Asseyez-vous confortablement et fixez doucement votre regard sur une bougie allumée ou autre point focal. Laissez votre esprit se concentrer sur ce point, respirant lentement et profondément."
+          },
+          {
+            name: "Visualisation Guidée",
+            description: "Visualisez des images ou symboles sacrés liés aux mantras, en les imaginant avec richesse de détails. Laissez-vous envelopper par l'énergie et la signification de ces éléments."
+          }
+        ]
+      },
+      rituais: {
+        title: "Rituels pour Commencer et Terminer la Journée",
+        description: "Incorporer des rituels intentionnels au début et à la fin de la journée aide à créer un champ énergétique propice à la pratique des mantras.",
+        practices: [
+          {
+            name: "Rituel Matinal",
+            description: "Commencez votre journée avec un rituel de purification de l'espace, comme brûler de l'encens ou asperger d'eau bénite. Puis, allumez une bougie et récitez vos mantras avec intention, visualisant vos objectifs se réalisant."
+          },
+          {
+            name: "Rituel du Soir",
+            description: "Terminez votre journée avec un rituel de gratitude et d'intégration. Souvenez-vous de vos réalisations, exprimez la gratitude et visualisez comment votre journée a été bénie. Puis, récitez vos mantras avec l'intention de sceller vos énergies pour le lendemain."
+          }
+        ]
+      },
+      conclusao: {
+        title: "Transformer Votre Vie avec les Mantras",
+        benefits: [
+          "Connexion Profonde : Devenez plus présent, attentif et connecté à vous-même et aux énergies subtiles qui vous entourent.",
+          "Focus et Concentration : Améliorez votre capacité à vous concentrer et à vous focaliser sur les mantras.",
+          "Transformation Positive : Libérez les blocages, transformez les schémas limitants et attirez les bénédictions dans votre vie."
+        ]
+      },
+      dicas: {
+        title: "Conseils pour Maintenir une Routine Cohérente",
+        tips: [
+          "Horaire Fixe : Choisissez un moment spécifique de la journée pour vos pratiques et essayez de le maintenir cohérent.",
+          "Planification Hebdomadaire : Réservez du temps chaque semaine pour planifier votre routine et vous assurer qu'elle s'adapte à votre emploi du temps.",
+          "Rappels : Utilisez des rappels sur votre téléphone ou calendrier pour vous maintenir engagé dans votre pratique quotidienne.",
+          "Auto-Compassion : Soyez doux avec vous-même si vous manquez une pratique. Reprenez avec détermination le lendemain."
+        ]
+      }
+    },
+    protectionTitle: "Manuel de Protection Énergétique avec les Éléments Naturels",
+    protectionDescription: "Ce manuel exclusif enseigne comment utiliser les éléments naturels – comme les cristaux, les plantes et l'encens – pour renforcer votre champ énergétique et créer un environnement protégé.",
+    protectionContent: {
+      introduction: {
+        title: "Le pouvoir des éléments naturels pour la protection énergétique",
+        description: "Depuis les temps anciens, les sociétés se sont tournées vers les éléments naturels en quête d'équilibre, de guérison et de protection énergétique. Les cristaux, les plantes et l'encens possèdent des propriétés uniques qui, utilisées en harmonie, créent un champ d'énergie positive et repoussent les influences négatives."
+      },
+      crystals: {
+        title: "Cristaux : Propriétés, sélection et utilisation",
+        sections: [
+          {
+            title: "Propriétés Uniques",
+            description: "Chaque cristal a une fréquence vibratoire unique qui interagit avec notre champ énergétique de manières spécifiques. Certains cristaux, comme l'améthyste, ont des propriétés calmantes, tandis que d'autres, comme le quartz, amplifient l'énergie."
+          },
+          {
+            title: "Sélection Consciente",
+            description: "Choisissez des cristaux qui vous semblent intuitivement justes pour vous et votre intention. Gardez-les près de vous, portez-les dans votre sac ou placez-les dans votre environnement pour qu'ils puissent travailler sur votre énergie."
+          },
+          {
+            title: "Utilisations Puissantes",
+            description: "Les cristaux peuvent être utilisés en méditation, dans des rituels de purification énergétique, comme décoration dans les environnements, et même comme bijoux. Leur présence constante améliore la vibration positive autour de vous."
+          }
+        ]
+      },
+      plants: {
+        title: "Plantes : Espèces stratégiques pour un environnement équilibré",
+        sections: [
+          {
+            title: "Plantes Purifiantes",
+            description: "La fougère, le monstera et la rue sont connues pour leurs propriétés purifiantes, aidant à éliminer les toxines et impuretés de l'air, créant un environnement plus propre et revitalisé."
+          },
+          {
+            title: "Plantes Énergisantes",
+            description: "Le romarin, la lavande et le thym émanent une vibration positive, élevant l'énergie de l'espace et promouvant la légèreté et la vitalité."
+          },
+          {
+            title: "Plantes Anti-stress",
+            description: "La camomille, le lys de la paix et l'aloès ont des effets calmants, aidant à soulager la tension et à promouvoir un environnement relaxant et serein."
+          }
+        ]
+      },
+      incense: {
+        title: "Encens : Arômes et rituels pour purifier et énergiser",
+        sections: [
+          {
+            title: "Purification",
+            description: "L'encens de santal, palo santo et myrrhe sont excellents pour éliminer les énergies lourdes et négatives, laissant l'environnement léger et revigoré."
+          },
+          {
+            title: "Énergisation",
+            description: "L'encens à base d'herbes comme le romarin, le gingembre et la cannelle activent l'énergie de l'espace, apportant un sentiment de vitalité et de focus."
+          },
+          {
+            title: "Rituels Sacrés",
+            description: "Brûler de l'encens intentionnellement, accompagné de méditation et de gratitude, est une pratique puissante pour purifier et renforcer le champ énergétique."
+          }
+        ]
+      },
+      techniques: {
+        title: "Techniques pour purifier et renforcer le champ énergétique",
+        sections: [
+          {
+            title: "Purification Quotidienne",
+            description: "Commencez votre journée avec une méditation rapide, brûlez de l'encens et visualisez votre champ énergétique brillant et protégé. Répétez chaque fois que vous ressentez le besoin de rééquilibrer votre énergie."
+          },
+          {
+            title: "Purification Profonde",
+            description: "Une fois par semaine, faites une purification énergétique profonde avec des bains d'herbes, l'utilisation de cristaux et des techniques pour libérer les énergies négatives accumulées."
+          },
+          {
+            title: "Renforcement Régulier",
+            description: "Maintenez votre champ énergétique fort avec une pratique hebdomadaire de méditation, visualisation et connexion avec la nature, prévenant l'entrée d'influences négatives."
+          }
+        ]
+      },
+      routine: {
+        title: "Routine quotidienne de pratiques avec les éléments naturels",
+        sections: [
+          {
+            title: "Au Réveil",
+            description: "Commencez la journée avec une méditation rapide utilisant des cristaux et de l'encens pour activer l'énergie positive. Exemple : cristal de quartz rose pour l'amour de soi et encens de santal pour la paix intérieure."
+          },
+          {
+            title: "Dans l'Environnement",
+            description: "Distribuez des plantes, cristaux et encens au travail et à la maison pour maintenir une vibration élevée. Exemple : lys de la paix pour purifier l'air, améthyste pour transmuter les énergies négatives."
+          },
+          {
+            title: "Au Repos",
+            description: "Avant de dormir, effectuez un rituel de purification énergétique avec de l'encens de lavande pour relaxer, cristal de sélénite pour calmer, et visualisation de lumière blanche purifiante entourant votre corps pendant la nuit."
+          }
+        ]
+      },
+      conclusion: {
+        title: "Vivre avec plus de légèreté, clarté et protection énergétique",
+        description: "En incorporant les éléments naturels dans votre routine, vous créerez un environnement enrichi, équilibré et protégé. Sentez-vous confiant, léger et aligné, sachant que vous êtes entouré de vibrations positives qui repoussent les influences négatives."
+      }
+    },
+    elementsTitle: "Protection Énergétique avec les Éléments Naturels",
+    elementsDescription: "Les quatre éléments peuvent être incorporés dans votre pratique pour créer une barrière protectrice :",
+    clickInstruction: "Cliquez sur les mantras pour jouer l'audio",
+    play: "Jouer",
+    pause: "Pause",
+    tip: "Conseil :",
+    tipText: "En utilisant les quatre éléments ensemble, vous créez une barrière énergétique complète qui harmonise votre environnement et améliore vos pratiques spirituelles.",
+    earthElement: {
+      title: "Terre",
+      description: "Favorise l'ancrage et la stabilité. Utilisez des cristaux ou des plantes pendant votre pratique."
+    },
+    waterElement: {
+      title: "Eau",
+      description: "Apporte fluidité et purification. Gardez un verre d'eau à proximité et buvez après la pratique."
+    },
+    fireElement: {
+      title: "Feu",
+      description: "Symbolise la transformation. Allumez une bougie pendant la récitation des mantras."
+    },
+    airElement: {
+      title: "Air",
+      description: "Représente la clarté. Pratiquez à l'extérieur ou près d'une fenêtre ouverte."
     }
   }
 };
