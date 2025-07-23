@@ -127,6 +127,43 @@ export default function BonusPage() {
           link: "/cancao"
         }
       ]
+    },
+    fr: {
+      title: "BONUS",
+      subtitle: "Accédez à nos contenus exclusifs",
+      buttonText: "ACCÉDER",
+      bonusList: [
+        { 
+          title: "Groupe WhatsApp Exclusif", 
+          description: "Rejoignez notre groupe pour recevoir des messages quotidiens",
+          icon: "whatsapp",
+          link: "https://chat.whatsapp.com/FlCvIHaJoWgLfdqH5vnX5Q"
+        },
+        { 
+          title: "Prières de Guérison", 
+          description: "Prières puissantes pour la guérison spirituelle",
+          icon: "prayer",
+          link: "/oracoes"
+        },
+        { 
+          title: "Cadeau Surprise", 
+          description: "Un cadeau spécial pour vous",
+          icon: "gift",
+          link: "/presente"
+        },
+        { 
+          title: "Contact avec Celestino", 
+          description: "Contact direct avec notre mentor spirituel",
+          icon: "celestino",
+          link: "https://wa.me/5511967973944"
+        },
+        { 
+          title: "Chanson Angélique", 
+          description: "Musique pour élever votre vibration",
+          icon: "music",
+          link: "/cancao"
+        }
+      ]
     }
   };
   
@@ -167,4 +204,4 @@ export default function BonusPage() {
       </footer>
     </main>
   );
-} 
+}

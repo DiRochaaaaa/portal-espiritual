@@ -2,9 +2,8 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { BsStars, BsShieldFill, BsFillPlayFill } from 'react-icons/bs';
-import { FaFeatherAlt, FaHeart, FaEye } from 'react-icons/fa';
-import { GiAngelWings, GiCrystalBall, GiMagicSwirl } from 'react-icons/gi';
+import { BsStars, BsFillPlayFill } from 'react-icons/bs';
+import { GiAngelWings } from 'react-icons/gi';
 
 interface GuardianAngelSectionProps {
   locale: 'pt' | 'es' | 'en';
@@ -383,4 +382,4 @@ const GuardianAngelSection: React.FC<GuardianAngelSectionProps> = ({ locale }) =
   );
 };
 
-export default GuardianAngelSection; 
+export default GuardianAngelSection;

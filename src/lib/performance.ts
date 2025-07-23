@@ -85,14 +85,16 @@ export function monitorWebVitals(): void {
     
     // Cumulative Layout Shift (CLS)
     let clsValue = 0;
-    let clsEntries = [];
+    const clsEntries: PerformanceEntry[] = [];
     
     const clsObserver = new PerformanceObserver((entryList) => {
       for (const entry of entryList.getEntries()) {
-        // @ts-ignore - Type não definido corretamente
-        if (!entry.hadRecentInput) {
-          // @ts-ignore - Type não definido corretamente
-          clsValue += entry.value;
+        const layoutShiftEntry = entry as PerformanceEntry & {
+          hadRecentInput?: boolean;
+          value?: number;
+        };
+        if (!layoutShiftEntry.hadRecentInput) {
+          clsValue += layoutShiftEntry.value || 0;
           clsEntries.push(entry);
         }
       }
@@ -110,10 +112,20 @@ export function monitorWebVitals(): void {
 /**
  * Monitora o uso de memória (suportado apenas em alguns navegadores)
  */
+interface PerformanceMemory {
+  totalJSHeapSize: number;
+  usedJSHeapSize: number;
+  jsHeapSizeLimit: number;
+}
+
+interface PerformanceWithMemory extends Performance {
+  memory?: PerformanceMemory;
+}
+
 export function monitorMemoryUsage(): void {
-  if (typeof window !== 'undefined' && (performance as any).memory) {
+  if (typeof window !== 'undefined' && (performance as PerformanceWithMemory).memory) {
     setInterval(() => {
-      const memory = (performance as any).memory;
+      const memory = (performance as PerformanceWithMemory).memory!;
       console.log('[Performance] Memory:', {
         totalJSHeapSize: formatBytes(memory.totalJSHeapSize),
         usedJSHeapSize: formatBytes(memory.usedJSHeapSize),
@@ -146,4 +158,4 @@ export function initPerformanceMonitoring(): void {
     monitorWebVitals();
     monitorMemoryUsage();
   }
-} 
+}

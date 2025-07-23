@@ -63,4 +63,3 @@ function detectSlowConnection() {
 
 // Executar detecção de conexão lenta
 detectSlowConnection();
-``` 

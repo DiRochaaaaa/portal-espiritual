@@ -23,7 +23,8 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({ onClose }) => {
       <div className="bg-gradient-to-br from-purple-900 to-indigo-800 rounded-lg p-6 shadow-xl max-w-sm w-full mx-4 border border-purple-500">
         <h2 className="text-xl font-bold text-white mb-2 text-center">Selecione seu idioma</h2>
         <h2 className="text-lg font-semibold text-white mb-2 text-center">Seleccione su idioma</h2>
-        <h2 className="text-lg font-semibold text-white mb-6 text-center">Select your language</h2>
+        <h2 className="text-lg font-semibold text-white mb-2 text-center">Select your language</h2>
+        <h2 className="text-lg font-semibold text-white mb-6 text-center">Sélectionnez votre langue</h2>
         
         <div className="flex flex-col space-y-4">
           <button
@@ -46,10 +47,17 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({ onClose }) => {
           >
             <span className="mr-2">🇺🇸</span> English
           </button>
+
+          <button
+            onClick={() => handleSelectLanguage('fr')}
+            className="py-3 px-4 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition duration-200 flex items-center justify-center"
+          >
+            <span className="mr-2">🇫🇷</span> Français
+          </button>
         </div>
       </div>
     </div>
   );
 };
 
-export default LanguageSelector; 
+export default LanguageSelector;

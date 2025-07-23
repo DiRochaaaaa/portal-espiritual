@@ -550,6 +550,124 @@ In the name of Jesus, Amen.`
       },
       backToHome: "Back to Home",
       nextPage: "Next Page",
+    },
+    fr: {
+      title: "Prières de Guérison",
+      subtitle: "Prières puissantes pour la guérison spirituelle et la protection divine",
+      introduction: `La guérison est l'un des plus grands désirs de l'humanité. Quand nous sommes malades, nous ressentons le besoin d'être guéris, de retrouver notre santé et notre qualité de vie.
+
+La prière est un moyen puissant d'exprimer notre désir de guérison. Quand nous prions, nous nous connectons avec Dieu, le Créateur de toutes choses, et demandons Son intervention dans nos vies.
+
+La foi est un élément essentiel dans la prière de guérison. Quand nous prions avec foi, nous plaçons notre confiance en Dieu et croyons qu'Il peut nous guérir.
+
+Ce guide bonus présente 7 prières de guérison. Elles peuvent être utilisées pour demander la guérison pour vous-même ou pour une autre personne.`,
+      prayerTitle: (id: number) => {
+        const titles = {
+          1: "PRIÈRE POUR LA GUÉRISON PHYSIQUE",
+          2: "PRIÈRE POUR LA GUÉRISON SPIRITUELLE",
+          3: "PRIÈRE POUR LA GUÉRISON ÉMOTIONNELLE",
+          4: "PRIÈRE POUR LA GUÉRISON DE LA DÉPRESSION",
+          5: "PRIÈRE POUR LA GUÉRISON DE L'ANXIÉTÉ",
+          6: "PRIÈRE POUR LA GUÉRISON DE LA DOULEUR",
+          7: "PRIÈRE POUR LA GUÉRISON DE LA DÉPENDANCE"
+        };
+        return titles[id as keyof typeof titles];
+      },
+      prayerText: (id: number) => {
+        const prayers = {
+          1: `Seigneur Dieu, Créateur de l'univers,
+Tu es le Médecin Divin,
+qui peut guérir toutes les maladies.
+Je Te demande, Seigneur,
+la guérison de ma maladie (nom de la maladie).
+Je sais que Tu peux me guérir,
+même si les médecins ont dit qu'il n'y a pas de remède.
+Je place ma foi en Toi,
+et crois que Tu peux faire l'impossible.
+Merci, Seigneur,
+pour Ta miséricorde et Ton amour.
+Au nom de Jésus, Amen.`,
+          2: `Seigneur Dieu,
+Tu es le Dieu de la guérison,
+qui peut guérir à la fois le corps et l'âme.
+Je Te demande, Seigneur,
+la guérison de mon âme.
+Je sais que j'ai souvent fait des erreurs,
+et que cela m'a apporté de la souffrance.
+Je Te demande pardon, Seigneur,
+et me rends à Ton amour.
+Je crois que Tu peux me guérir,
+et me donner une nouvelle vie.
+Merci, Seigneur,
+pour Ta miséricorde et Ton amour.
+Au nom de Jésus, Amen.`,
+          3: `Seigneur Dieu,
+Tu es le Dieu de la guérison,
+qui peut guérir à la fois le corps et l'âme.
+Je Te demande, Seigneur,
+la guérison de mes émotions.
+Je sais que j'ai souvent souffert,
+et que cela m'a laissé des blessures émotionnelles.
+Je Te demande de me guérir, Seigneur,
+et de me donner la paix et la joie.
+Je crois que Tu peux me guérir,
+et me donner une nouvelle vie.
+Merci, Seigneur,
+pour Ta miséricorde et Ton amour.
+Au nom de Jésus, Amen.`,
+          4: `Seigneur Dieu,
+Tu es le Dieu de la guérison,
+qui peut guérir à la fois le corps et l'âme.
+Je Te demande, Seigneur,
+la guérison de ma dépression.
+Je sais que cette maladie me cause beaucoup de souffrance,
+et je veux être guéri.
+Je place ma foi en Toi,
+et crois que Tu peux me guérir.
+Merci, Seigneur,
+pour Ta miséricorde et Ton amour.
+Au nom de Jésus, Amen.`,
+          5: `Seigneur Dieu,
+Tu es le Dieu de la guérison,
+qui peut guérir à la fois le corps et l'âme.
+Je Te demande, Seigneur,
+la guérison de mon anxiété.
+Je sais que cette maladie me cause beaucoup de souffrance,
+et je veux être guéri.
+Je place ma foi en Toi,
+et crois que Tu peux me guérir.
+Merci, Seigneur,
+pour Ta miséricorde et Ton amour.
+Au nom de Jésus, Amen.`,
+          6: `Seigneur Dieu,
+Tu es le Dieu de la guérison,
+qui peut guérir à la fois le corps et l'âme.
+Je Te demande, Seigneur,
+la guérison de ma douleur.
+Je sais que cette douleur me cause beaucoup de souffrance,
+et je veux être guéri.
+Je place ma foi en Toi,
+et crois que Tu peux me guérir.
+Merci, Seigneur,
+pour Ta miséricorde et Ton amour.
+Au nom de Jésus, Amen.`,
+          7: `Seigneur Dieu,
+Tu es le Dieu de la guérison,
+qui peut guérir à la fois le corps et l'âme.
+Je Te demande, Seigneur,
+la guérison de ma dépendance.
+Je sais que cette maladie me détruit,
+et je veux être guéri.
+Je place ma foi en Toi,
+et crois que Tu peux me guérir.
+Merci, Seigneur,
+pour Ta miséricorde et Ton amour.
+Au nom de Jésus, Amen.`
+        };
+        return prayers[id as keyof typeof prayers];
+      },
+      backToHome: "Retour à l'Accueil",
+      nextPage: "Page Suivante",
     }
   };
 

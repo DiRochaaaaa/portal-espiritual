@@ -1,18 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef, CSSProperties } from 'react';
-import { motion, Variants } from 'framer-motion';
-
-// Função para codificar corretamente URLs de áudio
-const encodeAudioUrl = (url: string): string => {
-  // Divide a URL em partes (caminho e nome do arquivo)
-  const parts = url.split('/');
-  const fileName = parts.pop();
-  const path = parts.join('/');
-  
-  // Codifica o nome do arquivo para lidar com espaços e caracteres especiais
-  return `${path}/${encodeURIComponent(fileName || '')}`;
-};
+import { motion } from 'framer-motion';
 
 // Mapear IDs do YouTube para arquivos MP3 locais
 const AUDIO_FILES: Record<string, string> = {
@@ -658,4 +647,4 @@ const MeditationPlayer: React.FC<MeditationPlayerProps> = ({ mantras, locale }) 
   );
 };
 
-export default MeditationPlayer; 
+export default MeditationPlayer;

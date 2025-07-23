@@ -206,6 +206,126 @@ export default function PrivacyPolicyPage() {
         p1: "Si tiene alguna pregunta sobre esta Política de Privacidad, contáctenos:",
         email: "adm.artemi@gmail.com"
       }
+    },
+    en: {
+      title: "Privacy Policy",
+      lastUpdated: "Last updated: January 2025",
+      intro: "ARTEMI LTDA, responsible for the Spiritual Portal, is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and protect your personal information.",
+      dataCollection: {
+        title: "Data Collection",
+        p1: "We collect information when you visit our website, interact with our content, or register on our platform.",
+        p2: "The information we may collect includes:",
+        items: [
+          "Name and email address",
+          "Demographic information such as location and language",
+          "Device and browser information",
+          "IP address and website usage data"
+        ]
+      },
+      dataUse: {
+        title: "Data Use",
+        p1: "We use your information to:",
+        items: [
+          "Personalize your experience and meet your individual needs",
+          "Improve our website based on feedback received",
+          "Send periodic emails with spiritual or promotional content",
+          "Process transactions and provide requested services"
+        ]
+      },
+      dataSecurity: {
+        title: "Data Security",
+        p1: "We implement a variety of security measures to maintain the protection of your personal information. We use advanced encryption to protect sensitive information transmitted online and also protect your information offline."
+      },
+      cookies: {
+        title: "Cookies",
+        p1: "We use cookies to improve the user experience. Cookies are small files that a website transfers to your computer's hard drive through your web browser (if you allow) that enables websites to recognize your browser and remember certain information.",
+        p2: "For more details, see our Cookie Policy."
+      },
+      thirdParty: {
+        title: "Third-Party Services",
+        p1: "We use third-party services for analytics, advertising, and specific functionalities. These services may collect information sent by your browser as part of a web page request."
+      },
+      rights: {
+        title: "Your Rights",
+        p1: "You have the right to:",
+        items: [
+          "Access the personal data we have about you",
+          "Request correction of inaccurate data",
+          "Request deletion of your data",
+          "Object to the processing of your data",
+          "Request transfer of your data"
+        ],
+        p2: "To exercise these rights, contact us via email: adm.artemi@gmail.com"
+      },
+      changes: {
+        title: "Changes to Privacy Policy",
+        p1: "We may update our Privacy Policy periodically. We recommend that you review this page regularly to be aware of any changes."
+      },
+      contact: {
+        title: "Contact Us",
+        p1: "If you have any questions about this Privacy Policy, contact us:",
+        email: "adm.artemi@gmail.com"
+      }
+    },
+    fr: {
+      title: "Politique de Confidentialité",
+      lastUpdated: "Dernière mise à jour : Janvier 2025",
+      intro: "ARTEMI LTDA, responsable du Portal Espiritual, s'engage à protéger votre vie privée. Cette Politique de Confidentialité explique comment nous collectons, utilisons et protégeons vos informations personnelles.",
+      dataCollection: {
+        title: "Collecte de Données",
+        p1: "Nous collectons des informations lorsque vous visitez notre site web, interagissez avec notre contenu ou vous inscrivez sur notre plateforme.",
+        p2: "Les informations que nous pouvons collecter incluent :",
+        items: [
+          "Nom et adresse e-mail",
+          "Informations démographiques telles que la localisation et la langue",
+          "Informations sur l'appareil et le navigateur",
+          "Adresse IP et données d'utilisation du site"
+        ]
+      },
+      dataUse: {
+        title: "Utilisation des Données",
+        p1: "Nous utilisons vos informations pour :",
+        items: [
+          "Personnaliser votre expérience et répondre à vos besoins individuels",
+          "Améliorer notre site web en fonction des commentaires reçus",
+          "Envoyer des e-mails périodiques avec du contenu spirituel ou promotionnel",
+          "Traiter les transactions et fournir les services demandés"
+        ]
+      },
+      dataSecurity: {
+        title: "Sécurité des Données",
+        p1: "Nous mettons en œuvre une variété de mesures de sécurité pour maintenir la protection de vos informations personnelles. Nous utilisons un chiffrement avancé pour protéger les informations sensibles transmises en ligne et protégeons également vos informations hors ligne."
+      },
+      cookies: {
+        title: "Cookies",
+        p1: "Nous utilisons des cookies pour améliorer l'expérience utilisateur. Les cookies sont de petits fichiers qu'un site web transfère sur le disque dur de votre ordinateur via votre navigateur web (si vous l'autorisez) qui permettent aux sites web de reconnaître votre navigateur et de se souvenir de certaines informations.",
+        p2: "Pour plus de détails, consultez notre Politique de Cookies."
+      },
+      thirdParty: {
+        title: "Services Tiers",
+        p1: "Nous utilisons des services tiers pour l'analyse, la publicité et des fonctionnalités spécifiques. Ces services peuvent collecter des informations envoyées par votre navigateur dans le cadre d'une demande de page web."
+      },
+      rights: {
+        title: "Vos Droits",
+        p1: "Vous avez le droit de :",
+        items: [
+          "Accéder aux données personnelles que nous avons sur vous",
+          "Demander la correction de données inexactes",
+          "Demander la suppression de vos données",
+          "Vous opposer au traitement de vos données",
+          "Demander le transfert de vos données"
+        ],
+        p2: "Pour exercer ces droits, contactez-nous par e-mail : adm.artemi@gmail.com"
+      },
+      changes: {
+        title: "Modifications de la Politique de Confidentialité",
+        p1: "Nous pouvons mettre à jour notre Politique de Confidentialité périodiquement. Nous vous recommandons de consulter cette page régulièrement pour être au courant de tout changement."
+      },
+      contact: {
+        title: "Nous Contacter",
+        p1: "Si vous avez des questions sur cette Politique de Confidentialité, contactez-nous :",
+        email: "adm.artemi@gmail.com"
+      }
     }
   };
   
@@ -296,4 +416,4 @@ export default function PrivacyPolicyPage() {
       <FooterWithSuspense />
     </main>
   );
-} 
+}

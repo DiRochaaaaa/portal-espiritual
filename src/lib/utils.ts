@@ -1,10 +1,23 @@
 import { Locale } from './locale';
 
 // Helper function to adapt mantras for the MeditationPlayer component
-export function adaptMantraFormat(mantra: any) {
+export function adaptMantraFormat(mantra: Record<string, unknown>): {
+  id: string;
+  title: string;
+  youtubeId: string;
+  description: string;
+  objective: string;
+  color: string;
+  text?: string;
+} {
   return {
-    ...mantra,
-    // Qualquer adaptação necessária
+    id: mantra.id as string,
+    title: mantra.title as string,
+    youtubeId: mantra.youtubeId as string,
+    description: mantra.description as string,
+    objective: mantra.objective as string,
+    color: mantra.color as string,
+    text: mantra.text as string | undefined,
   };
 }
 
@@ -42,7 +55,7 @@ export function pluralize(count: number, singular: string, plural: string): stri
 }
 
 // Create reusable debounce function
-export function debounce<T extends (...args: any[]) => any>(
+export function debounce<T extends (...args: unknown[]) => unknown>(
   func: T,
   wait: number
 ): (...args: Parameters<T>) => void {
@@ -58,44 +71,42 @@ export function debounce<T extends (...args: any[]) => any>(
 }
 
 // Cache para evitar recálculos
-const memoizedResults: Record<string, any> = {};
+const memoizedResults: Record<string, unknown> = {};
 
 // Função para cálculos caros com memoização
-export function memoize<T>(fn: (...args: any[]) => T, getKey: (...args: any[]) => string): (...args: any[]) => T {
-  return (...args: any[]): T => {
+export function memoize<T, TArgs extends unknown[]>(fn: (...args: TArgs) => T, getKey: (...args: TArgs) => string): (...args: TArgs) => T {
+  return (...args: TArgs): T => {
     const key = getKey(...args);
     
     if (memoizedResults[key] === undefined) {
       memoizedResults[key] = fn(...args);
     }
     
-    return memoizedResults[key];
+    return memoizedResults[key] as T;
   };
 }
 
 // Função para limitar a frequência de execução de funções (throttle)
-export function throttle<T extends (...args: any[]) => any>(
+export function throttle<T extends (...args: unknown[]) => unknown>(
   func: T,
   limit: number
 ): (...args: Parameters<T>) => void {
   let lastFunc: NodeJS.Timeout;
   let lastRan: number = 0;
   
-  return function(this: any, ...args: Parameters<T>): void {
-    const context = this;
-    
+  return function(this: unknown, ...args: Parameters<T>): void {
     if (!lastRan) {
-      func.apply(context, args);
+      func.apply(this, args);
       lastRan = Date.now();
     } else {
       clearTimeout(lastFunc);
       
-      lastFunc = setTimeout(function() {
+      lastFunc = setTimeout(() => {
         if ((Date.now() - lastRan) >= limit) {
-          func.apply(context, args);
+          func.apply(this, args);
           lastRan = Date.now();
         }
       }, limit - (Date.now() - lastRan));
     }
   };
-} 
+}

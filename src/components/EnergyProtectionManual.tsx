@@ -1,8 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { BsShieldFill, BsGem } from 'react-icons/bs';
-import { FaLeaf, FaSmog } from 'react-icons/fa';
-import { GiCrystalGrowth, GiMedicines, GiIncense } from 'react-icons/gi';
+import { BsShieldFill } from 'react-icons/bs';
 import { colors, motionVariants } from '../styles/shared';
 import SectionTitle from './SectionTitle';
 import Card from './Card';
@@ -65,22 +63,7 @@ interface EnergyProtectionManualProps {
 const EnergyProtectionManual: React.FC<EnergyProtectionManualProps> = ({ content, visible }) => {
   if (!visible) return null;
   
-  const getIconForSection = (sectionTitle: string) => {
-    switch (sectionTitle) {
-      case content.content.crystals.title:
-        return <GiCrystalGrowth />;
-      case content.content.plants.title:
-        return <GiMedicines />;
-      case content.content.incense.title:
-        return <GiIncense />;
-      case content.content.techniques.title:
-        return <FaSmog />;
-      case content.content.routine.title:
-        return <FaLeaf />;
-      default:
-        return <BsGem />;
-    }
-  };
+
   
   return (
     <motion.section
@@ -327,4 +310,4 @@ const EnergyProtectionManual: React.FC<EnergyProtectionManualProps> = ({ content
   );
 };
 
-export default EnergyProtectionManual; 
+export default EnergyProtectionManual;

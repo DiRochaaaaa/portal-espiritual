@@ -1,6 +1,9 @@
 'use client';
 
-import { useState, useEffect, useRef, CSSProperties, memo } from 'react';import { motion, AnimatePresence } from 'framer-motion';import Link from 'next/link';import { NavbarWithSuspense, SpiritualQuotesWithSuspense, BonusSectionWithSuspense, FooterWithSuspense, GuardianAngelSectionWithSuspense } from '../lib/LazyComponents';import { getCurrentLocale, toggleLocale, Locale } from '../lib/locale';import YouTubeLoader from '../components/YouTubeLoader';
+import { useState, useEffect, useRef, CSSProperties } from 'react';
+import { motion } from 'framer-motion';
+import { NavbarWithSuspense, SpiritualQuotesWithSuspense, BonusSectionWithSuspense, FooterWithSuspense, GuardianAngelSectionWithSuspense } from '../lib/LazyComponents';
+import { getCurrentLocale, Locale } from '../lib/locale';
 
 // Custom hook for window size
 function useWindowSize() {
@@ -131,18 +134,19 @@ export default function HomePage() {
   // Referência para a div do vídeo
   const videoContainerRef = useRef<HTMLDivElement>(null);
   
+  // Configuração de debug - mostrar botão de reset se clicar 5 vezes no footer
+  const clickCountRef = useRef(0);
+  
   // Efeito para configuração inicial
   useEffect(() => {
     setMounted(true);
     setLocale(getCurrentLocale());
     
-    // Configuração de debug - mostrar botão de reset se clicar 5 vezes no footer
-    let clickCount = 0;
     const handleFooterClick = () => {
-      clickCount++;
-      if (clickCount >= 5) {
+      clickCountRef.current++;
+      if (clickCountRef.current >= 5) {
         setShowDebugButton(true);
-        clickCount = 0;
+        clickCountRef.current = 0;
       }
     };
     
@@ -192,6 +196,7 @@ export default function HomePage() {
     // Definir o ID do vídeo com base no idioma
     const videoId = locale === 'pt' ? '6734ea56e0f4c0000b8e807e' : 
                     locale === 'es' ? '68193ae1d508bf236b3df1a1' : 
+                    locale === 'fr' ? '687ecfe4ecd5358e3bf32b21' : // French video ID
                     '6861ab32032c2fa15600484e'; // English video ID
     
     // Configurar o HTML do vídeo
@@ -270,6 +275,15 @@ export default function HomePage() {
       ritualButton: "Access Lightning Ritual",
       additionalContentTitle: "Additional Content",
       additionalContentDescription: "Access our special spiritual practices"
+    },
+    fr: {
+      title: "Bienvenue au Tarot des Anges",
+      startReading: "Commencer ma Lecture",
+      resetButton: "Réinitialiser la Vidéo",
+      liweiButton: "Accéder aux Mantras du Moine Li Wei",
+      ritualButton: "Accéder au Rituel Éclair",
+      additionalContentTitle: "Contenu Supplémentaire",
+      additionalContentDescription: "Accédez à nos pratiques spirituelles spéciales"
     }
   };
   
@@ -476,7 +490,9 @@ export default function HomePage() {
               <SpiritualQuotesWithSuspense />
               
               {/* Seção do Anjo da Guarda - Posicionada no final do portal */}
-              <GuardianAngelSectionWithSuspense locale={locale} />
+              {(locale === 'pt' || locale === 'es' || locale === 'en') && (
+                <GuardianAngelSectionWithSuspense locale={locale} />
+              )}
             </>
           )}
         </motion.div>
@@ -486,4 +502,4 @@ export default function HomePage() {
       <FooterWithSuspense showDebugButton={showDebugButton} onResetVideo={resetVideo} />
     </main>
   );
-} 
+}

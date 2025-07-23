@@ -4,7 +4,6 @@ import { useState, useEffect, useRef, CSSProperties } from 'react';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 import Navbar from '../../components/Navbar';
 import { getCurrentLocale, Locale } from '../../lib/locale';
-import Image from 'next/image';
 
 type ChapterData = {
   title: string;
@@ -33,6 +32,7 @@ type Translations = {
   pt: TranslationContent;
   es: TranslationContent;
   en: TranslationContent;
+  fr: TranslationContent;
 };
 
 const styles: Record<string, CSSProperties> = {
@@ -573,7 +573,7 @@ export default function PresenteSurpresaPage() {
         window.speechSynthesis.cancel();
       }
     };
-  }, [activeMantra, locale, mounted]);
+  }, [activeMantra, mounted, locale]);
 
   if (!mounted) return null;
 
@@ -943,6 +943,128 @@ export default function PresenteSurpresaPage() {
           ]
         }
       ]
+    },
+    fr: {
+      title: "LE POUVOIR DU HOʻOPONOPONO",
+      subtitle: "L'Art de Guérir et de Transformer • Celestino – La Voix de la Vérité",
+      tocTitle: "TABLE DES MATIÈRES",
+      backToTop: "↑",
+      practiceTitle: "PRATIQUER LES MANTRAS",
+      practiceButton: "Pratiquer Ho'oponopono maintenant",
+      closeButton: "Fermer",
+      nextChapter: "Suivant: ",
+      backToToc: "Retour au Sommaire",
+      highlightText: "Je suis désolé. Pardonne-moi. Je t'aime. Merci.",
+      mantras: [
+        "Je suis désolé",
+        "Pardonne-moi", 
+        "Je t'aime",
+        "Merci"
+      ],
+      contents: [
+        {
+          title: "Chapitre 1 – Introduction au Ho'oponopono",
+          sections: [
+            {
+              title: "1.1 Origine et histoire du Ho'oponopono",
+              content: "Le Ho'oponopono est une technique de guérison et de résolution de problèmes originaire d'Hawaï. Les anciens kahunas enseignaient que les maladies et les difficultés naissent de mémoires négatives stockées dans le subconscient. Le terme signifie littéralement \"corriger une erreur\" ou \"remettre en ordre\". La méthode a gagné une reconnaissance mondiale avec le psychologue hawaïen Dr. Ihaleakala Hew Len, qui l'a pratiquée—avec des résultats remarquables—dans un hôpital psychiatrique de haute sécurité."
+            },
+            {
+              title: "1.2 Principes de base du Ho'oponopono",
+              content: "Il n'est pas nécessaire d'analyser le problème ; il suffit de prendre 100% de responsabilité et de nettoyer les mémoires qui y sont liées.\n\nCe que chaque personne guérit en elle-même impacte le collectif, car nous sommes tous un."
+            },
+            {
+              title: "1.3 L'importance de la responsabilité personnelle",
+              content: "Assumer que \"j'ai créé cela\" nous libère de la position de victime, ouvre le chemin au pardon et permet l'accès au Divin pour nettoyer et transmuter les mémoires."
+            }
+          ]
+        },
+        {
+          title: "Chapitre 2 – Le pouvoir des mémoires négatives",
+          sections: [
+            {
+              title: "2.1 Comment les mémoires négatives affectent notre vie",
+              content: "Les mémoires douloureuses conditionnent les émotions, les comportements et les perceptions ; elles entretiennent l'anxiété, la dépression, la faible estime de soi et peuvent même se manifester par des symptômes physiques."
+            },
+            {
+              title: "2.2 Identifier et reconnaître les mémoires négatives",
+              content: "Observez les schémas récurrents et les réactions émotionnelles intenses. Les situations qui déclenchent une peur, une colère ou une tristesse disproportionnée pointent souvent vers des mémoires sous-jacentes qui ont besoin d'être nettoyées."
+            },
+            {
+              title: "2.3 Les effets des mémoires négatives sur la santé physique et émotionnelle",
+              content: "Le stress chronique lié aux mémoires négatives augmente l'inflammation, compromet le sommeil et l'immunité, favorisant les maladies cardiaques, les troubles digestifs et les conditions mentales."
+            }
+          ]
+        },
+        {
+          title: "Chapitre 3 – La technique du Ho'oponopono",
+          sections: [
+            {
+              title: "3.1 Les quatre phrases : \"Je suis désolé\", \"Pardonne-moi\", \"Je t'aime\", \"Merci\"",
+              content: "Je suis désolé – Je reconnais et prends la responsabilité.\n\nPardonne-moi – Je demande pardon à moi-même, aux autres et au Divin.\n\nJe t'aime – J'offre un amour inconditionnel à tout et à tous.\n\nMerci – Je célèbre l'opportunité de purification et de guérison.\n\nDites dans n'importe quel ordre, elles servent de \"clé de nettoyage\" pour dissoudre les programmes subconscients."
+            },
+            {
+              title: "3.2 Comment pratiquer le Ho'oponopono quotidiennement",
+              content: "Répétez mentalement ou à voix haute chaque fois qu'un inconfort surgit ; écrivez les phrases dans un carnet ; placez des rappels visuels dans votre environnement. La constance approfondit le nettoyage."
+            },
+            {
+              title: "3.3 La méditation et l'écriture comme outils du Ho'oponopono",
+              content: "Méditez en vous concentrant sur les quatre phrases, permettant aux émotions de venir et de se libérer. L'écriture répétitive ou le journal d'insights rend le processus de libération tangible."
+            }
+          ]
+        },
+        {
+          title: "Chapitre 4 – Appliquer le Ho'oponopono dans les situations personnelles",
+          sections: [
+            {
+              title: "4.1 Résoudre les conflits internes",
+              content: "Utilisez les phrases pour libérer les schémas autodestructeurs, la critique interne et les anciennes culpabilités—trouvant la paix et la clarté mentale."
+            },
+            {
+              title: "4.2 Améliorer les relations",
+              content: "Nettoyez les ressentiments et les attentes ; pardonnez et envoyez de l'amour aux autres. Les couples peuvent pratiquer ensemble pour restaurer la communication."
+            },
+            {
+              title: "4.3 Guérir les maux physiques et émotionnels",
+              content: "En tant que pratique complémentaire, le Ho'oponopono aide à briser la racine énergétique des maladies chroniques et des troubles comme l'anxiété et la dépression."
+            }
+          ]
+        },
+        {
+          title: "Chapitre 5 – Le pouvoir transformateur du pardon",
+          sections: [
+            {
+              title: "5.1 L'importance du pardon dans notre parcours de guérison",
+              content: "Le pardon nous libère du poids des mémoires douloureuses, interrompant les cycles de souffrance."
+            },
+            {
+              title: "5.2 Se pardonner à soi-même",
+              content: "Répétez les quatre phrases pour embrasser les échecs personnels avec compassion, en apprenant d'eux sans porter de culpabilité."
+            },
+            {
+              title: "5.3 Pardonner aux autres pour atteindre la paix intérieure",
+              content: "En pardonnant sincèrement, nous libérons l'énergie qui nous maintient liés au passé et ouvrons l'espace pour des relations authentiques."
+            }
+          ]
+        },
+        {
+          title: "Chapitre 6 – Étendre le Ho'oponopono au monde",
+          sections: [
+            {
+              title: "6.1 Le rôle du Ho'oponopono dans la transformation globale",
+              content: "En guérissant en nous-mêmes, nous collaborons à guérir l'ensemble—puisque la réalité collective reflète l'état intérieur de chaque individu."
+            },
+            {
+              title: "6.2 Pratiques pour apporter la paix au monde",
+              content: "Répétez les quatre phrases dirigées vers l'humanité.\n\nÉcrivez ou méditez en groupes.\n\nVisualisez la planète inondée d'amour et de gratitude."
+            },
+            {
+              title: "6.3 Créer une vie d'amour, de gratitude et d'harmonie",
+              content: "L'engagement quotidien envers la responsabilité personnelle, le pardon et la gratitude crée un cycle vertueux de bien-être intérieur qui se reflète dans tous les domaines de la vie."
+            }
+          ]
+        }
+      ]
     }
   };
 
@@ -1074,9 +1196,9 @@ export default function PresenteSurpresaPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
               >
-                <span style={{...styles.highlightQuote, ...styles.highlightQuoteLeft}}>"</span>
+                <span style={{...styles.highlightQuote, ...styles.highlightQuoteLeft}}>&ldquo;</span>
                 {t.highlightText}
-                <span style={{...styles.highlightQuote, ...styles.highlightQuoteRight}}>"</span>
+                <span style={{...styles.highlightQuote, ...styles.highlightQuoteRight}}>&rdquo;</span>
               </motion.div>
             )}
           </div>
@@ -1269,4 +1391,4 @@ export default function PresenteSurpresaPage() {
       </AnimatePresence>
     </main>
   );
-} 
+}

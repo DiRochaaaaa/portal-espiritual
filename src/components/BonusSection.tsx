@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { BonusCardWithSuspense } from '../lib/LazyComponents';
 
 interface BonusSectionProps {
-  locale: 'pt' | 'es' | 'en';
+  locale: 'pt' | 'es' | 'en' | 'fr';
 }
 
 const styles: Record<string, CSSProperties> = {
@@ -205,6 +205,48 @@ export default function BonusSection({ locale }: BonusSectionProps) {
           link: links.celestino
         }
       ]
+    },
+    fr: {
+      mainTitle: "Portail Spirituel",
+      featuresTitle: "Ressources Spirituelles",
+      featuresDescription: "Explorez les ressources disponibles sur notre portail pour enrichir votre parcours spirituel :",
+      contactTitle: "Contact et Communauté",
+      contactDescription: "Connectez-vous avec nous et rejoignez notre communauté spirituelle :",
+      buttonText: "ACCÉDER",
+      features: [
+        {
+          title: "Prières de Guérison",
+          description: "Prières puissantes pour la guérison spirituelle",
+          icon: "prayer",
+          link: links.prayers
+        },
+        {
+          title: "Cadeau Surprise",
+          description: "Un cadeau spécial pour vous",
+          icon: "gift",
+          link: links.gift
+        },
+        {
+          title: "Chanson Angélique",
+          description: "Musique pour élever votre vibration",
+          icon: "music",
+          link: links.song
+        }
+      ],
+      contacts: [
+        {
+          title: "Groupe WhatsApp Exclusif",
+          description: "Rejoignez notre groupe pour recevoir des messages quotidiens",
+          icon: "whatsapp",
+          link: links.whatsapp.pt
+        },
+        {
+          title: "Contact Direct avec Celestino",
+          description: "Contact direct avec notre mentor spirituel",
+          icon: "celestino",
+          link: links.celestino
+        }
+      ]
     }
   };
 
@@ -290,4 +332,4 @@ export default function BonusSection({ locale }: BonusSectionProps) {
       </div>
     </motion.section>
   );
-} 
+}

@@ -42,7 +42,7 @@ export default function LoginPage() {
                 top: `${Math.random() * 100}%`,
                 '--duration': `${3 + Math.random() * 4}s`,
                 '--delay': `${Math.random() * 2}s`,
-              } as any}
+              } as React.CSSProperties & Record<string, string>}
             />
           ))}
         </div>
@@ -151,4 +151,4 @@ export default function LoginPage() {
               ) : (
                 'Entrar no Portal'
               )}
-                                    </motion.button>          </motion.form>          {/* Informações adicionais */}          <motion.div            initial={{ opacity: 0 }}            animate={{ opacity: 1 }}            transition={{ delay: 1, duration: 0.5 }}            className="mt-6 space-y-4"          >            {/* Instrução sobre email da compra */}            <div className="text-center p-3 bg-purpleMystic/10 border border-purpleMystic/30 rounded-lg">              <p className="text-gray-300 text-sm">                💡 Use o <span className="text-goldAccent font-medium">email da sua compra</span> para acessar              </p>            </div>            {/* Contato para dúvidas */}            <div className="text-center">              <p className="text-gray-400 text-xs mb-1">Dúvidas? Entre em contato:</p>              <a                 href="mailto:adm.artemi@gmail.com"                 className="text-goldAccent hover:text-yellow-300 text-sm transition-colors duration-300 underline decoration-goldAccent/50 hover:decoration-yellow-300"              >                adm.artemi@gmail.com              </a>            </div>          </motion.div>        </div>      </motion.div>    </div>  );} 
+                                    </motion.button>          </motion.form>          {/* Informações adicionais */}          <motion.div            initial={{ opacity: 0 }}            animate={{ opacity: 1 }}            transition={{ delay: 1, duration: 0.5 }}            className="mt-6 space-y-4"          >            {/* Instrução sobre email da compra */}            <div className="text-center p-3 bg-purpleMystic/10 border border-purpleMystic/30 rounded-lg">              <p className="text-gray-300 text-sm">                💡 Use o <span className="text-goldAccent font-medium">email da sua compra</span> para acessar              </p>            </div>            {/* Contato para dúvidas */}            <div className="text-center">              <p className="text-gray-400 text-xs mb-1">Dúvidas? Entre em contato:</p>              <a                 href="mailto:adm.artemi@gmail.com"                 className="text-goldAccent hover:text-yellow-300 text-sm transition-colors duration-300 underline decoration-goldAccent/50 hover:decoration-yellow-300"              >                adm.artemi@gmail.com              </a>            </div>          </motion.div>        </div>      </motion.div>    </div>  );}

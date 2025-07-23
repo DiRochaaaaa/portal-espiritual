@@ -1,10 +1,10 @@
 'use client';
 
-import { useCallback, useEffect, useState, CSSProperties } from 'react';
+import { useEffect, useState, useCallback, CSSProperties } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { toggleLocale, getCurrentLocale, Locale } from '../lib/locale';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { BsChatSquareFill } from 'react-icons/bs';
 import { BsMusicNoteBeamed } from 'react-icons/bs';
 
@@ -163,7 +163,6 @@ const NavbarComponent = () => {
   const [mounted, setMounted] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const pathname = usePathname();
-  const router = useRouter();
   const isHomePage = pathname === '/';
   
   // Wait for client-side rendering to access cookies
@@ -188,16 +187,6 @@ const NavbarComponent = () => {
     toggleLocale();
   }, []);
   
-  // Este método não funcionará se não houver histórico de navegação
-  const handleBack = useCallback(() => {
-    try {
-      router.back();
-    } catch (e) {
-      // Fallback para a página inicial se router.back() falhar
-      router.push('/');
-    }
-  }, [router]);
-  
   const translations = {
     pt: {
       back: "Voltar",
@@ -216,6 +205,12 @@ const NavbarComponent = () => {
       messages: "Messages",
       music: "Song",
       portalName: "Spiritual Portal"
+    },
+    fr: {
+      back: "Retour",
+      messages: "Messages",
+      music: "Chanson",
+      portalName: "Portail Spirituel"
     }
   };
 
@@ -340,4 +335,4 @@ const NavbarComponent = () => {
   );
 };
 
-export default NavbarComponent; 
+export default NavbarComponent;

@@ -220,6 +220,140 @@ export default function TermsOfUsePage() {
         p1: "Si tiene alguna pregunta sobre estos Términos de Uso, contáctenos:",
         email: "adm.artemi@gmail.com"
       }
+    },
+    en: {
+      title: "Terms of Use",
+      lastUpdated: "Last updated: January 2025",
+      intro: "By accessing the Spiritual Portal, operated by ARTEMI LTDA, you agree to these Terms of Use. Please read them carefully.",
+      definitions: {
+        title: "Definitions",
+        items: [
+          "\"Spiritual Portal\" or \"site\" refers to the website available at portalespritual.com or related addresses.",
+          "\"User\", \"you\" or \"your\" refers to any person who accesses or uses our site.",
+          "\"We\", \"our\" or \"ARTEMI\" refers to ARTEMI LTDA, owner and operator of the Spiritual Portal."
+        ]
+      },
+      acceptance: {
+        title: "Acceptance of Terms",
+        p1: "By accessing or using our website, you confirm that you have read, understood and agreed to these Terms of Use, as well as our Privacy Policy and Cookie Policy.",
+        p2: "If you do not agree with any part of these terms, we ask that you do not use our site."
+      },
+      accountTerms: {
+        title: "Account Terms",
+        p1: "Some features of the Spiritual Portal may require registration. By creating an account, you agree to:",
+        items: [
+          "Provide accurate, current and complete information",
+          "Maintain the confidentiality of your password",
+          "Be entirely responsible for all activities performed on your account",
+          "Notify us immediately of any unauthorized use of your account"
+        ]
+      },
+      content: {
+        title: "Site Content",
+        p1: "Our content includes texts, graphics, images, audios, videos and spiritual material. All this content is owned by ARTEMI LTDA or our partners, protected by copyright and intellectual property laws."
+      },
+      userConduct: {
+        title: "User Conduct",
+        p1: "By using our site, you agree not to:",
+        items: [
+          "Violate any applicable laws or regulations",
+          "Infringe our intellectual property rights or those of third parties",
+          "Transmit material that is illegal, offensive, defamatory or harmful",
+          "Attempt to interfere with the proper functioning of the site",
+          "Attempt to access restricted areas of the site without authorization",
+          "Use our site to distribute unsolicited advertising"
+        ]
+      },
+      disclaimer: {
+        title: "Disclaimers",
+        p1: "The Spiritual Portal provides content of a spiritual nature for informational and educational purposes only. We do not offer medical, psychological, financial or legal advice.",
+        p2: "Our spiritual content does not replace the advice of qualified professionals in any area. Always consult appropriate professionals for specific issues."
+      },
+      limitations: {
+        title: "Limitations of Liability",
+        p1: "ARTEMI LTDA will not be liable for any direct, indirect, incidental, consequential or punitive damages resulting from your access or use (or inability to access or use) of our site or content."
+      },
+      changes: {
+        title: "Changes to Terms",
+        p1: "We reserve the right to modify these Terms of Use at any time. Changes take effect immediately upon posting on the site.",
+        p2: "It is your responsibility to periodically check these terms to stay informed about any updates."
+      },
+      termination: {
+        title: "Termination",
+        p1: "We may terminate or suspend your access to our site immediately, without prior notice, for any violation of these Terms of Use."
+      },
+      contact: {
+        title: "Contact Us",
+        p1: "If you have any questions about these Terms of Use, contact us:",
+        email: "adm.artemi@gmail.com"
+      }
+    },
+    fr: {
+      title: "Conditions d'Utilisation",
+      lastUpdated: "Dernière mise à jour : Janvier 2025",
+      intro: "En accédant au Portal Espiritual, exploité par ARTEMI LTDA, vous acceptez ces Conditions d'Utilisation. Veuillez les lire attentivement.",
+      definitions: {
+        title: "Définitions",
+        items: [
+          "\"Portal Espiritual\" ou \"site\" fait référence au site web disponible sur portalespritual.com ou adresses connexes.",
+          "\"Utilisateur\", \"vous\" ou \"votre\" fait référence à toute personne qui accède ou utilise notre site.",
+          "\"Nous\", \"notre\" ou \"ARTEMI\" fait référence à ARTEMI LTDA, propriétaire et exploitant du Portal Espiritual."
+        ]
+      },
+      acceptance: {
+        title: "Acceptation des Conditions",
+        p1: "En accédant ou en utilisant notre site web, vous confirmez que vous avez lu, compris et accepté ces Conditions d'Utilisation, ainsi que notre Politique de Confidentialité et Politique de Cookies.",
+        p2: "Si vous n'êtes pas d'accord avec une partie de ces conditions, nous vous demandons de ne pas utiliser notre site."
+      },
+      accountTerms: {
+        title: "Conditions de Compte",
+        p1: "Certaines fonctionnalités du Portal Espiritual peuvent nécessiter une inscription. En créant un compte, vous acceptez de :",
+        items: [
+          "Fournir des informations précises, actuelles et complètes",
+          "Maintenir la confidentialité de votre mot de passe",
+          "Être entièrement responsable de toutes les activités effectuées sur votre compte",
+          "Nous notifier immédiatement de toute utilisation non autorisée de votre compte"
+        ]
+      },
+      content: {
+        title: "Contenu du Site",
+        p1: "Notre contenu comprend des textes, graphiques, images, audios, vidéos et matériel spirituel. Tout ce contenu appartient à ARTEMI LTDA ou à nos partenaires, protégé par les lois sur les droits d'auteur et la propriété intellectuelle."
+      },
+      userConduct: {
+        title: "Conduite de l'Utilisateur",
+        p1: "En utilisant notre site, vous acceptez de ne pas :",
+        items: [
+          "Violer toute loi ou réglementation applicable",
+          "Enfreindre nos droits de propriété intellectuelle ou ceux de tiers",
+          "Transmettre du matériel illégal, offensant, diffamatoire ou nuisible",
+          "Tenter d'interférer avec le bon fonctionnement du site",
+          "Tenter d'accéder à des zones restreintes du site sans autorisation",
+          "Utiliser notre site pour distribuer de la publicité non sollicitée"
+        ]
+      },
+      disclaimer: {
+        title: "Avis de Non-Responsabilité",
+        p1: "Le Portal Espiritual fournit du contenu de nature spirituelle à des fins informatives et éducatives uniquement. Nous n'offrons pas de conseils médicaux, psychologiques, financiers ou juridiques.",
+        p2: "Notre contenu spirituel ne remplace pas les conseils de professionnels qualifiés dans quelque domaine que ce soit. Consultez toujours des professionnels appropriés pour des questions spécifiques."
+      },
+      limitations: {
+        title: "Limitations de Responsabilité",
+        p1: "ARTEMI LTDA ne sera pas responsable de tout dommage direct, indirect, accessoire, consécutif ou punitif résultant de votre accès ou utilisation (ou incapacité d'accéder ou d'utiliser) de notre site ou contenu."
+      },
+      changes: {
+        title: "Modifications des Conditions",
+        p1: "Nous nous réservons le droit de modifier ces Conditions d'Utilisation à tout moment. Les modifications prennent effet immédiatement après leur publication sur le site.",
+        p2: "Il est de votre responsabilité de vérifier périodiquement ces conditions pour rester informé de toute mise à jour."
+      },
+      termination: {
+        title: "Résiliation",
+        p1: "Nous pouvons résilier ou suspendre votre accès à notre site immédiatement, sans préavis, pour toute violation de ces Conditions d'Utilisation."
+      },
+      contact: {
+        title: "Nous Contacter",
+        p1: "Si vous avez des questions sur ces Conditions d'Utilisation, contactez-nous :",
+        email: "adm.artemi@gmail.com"
+      }
     }
   };
   
@@ -319,4 +453,4 @@ export default function TermsOfUsePage() {
       <FooterWithSuspense />
     </main>
   );
-} 
+}

@@ -1,17 +1,8 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
-// Função para codificar corretamente URLs de áudio
-const encodeAudioUrl = (url: string): string => {
-  // Divide a URL em partes (caminho e nome do arquivo)
-  const parts = url.split('/');
-  const fileName = parts.pop();
-  const path = parts.join('/');
-  
-  // Codifica o nome do arquivo para lidar com espaços e caracteres especiais
-  return `${path}/${encodeURIComponent(fileName || '')}`;
-};
+
 
 // Mapear IDs do YouTube para arquivos MP3 locais
 const AUDIO_FILES: Record<string, string> = {
@@ -30,12 +21,29 @@ const AUDIO_FILES: Record<string, string> = {
   'nnjICT7yu1U': 'https://leitura.tarodosanjos.online/wp-content/uploads/2025/05/frequencia-abundancia.mp3',
 };
 
+interface YouTubePlayer {
+  playVideo: () => Promise<void>;
+  pauseVideo: () => void;
+  stopVideo: () => void;
+  mute: () => void;
+  unMute: () => void;
+  getCurrentTime: () => number;
+  getDuration: () => number;
+  getPlayerState: () => number;
+  seekTo: (seconds: number, allowSeekAhead?: boolean) => void;
+}
+
+interface YouTubeEvent {
+  target: YouTubePlayer;
+  data: number;
+}
+
 interface YouTubeLoaderProps {
   videoId: string;
-  onReady?: (player: any) => void;
-  onStateChange?: (event: any) => void;
-  onError?: (event: any) => void;
-  playerVars?: Record<string, any>;
+  onReady?: (player: YouTubePlayer) => void;
+  onStateChange?: (event: YouTubeEvent) => void;
+  onError?: (event: YouTubeEvent) => void;
+  playerVars?: Record<string, unknown>;
 }
 
 // Interface simplificada para o player de áudio
@@ -55,19 +63,17 @@ const YouTubeLoader: React.FC<YouTubeLoaderProps> = ({
   videoId,
   onReady,
   onStateChange,
-  onError,
-  playerVars = {}
+  onError
 }) => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const playerRef = useRef<SimpleAudioPlayer | null>(null);
   const [playerState, setPlayerState] = useState(0); // 0: stopped, 1: playing, 2: paused
   const [audioError, setAudioError] = useState(false);
   
   // Inicializar o player de áudio
-  const initializeAudio = () => {
+  const initializeAudio = useCallback(() => {
     try {
       // Resetar estados
-      setIsLoaded(false);
       setAudioError(false);
       
       // Verificar se temos um arquivo de áudio para este ID
@@ -76,7 +82,6 @@ const YouTubeLoader: React.FC<YouTubeLoaderProps> = ({
       if (!audioFilePath) {
         console.error(`Arquivo de áudio não encontrado para ID: ${videoId}`);
         setAudioError(true);
-        if (onError) onError({ data: 'FILE_NOT_FOUND' });
         return;
       }
       
@@ -103,7 +108,6 @@ const YouTubeLoader: React.FC<YouTubeLoaderProps> = ({
         
         audioRef.current.addEventListener('loadeddata', () => {
           console.log(`Áudio carregado: ${audioUrl}`);
-          setIsLoaded(true);
           
           // Criar uma interface que imita o player do YouTube
           const simplePlayer: SimpleAudioPlayer = {
@@ -114,7 +118,7 @@ const YouTubeLoader: React.FC<YouTubeLoaderProps> = ({
                 // Em dispositivos móveis, precisamos de uma interação do usuário para tocar áudio
                 const playPromise = audioRef.current.play();
                 setPlayerState(1); // playing
-                if (onStateChange) onStateChange({ data: 1 });
+                if (onStateChange) onStateChange({ target: simplePlayer, data: 1 });
                 
                 return playPromise;
               } catch (error) {
@@ -126,7 +130,7 @@ const YouTubeLoader: React.FC<YouTubeLoaderProps> = ({
               if (audioRef.current) {
                 audioRef.current.pause();
                 setPlayerState(2); // paused
-                if (onStateChange) onStateChange({ data: 2 });
+                if (onStateChange) onStateChange({ target: simplePlayer, data: 2 });
               }
             },
             stopVideo: () => {
@@ -134,7 +138,7 @@ const YouTubeLoader: React.FC<YouTubeLoaderProps> = ({
                 audioRef.current.pause();
                 audioRef.current.currentTime = 0;
                 setPlayerState(0); // stopped
-                if (onStateChange) onStateChange({ data: 0 });
+                if (onStateChange) onStateChange({ target: simplePlayer, data: 0 });
               }
             },
             mute: () => {
@@ -151,26 +155,28 @@ const YouTubeLoader: React.FC<YouTubeLoaderProps> = ({
             }
           };
           
+          // Armazenar o player na referência
+          playerRef.current = simplePlayer;
+          
           // Chamar onReady com nosso simplePlayer
           if (onReady) onReady(simplePlayer);
         });
         
         audioRef.current.addEventListener('canplaythrough', () => {
           console.log(`Áudio pronto para reprodução: ${audioUrl}`);
-          setIsLoaded(true);
         });
         
         audioRef.current.addEventListener('ended', () => {
           console.log('Áudio terminou');
           setPlayerState(0); // stopped
-          if (onStateChange) onStateChange({ data: 0 });
+          if (onStateChange && playerRef.current) onStateChange({ target: playerRef.current, data: 0 });
         });
         
         audioRef.current.addEventListener('error', (e) => {
           const error = e.target as HTMLAudioElement;
           console.error(`Erro ao carregar o áudio: ${audioFilePath}`, error.error);
           setAudioError(true);
-          if (onError) onError({ data: 'AUDIO_LOAD_ERROR', details: error.error });
+          if (onError && playerRef.current) onError({ data: -1, target: playerRef.current });
         });
       };
       
@@ -183,9 +189,10 @@ const YouTubeLoader: React.FC<YouTubeLoaderProps> = ({
     } catch (error) {
       console.error("Erro ao inicializar o player de áudio:", error);
       setAudioError(true);
-      if (onError) onError({ data: 'INIT_ERROR', details: error });
+      // onError espera um YouTubeEvent, mas não temos um player válido aqui
+      console.error('Erro de inicialização:', error);
     }
-  };
+  }, [videoId, onReady, onStateChange, onError, playerState]);
   
   // Carregar o áudio quando o componente montar ou o videoId mudar
   useEffect(() => {
@@ -202,7 +209,7 @@ const YouTubeLoader: React.FC<YouTubeLoaderProps> = ({
         audioRef.current.removeEventListener('error', () => {});
       }
     };
-  }, [videoId]); // Reinicializar quando o videoId mudar
+  }, [videoId, initializeAudio]); // Reinicializar quando o videoId mudar
   
   // Adicionar um componente visível para permitir interação do usuário se necessário
   return audioError ? (
@@ -224,7 +231,7 @@ const YouTubeLoader: React.FC<YouTubeLoaderProps> = ({
           audioRef.current.play()
             .then(() => {
               setPlayerState(1);
-              if (onStateChange) onStateChange({ data: 1 });
+              if (onStateChange && playerRef.current) onStateChange({ target: playerRef.current, data: 1 });
             })
             .catch(err => console.error("Não foi possível reproduzir:", err));
         }
@@ -235,4 +242,4 @@ const YouTubeLoader: React.FC<YouTubeLoaderProps> = ({
   ) : null;
 };
 
-export default YouTubeLoader; 
+export default YouTubeLoader;

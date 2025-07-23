@@ -191,6 +191,68 @@ const quotes = {
       text: "A smile is a light in the window of the soul, indicating that the heart is at home.",
       source: "Kardec"
     }
+  ],
+  fr: [
+    {
+      text: "La paix vient de l'intérieur. Ne la cherchez pas à l'extérieur.",
+      source: "Bouddha"
+    },
+    {
+      text: "Où que vous soyez, soyez-y totalement.",
+      source: "Eckhart Tolle"
+    },
+    {
+      text: "Le pardon est le parfum que la violette laisse sur le talon qui l'a écrasée.",
+      source: "Mark Twain"
+    },
+    {
+      text: "La gratitude transforme ce que nous avons en suffisant, et plus encore.",
+      source: "Melody Beattie"
+    },
+    {
+      text: "Votre tâche n'est pas de chercher l'amour, mais simplement de chercher et de trouver toutes les barrières en vous que vous avez construites contre lui.",
+      source: "Rumi"
+    },
+    {
+      text: "Vous n'êtes pas une goutte dans l'océan. Vous êtes l'océan entier dans une goutte.",
+      source: "Rumi"
+    },
+    {
+      text: "La façon dont vous pensez détermine la façon dont vous vous sentez, et la façon dont vous vous sentez influence votre façon d'agir.",
+      source: "Rick Warren"
+    },
+    {
+      text: "Qui regarde vers l'extérieur, rêve ; qui regarde vers l'intérieur, s'éveille.",
+      source: "Carl Jung"
+    },
+    {
+      text: "L'univers ne conspire pas contre vous, mais il ne dévie pas non plus pour aligner votre chemin.",
+      source: "Deepak Chopra"
+    },
+    {
+      text: "J'ai appris à donner non pas parce que j'ai beaucoup, mais parce que je sais exactement ce que signifie n'avoir rien.",
+      source: "Bob Marley"
+    },
+    {
+      text: "Le temps est la ressource la plus précieuse que nous ayons, car c'est la plus limitée. Nous pouvons produire plus d'argent, mais nous ne pouvons pas produire plus de temps.",
+      source: "Dalaï Lama"
+    },
+    {
+      text: "Le bonheur est la conséquence naturelle de faire ce que vous aimez et de servir ceux que vous aimez.",
+      source: "Wayne Dyer"
+    },
+    {
+      text: "La pratique du Ho'oponopono consiste à nettoyer les mémoires douloureuses qui se manifestent comme des problèmes, par la répétition des mots : 'Je suis désolé, pardonne-moi, je t'aime, je suis reconnaissant'.",
+      source: "Ihaleakala Hew Len"
+    },
+    {
+      text: "Quand vous pensez avoir atteint votre limite, allez un peu plus loin et vous trouverez une force infinie.",
+      source: "Chico Xavier"
+    },
+    {
+      text: "Le sourire est une lumière à la fenêtre de l'âme, indiquant que le cœur est à la maison.",
+      source: "Kardec"
+    }
   ]
 };
 
@@ -394,6 +456,10 @@ const SpiritualQuotes = () => {
     en: {
       title: "Spiritual Messages",
       instructions: "Use the buttons to navigate between messages"
+    },
+    fr: {
+      title: "Messages Spirituels",
+      instructions: "Utilisez les boutons pour naviguer entre les messages"
     }
   };
 
@@ -413,7 +479,7 @@ const SpiritualQuotes = () => {
               onClick={prevQuote}
               aria-label="Mensagem anterior"
             >
-              ←
+              &larr;
             </motion.button>
             <motion.button 
               style={{...mobileButtonStyle, right: '0px'}}
@@ -422,7 +488,7 @@ const SpiritualQuotes = () => {
               onClick={nextQuote}
               aria-label="Próxima mensagem"
             >
-              →
+              &rarr;
             </motion.button>
           </>
         )}
@@ -435,7 +501,7 @@ const SpiritualQuotes = () => {
           exit={{ opacity: 0, x: -50 }}
           transition={{ duration: 0.3 }}
         >
-          <p style={quoteStyle}>"{currentMessage.text}"</p>
+          <p style={quoteStyle}>&ldquo;{currentMessage.text}&rdquo;</p>
           <p style={sourceStyle}>— {currentMessage.source}</p>
         </motion.div>
       </div>
@@ -447,14 +513,14 @@ const SpiritualQuotes = () => {
             onClick={prevQuote}
             aria-label="Mensagem anterior"
           >
-            ←
+            &larr;
           </button>
           <button 
             style={navButtonStyle} 
             onClick={nextQuote}
             aria-label="Próxima mensagem"
           >
-            →
+            &rarr;
           </button>
         </div>
       )}
@@ -475,4 +541,4 @@ const SpiritualQuotes = () => {
   );
 };
 
-export default SpiritualQuotes; 
+export default SpiritualQuotes;

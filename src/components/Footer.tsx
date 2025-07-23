@@ -14,7 +14,7 @@ const Footer: React.FC<FooterProps> = ({ showDebugButton = false, onResetVideo }
   const [locale, setLocale] = useState<Locale>('pt');
   const [mounted, setMounted] = useState(false);
   const [currentYear, setCurrentYear] = useState(2025);
-  const [clickCount, setClickCount] = useState(0);
+
   const [showDebug, setShowDebug] = useState(showDebugButton);
 
   useEffect(() => {
@@ -24,16 +24,14 @@ const Footer: React.FC<FooterProps> = ({ showDebugButton = false, onResetVideo }
   }, []);
 
   // Handle clicks on footer for debug button
+  let clickCount = 0;
   const handleFooterClick = () => {
     if (!showDebug && onResetVideo) {
-      setClickCount(prev => {
-        const newCount = prev + 1;
-        if (newCount >= 5) {
-          setShowDebug(true);
-          return 0;
-        }
-        return newCount;
-      });
+      clickCount += 1;
+      if (clickCount >= 5) {
+        setShowDebug(true);
+        clickCount = 0;
+      }
     }
   };
 
@@ -66,6 +64,15 @@ const Footer: React.FC<FooterProps> = ({ showDebugButton = false, onResetVideo }
       contact: "Contact",
       company: "ARTEMI LTDA",
       resetButton: "Reset Video"
+    },
+    fr: {
+      rights: "Tous droits réservés",
+      privacyPolicy: "Politique de Confidentialité",
+      termsOfUse: "Conditions d'Utilisation",
+      cookies: "Politique de Cookies",
+      contact: "Contact",
+      company: "ARTEMI LTDA",
+      resetButton: "Réinitialiser Vidéo"
     }
   };
 
@@ -205,4 +212,4 @@ const Footer: React.FC<FooterProps> = ({ showDebugButton = false, onResetVideo }
   );
 };
 
-export default Footer; 
+export default Footer;

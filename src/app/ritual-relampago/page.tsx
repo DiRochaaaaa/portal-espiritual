@@ -1,15 +1,14 @@
 'use client';
 
-import { useState, useEffect, CSSProperties, memo, useMemo, useRef } from 'react';
+import { useState, useEffect, useRef, CSSProperties, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { NavbarWithSuspense, FooterWithSuspense } from '../../lib/LazyComponents';
 import { getCurrentLocale, Locale } from '../../lib/locale';
-import { BsClock, BsCalendar, BsMusicNoteBeamed, BsStars, BsWater, BsLightningFill, BsBookFill, BsPlayCircleFill, BsPauseCircleFill, BsVolumeMuteFill, BsVolumeUpFill } from 'react-icons/bs';
-import { FaHandsWash, FaSun, FaMoon, FaFeather, FaFire, FaYinYang, FaSeedling } from 'react-icons/fa';
-import { GiMagicSwirl, GiSoundWaves, GiMountains, GiCrystalBall, GiMeditation, GiQuillInk, GiPeaceDove, GiLotusFlower } from 'react-icons/gi';
-import { gradients, commonStyles, motionVariants, colors as sharedColors } from '../../styles/shared';
+import { BsClock, BsMusicNoteBeamed, BsStars, BsWater, BsLightningFill, BsBookFill, BsPlayCircleFill, BsPauseCircleFill, BsVolumeMuteFill, BsVolumeUpFill } from 'react-icons/bs';
+import { FaHandsWash, FaSun, FaMoon, FaFeather, FaFire, FaYinYang } from 'react-icons/fa';
+import { GiMagicSwirl, GiSoundWaves, GiMountains, GiCrystalBall, GiMeditation, GiQuillInk, GiLotusFlower } from 'react-icons/gi';
+import { gradients, commonStyles, motionVariants } from '../../styles/shared';
 import SectionTitle from '../../components/SectionTitle';
-import Card from '../../components/Card';
 
 // Definição das cores estendidas
 const colors = {
@@ -712,7 +711,17 @@ const ritualSteps = [
 ];
 
 // Cânticos para os dias da semana
-const chants = [
+interface Chant {
+  id: string;
+  days: string;
+  chant: string;
+  icon: JSX.Element;
+  description: string;
+  audioUrl: string;
+  duration: string;
+}
+
+const chants: Chant[] = [
   {
     id: 'monday',
     days: 'monday',
@@ -824,7 +833,6 @@ function formatTime(seconds: number) {
 export default function RitualRelampagoPage() {
   const [locale, setLocale] = useState<Locale>('pt');
   const [mounted, setMounted] = useState(false);
-  const [activeWindow, setActiveWindow] = useState<string | null>(null);
   const [playingAudio, setPlayingAudio] = useState<string | null>(null);
   const [progress, setProgress] = useState<{[key: string]: number}>({});
   const [duration, setDuration] = useState<{[key: string]: number}>({});
@@ -845,7 +853,7 @@ export default function RitualRelampagoPage() {
     return {
       stepHeader: {
         padding: isMobile ? '12px 16px' : '16px 20px', 
-        flexWrap: 'wrap' as 'wrap',
+        flexWrap: 'wrap' as const,
         gap: isMobile ? '10px' : '12px',
       },
       stepTitle: {
@@ -870,8 +878,8 @@ export default function RitualRelampagoPage() {
         fontSize: isMobile ? '0.95rem' : '1rem',
       },
       scheduleTable: {
-        display: isTablet || isMobile ? 'block' as 'block' : 'table' as 'table',
-        overflowX: isTablet || isMobile ? 'auto' as 'auto' : 'visible' as 'visible',
+        display: isTablet || isMobile ? 'block' as const : 'table' as const,
+        overflowX: isTablet || isMobile ? 'auto' as const : 'visible' as const,
       },
       tableHeader: {
         padding: isMobile ? '12px 16px' : '16px 20px',
@@ -1020,7 +1028,7 @@ export default function RitualRelampagoPage() {
       improvedAudioInfo: {
         marginLeft: isMobile ? '8px' : '15px',
         display: 'flex',
-        flexDirection: 'column' as 'column',
+        flexDirection: 'column' as const,
         flex: 1,
         overflow: 'hidden',
       },
@@ -1030,7 +1038,7 @@ export default function RitualRelampagoPage() {
         color: colors.text.light,
         display: 'flex',
         alignItems: 'center',
-        flexWrap: 'wrap' as 'wrap',
+        flexWrap: 'wrap' as const,
         gap: '4px',
       },
       improvedAudioStatusBadge: {
@@ -1065,14 +1073,14 @@ export default function RitualRelampagoPage() {
         borderRadius: '5px',
         marginTop: '10px',
         cursor: 'pointer',
-        position: 'relative' as 'relative',
+        position: 'relative' as const,
         minHeight: isMobile ? '6px' : '10px',
       },
       improvedProgressBar: {
         height: '100%',
         background: 'linear-gradient(to right, #D4AF37, #FFD700)',
         borderRadius: '5px',
-        position: 'absolute' as 'absolute',
+        position: 'absolute' as const,
         left: 0,
         top: 0,
         transition: 'width 0.1s linear',
@@ -1207,99 +1215,7 @@ export default function RitualRelampagoPage() {
 
   if (!mounted) return null;
 
-  // Renderização do componente do player de áudio
-  const renderAudioPlayer = (chant: any) => {
-    const audioId = chant.id;
-    const progressPercent = (progress[audioId] || 0) * 100;
-    const currentVolume = volume[audioId] || 1;
-    const isPlaying = playingAudio === audioId;
-    
-    return (
-      <div style={{
-        ...styles.audioPlayer,
-        ...responsiveStyles.audioPlayer
-      }}>
-        <div style={styles.audioPlayerGlow} />
-        
-        <div style={{
-          ...styles.audioControls,
-          ...responsiveStyles.audioControls
-        }}>
-          <motion.button 
-            style={{
-              ...styles.playButton,
-              ...responsiveStyles.playButton
-            }}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => isPlaying ? pauseAudio(audioId) : playAudio(audioId)}
-          >
-            {isPlaying ? <BsPauseCircleFill /> : <BsPlayCircleFill />}
-          </motion.button>
-          
-          <div style={{
-            ...styles.audioInfo,
-            overflow: 'hidden'
-          }}>
-            <div style={{
-              ...styles.audioTitle,
-              ...responsiveStyles.audioTitle,
-              whiteSpace: 'nowrap',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis'
-            }}>
-              {t[chant.chant as keyof typeof t]}
-            </div>
-            <div style={{
-              ...styles.audioDescription,
-              ...responsiveStyles.audioDescription,
-              whiteSpace: 'nowrap',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis'
-            }}>
-              {t[chant.days as keyof typeof t]}
-            </div>
-          </div>
-        </div>
-        
-        <div 
-          style={{
-            ...styles.progressContainer,
-            ...responsiveStyles.progressContainer
-          }}
-          onClick={(e) => seekAudio(audioId, e)}
-        >
-          <div 
-            style={{
-              ...styles.progressBar,
-              width: `${progressPercent}%`
-            }}
-          />
-        </div>
-        
-        <div style={{
-          ...styles.volumeControl,
-          ...responsiveStyles.volumeControl
-        }}>
-          <div style={{ cursor: 'pointer' }} onClick={() => changeVolume(audioId, currentVolume === 0 ? 1 : 0)}>
-            {currentVolume === 0 ? <BsVolumeMuteFill /> : <BsVolumeUpFill />}
-          </div>
-          <input 
-            type="range" 
-            min="0" 
-            max="1" 
-            step="0.05" 
-            value={currentVolume}
-            onChange={(e) => changeVolume(audioId, parseFloat(e.target.value))}
-            style={{ 
-              width: '100%',
-              accentColor: '#7B1FA2'
-            }}
-          />
-        </div>
-      </div>
-    );
-  };
+
 
   return (
     <>
@@ -1469,7 +1385,7 @@ export default function RitualRelampagoPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {portalWindows.map((window, index) => {
+                  {portalWindows.map((window) => {
                     const portalTheme = getPortalTheme(window.id);
                     
                     return (
@@ -1888,7 +1804,11 @@ export default function RitualRelampagoPage() {
                           whileTap={{ scale: 0.95 }}
                           onClick={() => {
                             loadAudio(chant.id, chant.audioUrl);
-                            playingAudio === chant.id ? pauseAudio(chant.id) : playAudio(chant.id);
+                            if (playingAudio === chant.id) {
+                              pauseAudio(chant.id);
+                            } else {
+                              playAudio(chant.id);
+                            }
                           }}
                         >
                           {playingAudio === chant.id ? <BsPauseCircleFill /> : <BsPlayCircleFill />}
@@ -2105,4 +2025,4 @@ export default function RitualRelampagoPage() {
       <FooterWithSuspense />
     </>
   );
-} 
+}

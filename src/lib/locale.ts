@@ -1,9 +1,9 @@
 import Cookies from 'js-cookie';
 
-export type Locale = 'pt' | 'es' | 'en';
+export type Locale = 'pt' | 'es' | 'en' | 'fr';
 
 export const defaultLocale: Locale = 'pt';
-export const locales: Locale[] = ['pt', 'es', 'en'];
+export const locales: Locale[] = ['pt', 'es', 'en', 'fr'];
 
 /**
  * Gets the current locale from cookies or defaults to 'pt'
@@ -27,7 +27,7 @@ export function setLocale(locale: Locale): void {
 }
 
 /**
- * Cycle through locales: PT -> ES -> EN -> PT
+ * Cycle through locales: PT -> ES -> EN -> FR -> PT
  */
 export function toggleLocale(): void {
   const currentLocale = getCurrentLocale();
@@ -41,6 +41,9 @@ export function toggleLocale(): void {
       newLocale = 'en';
       break;
     case 'en':
+      newLocale = 'fr';
+      break;
+    case 'fr':
       newLocale = 'pt';
       break;
     default:
@@ -60,8 +63,10 @@ export function getToggleText(locale: Locale): string {
     case 'es':
       return 'Cambiar a Inglés';
     case 'en':
-      return 'Change to Portuguese';
+      return 'Change to French';
+    case 'fr':
+      return 'Changer pour le Portugais';
     default:
       return 'Mudar para Espanhol';
   }
-} 
+}

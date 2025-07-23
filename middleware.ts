@@ -1,16 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-const locales = ['pt', 'es', 'en'];
+const locales = ['pt', 'es', 'en', 'fr'];
 const defaultLocale = 'pt';
 
 // Função para detectar e processar slugs de idioma na URL
 function detectLanguageFromUrl(pathname: string): { locale: string | null, cleanPath: string } {
-  // Verifica se a URL começa com /en, /es, /br ou /pt
+  // Verifica se a URL começa com /en, /es, /fr, /br ou /pt
   if (pathname.startsWith('/en')) {
     return { locale: 'en', cleanPath: pathname.replace(/^\/en/, '') || '/' };
   }
   if (pathname.startsWith('/es')) {
     return { locale: 'es', cleanPath: pathname.replace(/^\/es/, '') || '/' };
+  }
+  if (pathname.startsWith('/fr')) {
+    return { locale: 'fr', cleanPath: pathname.replace(/^\/fr/, '') || '/' };
   }
   if (pathname.startsWith('/br') || pathname.startsWith('/pt')) {
     return { locale: 'pt', cleanPath: pathname.replace(/^\/(?:br|pt)/, '') || '/' };
@@ -138,4 +141,4 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
-}; 
+};

@@ -131,6 +131,32 @@ const mantras = {
       objective: "Abundance",
       color: colors.gold.main
     }
+  ],
+  fr: [
+    {
+      id: "mantra-1",
+      title: "Son Angélique pour Attirer les Anges",
+      youtubeId: "DXNA9A68GTY",
+      description: "Ce son angélique a été créé pour élever votre vibration et vous aider à vous connecter avec l'énergie des anges. Recommandé pour la méditation quotidienne.",
+      objective: "Connexion Angélique",
+      color: "#7B68EE"
+    },
+    {
+      id: "mantra-2",
+      title: "Fréquence 432Hz pour le Nettoyage Énergétique",
+      youtubeId: "lUKJrkKnQOQ",
+      description: "La fréquence 432Hz est alignée avec la vibration naturelle de l'univers. Cette méditation aide à nettoyer les blocages énergétiques et à promouvoir l'harmonie intérieure.",
+      objective: "Nettoyage Énergétique",
+      color: "#4CAF50"
+    },
+    {
+      id: "mantra-3",
+      title: "Mantra pour l'Abondance et la Prospérité",
+      youtubeId: "nnjICT7yu1U",
+      description: "Ce puissant mantra aide à attirer l'abondance et la prospérité dans votre vie, en supprimant les blocages et en ouvrant les canaux pour recevoir les bénédictions.",
+      objective: "Abondance",
+      color: colors.gold.main
+    }
   ]
 };
 
@@ -163,6 +189,12 @@ export default function CancaoAngelicalPage() {
       subtitle: "Music to elevate your spiritual vibration",
       explanation: "Choose one of the mantras below and click 'Play' to begin your meditation journey. These songs have been carefully selected to elevate your vibrational frequency and help connect with higher energies.",
       tip: "Click the 'Play' button or directly on the center circle to start audio playback. Make sure your device's sound is turned on."
+    },
+    fr: {
+      title: "Chanson Angélique",
+      subtitle: "Musique pour élever votre vibration spirituelle",
+      explanation: "Choisissez l'un des mantras ci-dessous et cliquez sur 'Jouer' pour commencer votre voyage de méditation. Ces chansons ont été soigneusement sélectionnées pour élever votre fréquence vibratoire et aider à la connexion avec les énergies supérieures.",
+      tip: "Cliquez sur le bouton 'Jouer' ou directement sur le cercle central pour démarrer la lecture audio. Assurez-vous que le son de votre appareil est activé."
     }
   };
 
@@ -281,4 +313,4 @@ export default function CancaoAngelicalPage() {
       <FooterWithSuspense />
     </main>
   );
-} 
+}

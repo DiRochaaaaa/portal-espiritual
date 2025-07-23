@@ -16,7 +16,20 @@ export const LazyFooter = lazy(() => import('../components/Footer'));
 export const LazyGuardianAngelSection = lazy(() => import('../components/GuardianAngelSection'));
 
 // Componentes de fallback
-export const MeditationPlayerWithSuspense = (props: any) => (
+interface MeditationPlayerProps {
+  mantras: Array<{
+    id: string;
+    title: string;
+    youtubeId: string;
+    description: string;
+    objective: string;
+    color: string;
+    text?: string;
+  }>;
+  locale: string;
+}
+
+export const MeditationPlayerWithSuspense = (props: MeditationPlayerProps) => (
   <Suspense fallback={
     <div style={{
       width: '100%',
@@ -37,7 +50,45 @@ export const MeditationPlayerWithSuspense = (props: any) => (
   </Suspense>
 );
 
-export const MantraEffectsManualWithSuspense = (props: any) => (
+interface MantraEffectsManualProps {
+  content: {
+    title: string;
+    description: string;
+    content: {
+      respiracoes: {
+        title: string;
+        description: string;
+        practices: Array<{ name: string; description: string }>;
+      };
+      posturas: {
+        title: string;
+        description: string;
+        practices: Array<{ name: string; description: string }>;
+      };
+      meditacao: {
+        title: string;
+        description: string;
+        practices: Array<{ name: string; description: string }>;
+      };
+      rituais: {
+         title: string;
+         description: string;
+         practices: Array<{ name: string; description: string }>;
+       };
+       conclusao: {
+          title: string;
+          benefits: string[];
+        };
+        dicas: {
+          title: string;
+          tips: string[];
+        };
+     };
+   };
+   visible: boolean;
+}
+
+export const MantraEffectsManualWithSuspense = (props: MantraEffectsManualProps) => (
   <Suspense fallback={
     <div style={{
       width: '100%',
@@ -55,7 +106,60 @@ export const MantraEffectsManualWithSuspense = (props: any) => (
   </Suspense>
 );
 
-export const EnergyProtectionManualWithSuspense = (props: any) => (
+interface EnergyProtectionManualProps {
+  content: {
+    title: string;
+    description: string;
+    content: {
+      introduction: {
+        title: string;
+        description: string;
+      };
+      crystals: {
+        title: string;
+        sections: Array<{
+          title: string;
+          description: string;
+        }>;
+      };
+      plants: {
+        title: string;
+        sections: Array<{
+          title: string;
+          description: string;
+        }>;
+      };
+      incense: {
+        title: string;
+        sections: Array<{
+          title: string;
+          description: string;
+        }>;
+      };
+      techniques: {
+        title: string;
+        sections: Array<{
+          title: string;
+          description: string;
+        }>;
+      };
+      routine: {
+        title: string;
+        sections: Array<{
+          title: string;
+          description: string;
+        }>;
+      };
+      conclusion: {
+        title: string;
+        description: string;
+      };
+    };
+  };
+  visible: boolean;
+}
+
+export const EnergyProtectionManualWithSuspense = (props: EnergyProtectionManualProps) => (
   <Suspense fallback={
     <div style={{
       width: '100%',
@@ -73,7 +177,7 @@ export const EnergyProtectionManualWithSuspense = (props: any) => (
   </Suspense>
 );
 
-export const SpiritualQuotesWithSuspense = (props: any) => (
+export const SpiritualQuotesWithSuspense = (props: Record<string, unknown>) => (
   <Suspense fallback={
     <div style={{
       width: '100%',
@@ -91,7 +195,11 @@ export const SpiritualQuotesWithSuspense = (props: any) => (
   </Suspense>
 );
 
-export const BonusSectionWithSuspense = (props: any) => (
+interface BonusSectionProps {
+  locale: 'pt' | 'es' | 'en' | 'fr';
+}
+
+export const BonusSectionWithSuspense = (props: BonusSectionProps) => (
   <Suspense fallback={
     <div style={{
       width: '100%',
@@ -109,7 +217,16 @@ export const BonusSectionWithSuspense = (props: any) => (
   </Suspense>
 );
 
-export const BonusCardWithSuspense = (props: any) => (
+interface BonusCardProps {
+  title: string;
+  description?: string;
+  icon: string;
+  link: string;
+  index: number;
+  buttonText?: string;
+}
+
+export const BonusCardWithSuspense = (props: BonusCardProps) => (
   <Suspense fallback={
     <div style={{
       width: '100%',
@@ -127,7 +244,7 @@ export const BonusCardWithSuspense = (props: any) => (
   </Suspense>
 );
 
-export const NavbarWithSuspense = (props: any) => (
+export const NavbarWithSuspense = (props: Record<string, unknown>) => (
   <Suspense fallback={
     <div style={{
       position: 'fixed',
@@ -159,7 +276,11 @@ export const NavbarWithSuspense = (props: any) => (
   </Suspense>
 );
 
-export const LanguageSelectorWithSuspense = (props: any) => (
+interface LanguageSelectorProps {
+  onClose: () => void;
+}
+
+export const LanguageSelectorWithSuspense = (props: LanguageSelectorProps) => (
   <Suspense fallback={
     <div style={{
       display: 'flex',
@@ -180,13 +301,17 @@ export const LanguageSelectorWithSuspense = (props: any) => (
   </Suspense>
 );
 
-export const LanguageProviderWithSuspense = (props: any) => (
+interface LanguageProviderProps {
+  children: React.ReactNode;
+}
+
+export const LanguageProviderWithSuspense = (props: LanguageProviderProps) => (
   <Suspense fallback={<>{props.children}</>}>
     <LazyLanguageProvider {...props} />
   </Suspense>
 );
 
-export const FooterWithSuspense = (props: any) => (
+export const FooterWithSuspense = (props: Record<string, unknown>) => (
   <Suspense fallback={
     <footer style={{
       width: '100%',
@@ -215,7 +340,11 @@ export const FooterWithSuspense = (props: any) => (
   </Suspense>
 );
 
-export const GuardianAngelSectionWithSuspense = (props: any) => (
+interface GuardianAngelSectionProps {
+  locale: 'pt' | 'es' | 'en';
+}
+
+export const GuardianAngelSectionWithSuspense = (props: GuardianAngelSectionProps) => (
   <Suspense fallback={
     <div style={{
       width: '100%',
@@ -235,4 +364,4 @@ export const GuardianAngelSectionWithSuspense = (props: any) => (
   }>
     <LazyGuardianAngelSection {...props} />
   </Suspense>
-); 
+);

@@ -224,6 +224,144 @@ export default function CookiesPolicyPage() {
         p1: "Si tiene alguna pregunta sobre esta Política de Cookies, contáctenos:",
         email: "adm.artemi@gmail.com"
       }
+    },
+    en: {
+      title: "Cookie Policy",
+      lastUpdated: "Last updated: January 2025",
+      intro: "ARTEMI LTDA uses cookies and similar technologies on the Spiritual Portal to improve your experience. This policy explains how and why we use these technologies.",
+      whatAreCookies: {
+        title: "What are Cookies",
+        p1: "Cookies are small text files that are stored on your device (computer, tablet, or mobile phone) when you visit a website. They allow the site to recognize your device and remember certain information about your visit.",
+        p2: "Cookies are important because they help make your web experience more efficient and relevant."
+      },
+      howWeUse: {
+        title: "How We Use Cookies",
+        p1: "We use cookies for various purposes, including:",
+        items: [
+          "Enable proper site functionality (essential cookies)",
+          "Remember your preferences and settings (functionality cookies)",
+          "Analyze how you use our site so we can improve it (analytical cookies)",
+          "Personalize the content you see (personalization cookies)",
+          "Remember your language and region settings"
+        ]
+      },
+      typesOfCookies: {
+        title: "Types of Cookies We Use",
+        items: [
+          "Session Cookies: Expire when you close your browser and do not collect information from your device.",
+          "Persistent Cookies: Remain on your device for a set period or until manually deleted.",
+          "First-Party Cookies: Set by us and used to improve your experience on our site.",
+          "Third-Party Cookies: Set by our partners to enable additional functionalities like analytics and advertising."
+        ]
+      },
+      specificCookies: {
+        title: "Specific Cookies",
+        p1: "Some of the specific cookies we use include:",
+        items: [
+          "Language cookies: Remember your language preference",
+          "Authentication cookies: Keep you logged in during the session",
+          "Analytics cookies: Help us understand how visitors interact with the site",
+          "Preference cookies: Remember your choices, such as themes or settings"
+        ]
+      },
+      thirdPartyCookies: {
+        title: "Third-Party Cookies",
+        p1: "We also allow third parties to set cookies when you visit our site. These third parties include:",
+        items: [
+          "Analytics services (such as Google Analytics)",
+          "Social media platforms (for sharing buttons)",
+          "Content partners (such as YouTube for embedded videos)"
+        ],
+        p2: "These third parties may use cookies, web beacons, and similar technologies to collect or receive information from our website and elsewhere on the internet to provide measurement services and target ads."
+      },
+      controlCookies: {
+        title: "How to Control Cookies",
+        p1: "You can control and manage cookies in several ways:",
+        items: [
+          "Browser settings: You can set your browser to refuse all cookies or indicate when a cookie is being sent.",
+          "Cookie preference tools: We use a consent banner that allows you to choose which types of cookies you accept.",
+          "Third-party opt-out links: Many third-party services offer direct opt-out mechanisms."
+        ],
+        p2: "Please note that refusing cookies may affect the functionality of our site. By disabling cookies, some parts of the site may not work properly."
+      },
+      changes: {
+        title: "Changes to Cookie Policy",
+        p1: "We may update our Cookie Policy periodically. We recommend that you review this page regularly to be aware of any changes."
+      },
+      contact: {
+        title: "Contact Us",
+        p1: "If you have any questions about this Cookie Policy, contact us:",
+        email: "adm.artemi@gmail.com"
+      }
+    },
+    fr: {
+      title: "Politique de Cookies",
+      lastUpdated: "Dernière mise à jour : Janvier 2025",
+      intro: "ARTEMI LTDA utilise des cookies et des technologies similaires sur le Portal Espiritual pour améliorer votre expérience. Cette politique explique comment et pourquoi nous utilisons ces technologies.",
+      whatAreCookies: {
+        title: "Que sont les Cookies",
+        p1: "Les cookies sont de petits fichiers texte qui sont stockés sur votre appareil (ordinateur, tablette ou téléphone mobile) lorsque vous visitez un site web. Ils permettent au site de reconnaître votre appareil et de se souvenir de certaines informations sur votre visite.",
+        p2: "Les cookies sont importants car ils aident à rendre votre expérience web plus efficace et pertinente."
+      },
+      howWeUse: {
+        title: "Comment Nous Utilisons les Cookies",
+        p1: "Nous utilisons des cookies à diverses fins, notamment :",
+        items: [
+          "Permettre le bon fonctionnement du site (cookies essentiels)",
+          "Se souvenir de vos préférences et paramètres (cookies de fonctionnalité)",
+          "Analyser comment vous utilisez notre site pour que nous puissions l'améliorer (cookies analytiques)",
+          "Personnaliser le contenu que vous voyez (cookies de personnalisation)",
+          "Se souvenir de vos paramètres de langue et de région"
+        ]
+      },
+      typesOfCookies: {
+        title: "Types de Cookies que Nous Utilisons",
+        items: [
+          "Cookies de Session : Expirent lorsque vous fermez votre navigateur et ne collectent pas d'informations de votre appareil.",
+          "Cookies Persistants : Restent sur votre appareil pendant une période déterminée ou jusqu'à ce qu'ils soient supprimés manuellement.",
+          "Cookies Propriétaires : Définis par nous et utilisés pour améliorer votre expérience sur notre site.",
+          "Cookies Tiers : Définis par nos partenaires pour permettre des fonctionnalités supplémentaires comme l'analyse et la publicité."
+        ]
+      },
+      specificCookies: {
+        title: "Cookies Spécifiques",
+        p1: "Certains des cookies spécifiques que nous utilisons incluent :",
+        items: [
+          "Cookies de langue : Se souviennent de votre préférence de langue",
+          "Cookies d'authentification : Vous maintiennent connecté pendant la session",
+          "Cookies analytiques : Nous aident à comprendre comment les visiteurs interagissent avec le site",
+          "Cookies de préférences : Se souviennent de vos choix, comme les thèmes ou paramètres"
+        ]
+      },
+      thirdPartyCookies: {
+        title: "Cookies Tiers",
+        p1: "Nous permettons également à des tiers de définir des cookies lorsque vous visitez notre site. Ces tiers incluent :",
+        items: [
+          "Services d'analyse (comme Google Analytics)",
+          "Plateformes de médias sociaux (pour les boutons de partage)",
+          "Partenaires de contenu (comme YouTube pour les vidéos intégrées)"
+        ],
+        p2: "Ces tiers peuvent utiliser des cookies, des balises web et des technologies similaires pour collecter ou recevoir des informations de notre site web et d'ailleurs sur internet pour fournir des services de mesure et cibler des publicités."
+      },
+      controlCookies: {
+        title: "Comment Contrôler les Cookies",
+        p1: "Vous pouvez contrôler et gérer les cookies de plusieurs façons :",
+        items: [
+          "Paramètres du navigateur : Vous pouvez configurer votre navigateur pour refuser tous les cookies ou indiquer quand un cookie est envoyé.",
+          "Outils de préférence de cookies : Nous utilisons une bannière de consentement qui vous permet de choisir quels types de cookies vous acceptez.",
+          "Liens d'exclusion tiers : De nombreux services tiers offrent des mécanismes d'exclusion directs."
+        ],
+        p2: "Veuillez noter que refuser les cookies peut affecter la fonctionnalité de notre site. En désactivant les cookies, certaines parties du site peuvent ne pas fonctionner correctement."
+      },
+      changes: {
+        title: "Modifications de la Politique de Cookies",
+        p1: "Nous pouvons mettre à jour notre Politique de Cookies périodiquement. Nous vous recommandons de consulter cette page régulièrement pour être au courant de tout changement."
+      },
+      contact: {
+        title: "Nous Contacter",
+        p1: "Si vous avez des questions sur cette Politique de Cookies, contactez-nous :",
+        email: "adm.artemi@gmail.com"
+      }
     }
   };
   
@@ -323,4 +461,4 @@ export default function CookiesPolicyPage() {
       <FooterWithSuspense />
     </main>
   );
-} 
+}

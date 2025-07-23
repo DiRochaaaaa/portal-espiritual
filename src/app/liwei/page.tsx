@@ -1,20 +1,19 @@
 'use client';
 
-import { useState, useEffect, CSSProperties, memo, useMemo } from 'react';
+import { useState, useEffect, CSSProperties, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { NavbarWithSuspense, FooterWithSuspense, MeditationPlayerWithSuspense, MantraEffectsManualWithSuspense, EnergyProtectionManualWithSuspense } from '../../lib/LazyComponents';
 import { getCurrentLocale, Locale } from '../../lib/locale';
 import { BsFillVolumeUpFill, BsBookFill, BsShieldFill, BsChevronDown, BsChevronUp, BsPlayCircleFill } from 'react-icons/bs';
-import { FaLeaf, FaMountain, FaWater, FaFire } from 'react-icons/fa';
+import { FaLeaf, FaMountain, FaWater, FaFire, FaOm } from 'react-icons/fa';
 import { gradients, commonStyles, motionVariants } from '../../styles/shared';
-import { adaptMantraFormat, getTranslatedContent } from '../../lib/utils';
+import { adaptMantraFormat } from '../../lib/utils';
 import SectionTitle from '../../components/SectionTitle';
 import Card from '../../components/Card';
 
 // Importar ícones temáticos dos mantras
-import { FaHeart, FaInfinity, FaSeedling, FaOm, FaYinYang } from 'react-icons/fa';
-import { GiMountainRoad, GiLotusFlower, GiMeditation, GiPeaceDove } from 'react-icons/gi';
-import { RiMentalHealthFill } from 'react-icons/ri';
+import { FaInfinity } from 'react-icons/fa';
+import { GiMountainRoad, GiLotusFlower, GiPeaceDove } from 'react-icons/gi';
 
 // Definição das cores estendidas
 const colors = {
@@ -978,15 +977,7 @@ export default function LiWeiPage() {
 
   if (!mounted) return null;
 
-  const renderMantraText = (text: string) => (
-    <p style={{
-      fontWeight: '600', 
-      marginTop: '10px', 
-      ...gradients.goldText
-    }}>
-      {text}
-    </p>
-  );
+
 
   const renderMantraPlayer = (index: number) => (
     <motion.div 
@@ -1590,4 +1581,4 @@ export default function LiWeiPage() {
       <FooterWithSuspense />
     </main>
   );
-} 
+}
