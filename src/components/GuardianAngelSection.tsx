@@ -6,7 +6,7 @@ import { BsStars, BsFillPlayFill } from 'react-icons/bs';
 import { GiAngelWings } from 'react-icons/gi';
 
 interface GuardianAngelSectionProps {
-  locale: 'pt' | 'es' | 'en';
+  locale: 'pt' | 'es' | 'en' | 'fr';
 }
 
 const GuardianAngelSection: React.FC<GuardianAngelSectionProps> = ({ locale }) => {
@@ -54,6 +54,20 @@ const GuardianAngelSection: React.FC<GuardianAngelSectionProps> = ({ locale }) =
       buttonText: "Discover My Angel",
       testimonialText: "\"Discovering my angel completely changed my spiritual perspective\"",
       urgencyText: "Personalized Experience"
+    },
+    fr: {
+      title: "Découvrez Votre Ange Gardien",
+      subtitle: "Un voyage spirituel unique pour vous",
+      description: "Connectez-vous avec votre protecteur céleste et recevez des conseils personnalisés pour votre vie spirituelle",
+      features: [
+        "✨ Révélation de votre Ange personnel",
+        "🔮 Message exclusif de votre Ange",
+        "🛡️ Protection spirituelle personnalisée",
+        "💫 Conseils pour votre voyage"
+      ],
+      buttonText: "Découvrir Mon Ange",
+      testimonialText: "\"Découvrir mon ange a complètement changé ma perspective spirituelle\"",
+      urgencyText: "Expérience Personnalisée"
     }
   };
 
@@ -62,6 +76,8 @@ const GuardianAngelSection: React.FC<GuardianAngelSectionProps> = ({ locale }) =
     ? 'https://lp.portaldosanjos.online/es' 
     : locale === 'en'
     ? 'https://lp.portaldosanjos.online/en'
+    : locale === 'fr'
+    ? 'https://lp.portaldosanjos.online/fr'
     : 'https://lp.portaldosanjos.online/br';
 
   const styles = {

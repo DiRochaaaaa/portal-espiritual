@@ -447,19 +447,27 @@ const SpiritualQuotes = () => {
   const translations = {
     pt: {
       title: "Mensagens Espirituais",
-      instructions: "Use os botões para navegar entre as mensagens"
+      instructions: "Use os botões para navegar entre as mensagens",
+      previousMessage: "Mensagem anterior",
+      nextMessage: "Próxima mensagem"
     },
     es: {
       title: "Mensajes Espirituales",
-      instructions: "Use los botones para navegar entre los mensajes"
+      instructions: "Use los botones para navegar entre los mensajes",
+      previousMessage: "Mensaje anterior",
+      nextMessage: "Siguiente mensaje"
     },
     en: {
       title: "Spiritual Messages",
-      instructions: "Use the buttons to navigate between messages"
+      instructions: "Use the buttons to navigate between messages",
+      previousMessage: "Previous message",
+      nextMessage: "Next message"
     },
     fr: {
       title: "Messages Spirituels",
-      instructions: "Utilisez les boutons pour naviguer entre les messages"
+      instructions: "Utilisez les boutons pour naviguer entre les messages",
+      previousMessage: "Message précédent",
+      nextMessage: "Message suivant"
     }
   };
 
@@ -477,7 +485,7 @@ const SpiritualQuotes = () => {
               whileHover={{ scale: 1.1, background: 'rgba(123, 31, 162, 0.9)' }}
               whileTap={{ scale: 0.95 }}
               onClick={prevQuote}
-              aria-label="Mensagem anterior"
+              aria-label={t.previousMessage}
             >
               &larr;
             </motion.button>
@@ -486,7 +494,7 @@ const SpiritualQuotes = () => {
               whileHover={{ scale: 1.1, background: 'rgba(123, 31, 162, 0.9)' }}
               whileTap={{ scale: 0.95 }}
               onClick={nextQuote}
-              aria-label="Próxima mensagem"
+              aria-label={t.nextMessage}
             >
               &rarr;
             </motion.button>
@@ -511,14 +519,14 @@ const SpiritualQuotes = () => {
           <button 
             style={navButtonStyle} 
             onClick={prevQuote}
-            aria-label="Mensagem anterior"
+            aria-label={t.previousMessage}
           >
             &larr;
           </button>
           <button 
             style={navButtonStyle} 
             onClick={nextQuote}
-            aria-label="Próxima mensagem"
+            aria-label={t.nextMessage}
           >
             &rarr;
           </button>

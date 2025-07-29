@@ -490,7 +490,7 @@ export default function HomePage() {
               <SpiritualQuotesWithSuspense />
               
               {/* Seção do Anjo da Guarda - Posicionada no final do portal */}
-              {(locale === 'pt' || locale === 'es' || locale === 'en') && (
+              {(locale === 'pt' || locale === 'es' || locale === 'en' || locale === 'fr') && (
                 <GuardianAngelSectionWithSuspense locale={locale} />
               )}
             </>

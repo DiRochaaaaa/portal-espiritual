@@ -341,7 +341,7 @@ export const FooterWithSuspense = (props: Record<string, unknown>) => (
 );
 
 interface GuardianAngelSectionProps {
-  locale: 'pt' | 'es' | 'en';
+  locale: 'pt' | 'es' | 'en' | 'fr';
 }
 
 export const GuardianAngelSectionWithSuspense = (props: GuardianAngelSectionProps) => (

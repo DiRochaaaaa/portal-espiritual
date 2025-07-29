@@ -71,6 +71,10 @@ export default function MensagensPage() {
     en: {
       title: "Messages of Spiritual Wisdom",
       subtitle: "Browse through our collection of inspirations that can guide your spiritual journey and bring inner peace."
+    },
+    fr: {
+      title: "Messages de Sagesse Spirituelle",
+      subtitle: "Parcourez notre collection d'inspirations qui peuvent guider votre voyage spirituel et apporter la paix intérieure."
     }
   };
   
@@ -114,4 +118,4 @@ export default function MensagensPage() {
       </footer>
     </main>
   );
-} 
+}
