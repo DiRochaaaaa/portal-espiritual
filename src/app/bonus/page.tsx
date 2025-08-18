@@ -44,7 +44,7 @@ export default function BonusPage() {
           title: "Contato com Celestino", 
           description: "Contato direto com nosso mentor espiritual",
           icon: "celestino",
-          link: "https://wa.me/5511967973944"
+          link: "/celestino"
         },
         { 
           title: "Canção Angelical", 
@@ -81,7 +81,7 @@ export default function BonusPage() {
           title: "Contacto con Celestino", 
           description: "Contacto directo con nuestro mentor espiritual",
           icon: "celestino",
-          link: "https://wa.me/5511967973944"
+          link: "/celestino"
         },
         { 
           title: "Canción Angelical", 
@@ -118,7 +118,7 @@ export default function BonusPage() {
           title: "Contact with Celestino", 
           description: "Direct contact with our spiritual mentor",
           icon: "celestino",
-          link: "https://wa.me/5511967973944"
+          link: "/celestino"
         },
         { 
           title: "Angelic Song", 
@@ -155,7 +155,7 @@ export default function BonusPage() {
           title: "Contact avec Celestino", 
           description: "Contact direct avec notre mentor spirituel",
           icon: "celestino",
-          link: "https://wa.me/5511967973944"
+          link: "/celestino"
         },
         { 
           title: "Chanson Angélique", 

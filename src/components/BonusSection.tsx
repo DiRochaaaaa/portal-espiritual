@@ -72,7 +72,7 @@ const links = {
     pt: 'https://chat.whatsapp.com/LGi8EoO6OB804uGRossRNO',
     es: 'https://chat.whatsapp.com/CaYhi6V14y00Wr0iuSK6Rl'
   },
-  celestino: 'https://wa.me/5511967973944',
+  celestino: '/celestino',
   prayers: '/oracoes',
   gift: '/presente',
   song: '/cancao'

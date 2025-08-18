@@ -10,16 +10,13 @@ import { BsMusicNoteBeamed } from 'react-icons/bs';
 
 const styles: Record<string, CSSProperties> = {
   navbar: {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    right: 0,
-    zIndex: 50,
+    position: 'relative',
     padding: '0.6rem 0.8rem',
     backgroundColor: 'rgba(21, 0, 34, 0.9)',
     backdropFilter: 'blur(10px)',
     borderBottom: '1px solid rgba(123, 31, 162, 0.3)',
     boxShadow: '0 2px 10px rgba(0, 0, 0, 0.3)',
+    zIndex: 1004,
   },
   container: {
     maxWidth: '1280px',
