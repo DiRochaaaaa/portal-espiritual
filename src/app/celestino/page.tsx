@@ -370,15 +370,7 @@ export default function CelestinoPage() {
 
 
 
-  const getWelcomeMessage = (name: string) => {
-    const messages = {
-      pt: `Olá ${name}! 🙏 Sou Celestino, seu mentor espiritual. Estou aqui para te guiar em sua jornada de crescimento e despertar espiritual. Como posso te ajudar hoje?`,
-      es: `¡Hola ${name}! 🙏 Soy Celestino, tu mentor espiritual. Estoy aquí para guiarte en tu jornada de crecimiento y despertar espiritual. ¿Cómo puedo ayudarte hoy?`,
-      en: `Hello ${name}! 🙏 I'm Celestino, your spiritual mentor. I'm here to guide you on your journey of growth and spiritual awakening. How can I help you today?`,
-      fr: `Bonjour ${name}! 🙏 Je suis Celestino, votre mentor spirituel. Je suis ici pour vous guider dans votre parcours de croissance et d'éveil spirituel. Comment puis-je vous aider aujourd'hui?`,
-    };
-    return messages[locale];
-  };
+
 
   const handleNameSubmit = () => {
     if (tempName.trim()) {
