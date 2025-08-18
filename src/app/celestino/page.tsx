@@ -20,7 +20,7 @@ interface ChatResponse {
 
 const styles: Record<string, CSSProperties> = {
   container: {
-    height: '100vh',
+    height: '100dvh', // Dynamic viewport height para mobile
     width: '100vw',
     display: 'grid',
     gridTemplateRows: 'auto auto 1fr auto',
@@ -36,6 +36,8 @@ const styles: Record<string, CSSProperties> = {
     position: 'fixed',
     top: 0,
     left: 0,
+    right: 0,
+    bottom: 0,
   },
   navbarArea: {
     gridArea: 'navbar',
@@ -84,6 +86,7 @@ const styles: Record<string, CSSProperties> = {
     background: 'linear-gradient(to bottom, rgba(21, 0, 34, 0.3), rgba(74, 0, 114, 0.2))',
     padding: '16px 20px',
     minHeight: 0,
+    WebkitOverflowScrolling: 'touch', // Scroll suave no iOS
   },
   message: {
     display: 'flex',
@@ -144,7 +147,8 @@ const styles: Record<string, CSSProperties> = {
   },
   inputArea: {
     gridArea: 'input',
-    padding: '16px 20px 20px',
+    padding: '16px 20px',
+    paddingBottom: 'max(20px, env(safe-area-inset-bottom))', // Safe area para iPhone
     borderTop: '1px solid rgba(123, 31, 162, 0.4)',
     background: 'rgba(21, 0, 34, 0.98)',
     backdropFilter: 'blur(30px)',
@@ -296,18 +300,34 @@ export default function CelestinoPage() {
   const [showNameModal, setShowNameModal] = useState(false);
   const [tempName, setTempName] = useState('');
   const [isMobile, setIsMobile] = useState(false);
+  const [viewportHeight, setViewportHeight] = useState('100vh');
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Função para ajustar altura da viewport em mobile
+  const updateViewportHeight = () => {
+    if (typeof window !== 'undefined') {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+      setViewportHeight(`${window.innerHeight}px`);
+    }
+  };
 
   useEffect(() => {
     setMounted(true);
     setLocale(getCurrentLocale());
     
-    // Verificar se é mobile
+    // Detectar se é mobile e ajustar viewport
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
+      updateViewportHeight();
     };
+    
     checkMobile();
     window.addEventListener('resize', checkMobile);
+    window.addEventListener('orientationchange', updateViewportHeight);
+    
+    // Ajustar viewport height para mobile (corrige problema de teclado virtual)
+    updateViewportHeight();
     
     // Verificar se o usuário já tem ID salvo, se não, gerar um novo
     let savedUserId = localStorage.getItem(USER_ID_KEY);
@@ -344,6 +364,7 @@ export default function CelestinoPage() {
     
     return () => {
       window.removeEventListener('resize', checkMobile);
+      window.removeEventListener('orientationchange', updateViewportHeight);
     };
   }, []);
 
@@ -579,7 +600,10 @@ export default function CelestinoPage() {
   const t = translations[locale];
 
   return (
-      <main style={styles.container}>
+      <main style={{
+        ...styles.container,
+        height: isMobile ? viewportHeight : '100vh',
+      }}>
         {/* Navbar Area */}
         <div style={styles.navbarArea}>
           <NavbarWithSuspense />

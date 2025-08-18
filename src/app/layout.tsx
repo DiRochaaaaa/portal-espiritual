@@ -25,6 +25,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
+  viewportFit: 'cover', // Para suporte a safe areas
   themeColor: [
     { media: '(prefers-color-scheme: dark)', color: '#150022' },
     { media: '(prefers-color-scheme: light)', color: '#150022' }
@@ -68,4 +69,4 @@ export default function RootLayout({
       </body>
     </html>
   );
-} 
+}
