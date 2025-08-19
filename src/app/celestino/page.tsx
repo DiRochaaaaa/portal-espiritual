@@ -469,32 +469,74 @@ export default function CelestinoPage() {
         
         const responseText = data.message || getErrorMessage();
         
-        // Calcular delay baseado no tamanho da mensagem
-        const messageLength = responseText.length;
-        const baseDelay = 1000; // 1 segundo base
-        const delayPerChar = 30; // 30ms por caractere
-        const totalDelay = Math.min(baseDelay + (messageLength * delayPerChar), 20000); // máximo 20 segundos
+        // Dividir mensagem por quebras de linha se existirem
+        const messageParts = responseText.split('\n').filter(part => part.trim() !== '');
         
-        // Aguardar o delay antes de mostrar a resposta
-        await new Promise(resolve => setTimeout(resolve, totalDelay));
-        
-        const celestinoMessage: Message = {
-          id: (Date.now() + 1).toString(),
-          text: responseText,
-          sender: 'celestino',
-          timestamp: new Date(),
-        };
+        // Se há múltiplas partes, criar mensagens separadas
+        if (messageParts.length > 1) {
+          for (let i = 0; i < messageParts.length; i++) {
+            const part = messageParts[i].trim();
+            if (part) {
+              // Calcular delay baseado no tamanho da parte
+              const messageLength = part.length;
+              const baseDelay = 1000; // 1 segundo base
+              const delayPerChar = 30; // 30ms por caractere
+              const totalDelay = Math.min(baseDelay + (messageLength * delayPerChar), 20000);
+              
+              // Delay adicional entre mensagens (2-4 segundos)
+              const betweenMessagesDelay = Math.floor(Math.random() * (4000 - 2000 + 1)) + 2000;
+              const finalDelay = i === 0 ? totalDelay : totalDelay + betweenMessagesDelay;
+              
+              // Aguardar o delay antes de mostrar cada parte
+              await new Promise(resolve => setTimeout(resolve, finalDelay));
+              
+              const celestinoMessage: Message = {
+                id: `${Date.now()}_${i}`,
+                text: part,
+                sender: 'celestino',
+                timestamp: new Date(),
+              };
 
-        setMessages(prev => {
-          const newMessages = [...prev, celestinoMessage];
-          // Salvar mensagens no localStorage
-          try {
-            localStorage.setItem(MESSAGES_KEY, JSON.stringify(newMessages));
-          } catch (error) {
-            console.error('Erro ao salvar mensagens no localStorage:', error);
+              setMessages(prev => {
+                const newMessages = [...prev, celestinoMessage];
+                // Salvar mensagens no localStorage
+                try {
+                  localStorage.setItem(MESSAGES_KEY, JSON.stringify(newMessages));
+                } catch (error) {
+                  console.error('Erro ao salvar mensagens no localStorage:', error);
+                }
+                return newMessages;
+              });
+            }
           }
-          return newMessages;
-        });
+        } else {
+          // Mensagem única (sem quebras de linha)
+          const messageLength = responseText.length;
+          const baseDelay = 1000; // 1 segundo base
+          const delayPerChar = 30; // 30ms por caractere
+          const totalDelay = Math.min(baseDelay + (messageLength * delayPerChar), 20000);
+          
+          // Aguardar o delay antes de mostrar a resposta
+          await new Promise(resolve => setTimeout(resolve, totalDelay));
+          
+          const celestinoMessage: Message = {
+            id: (Date.now() + 1).toString(),
+            text: responseText,
+            sender: 'celestino',
+            timestamp: new Date(),
+          };
+
+          setMessages(prev => {
+            const newMessages = [...prev, celestinoMessage];
+            // Salvar mensagens no localStorage
+            try {
+              localStorage.setItem(MESSAGES_KEY, JSON.stringify(newMessages));
+            } catch (error) {
+              console.error('Erro ao salvar mensagens no localStorage:', error);
+            }
+            return newMessages;
+          });
+        }
       } catch (error) {
         console.error('Erro ao enviar mensagem:', error);
         
