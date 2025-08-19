@@ -301,6 +301,7 @@ export default function CelestinoPage() {
   const [tempName, setTempName] = useState('');
   const [isMobile, setIsMobile] = useState(false);
   const [viewportHeight, setViewportHeight] = useState('100vh');
+  const [isWaitingResponse, setIsWaitingResponse] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Função para ajustar altura da viewport em mobile
@@ -404,7 +405,10 @@ export default function CelestinoPage() {
   };
 
   const sendMessage = async () => {
-    if (!inputMessage.trim() || isLoading) return;
+    if (!inputMessage.trim() || isLoading || isWaitingResponse) return;
+    
+    // Bloquear chat imediatamente após envio
+    setIsWaitingResponse(true);
 
     const userMessage: Message = {
       id: Date.now().toString(),
@@ -569,6 +573,7 @@ export default function CelestinoPage() {
         });
       } finally {
         setIsLoading(false);
+        setIsWaitingResponse(false); // Liberar chat após resposta
       }
     }, processingDelay);
   };
@@ -888,8 +893,8 @@ export default function CelestinoPage() {
                 value={inputMessage}
                 onChange={(e) => setInputMessage(e.target.value)}
                 onKeyPress={handleKeyPress}
-                placeholder={t.placeholder}
-                disabled={isLoading}
+                placeholder={isWaitingResponse ? (locale === 'pt' ? 'Aguardando resposta...' : locale === 'es' ? 'Esperando respuesta...' : locale === 'en' ? 'Waiting for response...' : 'En attente de réponse...') : t.placeholder}
+                disabled={isLoading || isWaitingResponse}
                 rows={1}
                 onFocus={(e) => {
                   e.target.style.borderColor = 'rgba(212, 175, 55, 1)';
@@ -905,12 +910,12 @@ export default function CelestinoPage() {
               <motion.button
                 style={{
                   ...styles.sendButton,
-                  ...((!inputMessage.trim() || isLoading) ? styles.sendButtonDisabled : {}),
+                  ...((!inputMessage.trim() || isLoading || isWaitingResponse) ? styles.sendButtonDisabled : {}),
                 }}
                 onClick={sendMessage}
-                disabled={!inputMessage.trim() || isLoading}
-                whileHover={{ scale: inputMessage.trim() && !isLoading ? 1.05 : 1 }}
-                whileTap={{ scale: inputMessage.trim() && !isLoading ? 0.95 : 1 }}
+                disabled={!inputMessage.trim() || isLoading || isWaitingResponse}
+                whileHover={{ scale: inputMessage.trim() && !isLoading && !isWaitingResponse ? 1.05 : 1 }}
+                whileTap={{ scale: inputMessage.trim() && !isLoading && !isWaitingResponse ? 0.95 : 1 }}
               >
                 <BsSend />
               </motion.button>
