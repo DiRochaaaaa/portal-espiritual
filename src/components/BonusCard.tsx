@@ -16,18 +16,19 @@ interface BonusCardProps {
 const styles: Record<string, CSSProperties> = {
   card: {
     position: 'relative',
-    background: 'linear-gradient(145deg, rgba(31, 41, 55, 0.8), rgba(17, 24, 39, 0.9))',
-    backdropFilter: 'blur(16px)',
-    borderRadius: '16px',
+    background: 'linear-gradient(145deg, rgba(31, 41, 55, 0.9), rgba(17, 24, 39, 0.95))',
+    backdropFilter: 'blur(20px)',
+    borderRadius: '12px',
     overflow: 'hidden',
-    padding: '32px 24px',
+    padding: '20px 16px',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     textAlign: 'center',
-    height: '100%',
-    border: '1px solid rgba(255, 255, 255, 0.08)',
-    boxShadow: '0 10px 25px rgba(0, 0, 0, 0.2)',
+    minHeight: '200px',
+    maxHeight: '220px',
+    border: '1px solid rgba(255, 255, 255, 0.1)',
+    boxShadow: '0 8px 20px rgba(0, 0, 0, 0.3)',
     transition: 'all 0.3s ease',
     zIndex: 1,
     touchAction: 'manipulation',
@@ -56,15 +57,16 @@ const styles: Record<string, CSSProperties> = {
     transition: 'opacity 0.5s ease',
   },
   iconContainer: {
-    width: '84px',
-    height: '84px',
-    borderRadius: '16px',
+    width: '60px',
+    height: '60px',
+    borderRadius: '12px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: '24px',
+    marginBottom: '16px',
     position: 'relative',
     zIndex: 2,
+    flexShrink: 0,
   },
   iconGlow: {
     position: 'absolute',
@@ -80,13 +82,13 @@ const styles: Record<string, CSSProperties> = {
     position: 'absolute',
     width: '100%',
     height: '100%',
-    borderRadius: '16px',
+    borderRadius: '12px',
     background: 'linear-gradient(135deg, #2563EB, #1E40AF)',
-    boxShadow: '0 5px 15px rgba(0, 0, 0, 0.2)',
+    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.25)',
     zIndex: 2,
   },
   icon: {
-    fontSize: '38px',
+    fontSize: '28px',
     color: '#fff',
     position: 'relative',
     zIndex: 3,
@@ -94,38 +96,45 @@ const styles: Record<string, CSSProperties> = {
   },
   title: {
     color: '#F9FAFB',
-    fontSize: '1.5rem',
-    fontWeight: 700,
-    margin: '0 0 10px',
+    fontSize: '1.1rem',
+    fontWeight: 600,
+    margin: '0 0 8px',
     textShadow: '0 1px 2px rgba(0, 0, 0, 0.15)',
+    lineHeight: '1.3',
+    flexShrink: 0,
   },
   description: {
     color: '#D1D5DB',
-    fontSize: '0.95rem',
-    marginBottom: '24px',
+    fontSize: '0.85rem',
+    marginBottom: '16px',
     flexGrow: 1,
-    lineHeight: '1.6',
+    lineHeight: '1.4',
+    display: '-webkit-box',
+    WebkitLineClamp: 2,
+    WebkitBoxOrient: 'vertical',
+    overflow: 'hidden',
   },
   button: {
     marginTop: 'auto',
-    padding: '12px 28px',
-    borderRadius: '12px',
+    padding: '10px 20px',
+    borderRadius: '8px',
     background: 'linear-gradient(to right, #2563EB, #1D4ED8)',
     color: '#fff',
     border: 'none',
     cursor: 'pointer',
-    fontSize: '0.95rem',
+    fontSize: '0.85rem',
     fontWeight: 600,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: '8px',
+    gap: '6px',
     textDecoration: 'none',
-    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+    boxShadow: '0 3px 8px rgba(0, 0, 0, 0.2)',
     transition: 'all 0.3s ease',
     position: 'relative',
     overflow: 'hidden',
     touchAction: 'manipulation',
+    flexShrink: 0,
   },
   buttonText: {
     position: 'relative',
@@ -180,7 +189,21 @@ const getIcon = (iconType: string) => {
     case 'gift':
       return <BsGiftFill />;
     case 'celestino':
-      return <BsPersonFill />;
+      return (
+        <div style={{
+          width: '60px',
+          height: '60px',
+          borderRadius: '12px',
+          backgroundImage: 'url(https://leitura.tarodosanjos.online/wp-content/uploads/2025/08/IMG_8416-scaled-e1755552533631.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          border: '2px solid rgba(212, 175, 55, 0.8)',
+          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+          position: 'relative',
+          zIndex: 4,
+        }} />
+      );
     case 'music':
       return <BsMusicNoteBeamed />;
     case 'mantra':
@@ -350,4 +373,4 @@ export default function BonusCard({ title, description, icon, link, index, butto
       </div>
     </motion.div>
   );
-} 
+}
