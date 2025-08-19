@@ -1,7 +1,7 @@
 import { CSSProperties, useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { BsChatFill, BsBookFill, BsGiftFill, BsMusicNoteBeamed, BsPersonFill, BsStarFill } from 'react-icons/bs';
+import { BsChatFill, BsBookFill, BsGiftFill, BsMusicNoteBeamed, BsStarFill } from 'react-icons/bs';
 import { GiMeditation } from 'react-icons/gi';
 
 interface BonusCardProps {
