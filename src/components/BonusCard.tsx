@@ -25,8 +25,7 @@ const styles: Record<string, CSSProperties> = {
     flexDirection: 'column',
     alignItems: 'center',
     textAlign: 'center',
-    minHeight: '200px',
-    maxHeight: '220px',
+    minHeight: '240px',
     border: '1px solid rgba(255, 255, 255, 0.1)',
     boxShadow: '0 8px 20px rgba(0, 0, 0, 0.3)',
     transition: 'all 0.3s ease',
@@ -208,6 +207,8 @@ const getIcon = (iconType: string) => {
       return <BsMusicNoteBeamed />;
     case 'mantra':
       return <GiMeditation />;
+    case 'tarot':
+      return <div style={{ fontSize: '28px' }}>🔮</div>;
     default:
       return <BsStarFill />;
   }
@@ -225,6 +226,8 @@ const getIconColor = (iconType: string) => {
       return 'linear-gradient(135deg, #8B5CF6, #7C3AED)';
     case 'music':
       return 'linear-gradient(135deg, #3B82F6, #2563EB)';
+    case 'tarot':
+      return 'linear-gradient(135deg, #7C3AED, #5B21B6)';
     default:
       return 'linear-gradient(135deg, #2563EB, #1E40AF)';
   }

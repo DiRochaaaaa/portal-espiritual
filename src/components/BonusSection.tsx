@@ -75,7 +75,8 @@ const links = {
   celestino: '/celestino',
   prayers: '/oracoes',
   gift: '/presente',
-  song: '/cancao'
+  song: '/cancao',
+  cartaAdicional: '/carta-adicional'
 };
 
 export default function BonusSection({ locale }: BonusSectionProps) {
@@ -105,6 +106,12 @@ export default function BonusSection({ locale }: BonusSectionProps) {
           description: "Músicas para elevar sua vibração",
           icon: "music",
           link: links.song
+        },
+        {
+          title: "Carta Adicional do Tarô dos Anjos",
+          description: "Descubra uma mensagem especial dos anjos para você hoje",
+          icon: "tarot",
+          link: links.cartaAdicional
         }
       ],
       contacts: [
@@ -147,6 +154,12 @@ export default function BonusSection({ locale }: BonusSectionProps) {
           description: "Música para elevar tu vibración",
           icon: "music",
           link: links.song
+        },
+        {
+          title: "Carta Adicional del Tarot de los Ángeles",
+          description: "Descubre un mensaje especial de los ángeles para ti hoy",
+          icon: "tarot",
+          link: links.cartaAdicional
         }
       ],
       contacts: [
@@ -189,6 +202,12 @@ export default function BonusSection({ locale }: BonusSectionProps) {
           description: "Music to elevate your vibration",
           icon: "music",
           link: links.song
+        },
+        {
+          title: "Additional Angel Tarot Card",
+          description: "Discover a special message from the angels for you today",
+          icon: "tarot",
+          link: links.cartaAdicional
         }
       ],
       contacts: [
@@ -231,6 +250,12 @@ export default function BonusSection({ locale }: BonusSectionProps) {
           description: "Musique pour élever votre vibration",
           icon: "music",
           link: links.song
+        },
+        {
+          title: "Carte Supplémentaire du Tarot des Anges",
+          description: "Découvrez un message spécial des anges pour vous aujourd'hui",
+          icon: "tarot",
+          link: links.cartaAdicional
         }
       ],
       contacts: [
