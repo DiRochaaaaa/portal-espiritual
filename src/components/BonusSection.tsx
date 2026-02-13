@@ -212,12 +212,6 @@ export default function BonusSection({ locale }: BonusSectionProps) {
       ],
       contacts: [
         {
-          title: "Exclusive WhatsApp Group",
-          description: "Join our group to receive daily messages",
-          icon: "whatsapp",
-          link: links.whatsapp.pt // Using PT group for now, can be updated later
-        },
-        {
           title: "Direct Contact with Celestino",
           description: "Direct contact with our spiritual mentor",
           icon: "celestino",
